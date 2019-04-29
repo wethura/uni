@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="edu.uni.labManagement.mapper.DeviceSlaveMapper" >
+  <resultMap id="BaseResultMap" type="edu.uni.labManagement.bean.DeviceSlave" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="master_id" property="masterId" jdbcType="BIGINT" />
+    <result column="slave_id" property="slaveId" jdbcType="BIGINT" />
+    <result column="university_id" property="universityId" jdbcType="BIGINT" />
+    <result column="datetime" property="datetime" jdbcType="DATE" />
+    <result column="by_who" property="byWho" jdbcType="VARCHAR" />
+    <result column="deleted" property="deleted" jdbcType="BIT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, master_id, slave_id, university_id, datetime, by_who, deleted
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="edu.uni.labManagement.bean.DeviceSlaveExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from lm_device_slave
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from lm_device_slave
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from lm_device_slave
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="edu.uni.labManagement.bean.DeviceSlaveExample" >
+    delete from lm_device_slave
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="edu.uni.labManagement.bean.DeviceSlave" >
+    insert into lm_device_slave (id, master_id, slave_id, 
+      university_id, datetime, by_who, 
+      deleted)
+    values (#{id,jdbcType=BIGINT}, #{masterId,jdbcType=BIGINT}, #{slaveId,jdbcType=BIGINT}, 
+      #{universityId,jdbcType=BIGINT}, #{datetime,jdbcType=DATE}, #{byWho,jdbcType=VARCHAR}, 
+      #{deleted,jdbcType=BIT})
+  </insert>
+  <insert id="insertSelective" parameterType="edu.uni.labManagement.bean.DeviceSlave" >
+    insert into lm_device_slave
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="masterId != null" >
+        master_id,
+      </if>
+      <if test="slaveId != null" >
+        slave_id,
+      </if>
+      <if test="universityId != null" >
+        university_id,
+      </if>
+      <if test="datetime != null" >
+        datetime,
+      </if>
+      <if test="byWho != null" >
+        by_who,
+      </if>
+      <if test="deleted != null" >
+        deleted,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="masterId != null" >
+        #{masterId,jdbcType=BIGINT},
+      </if>
+      <if test="slaveId != null" >
+        #{slaveId,jdbcType=BIGINT},
+      </if>
+      <if test="universityId != null" >
+        #{universityId,jdbcType=BIGINT},
+      </if>
+      <if test="datetime != null" >
+        #{datetime,jdbcType=DATE},
+      </if>
+      <if test="byWho != null" >
+        #{byWho,jdbcType=VARCHAR},
+      </if>
+      <if test="deleted != null" >
+        #{deleted,jdbcType=BIT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="edu.uni.labManagement.bean.DeviceSlaveExample" resultType="java.lang.Integer" >
+    select count(*) from lm_device_slave
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update lm_device_slave
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.masterId != null" >
+        master_id = #{record.masterId,jdbcType=BIGINT},
+      </if>
+      <if test="record.slaveId != null" >
+        slave_id = #{record.slaveId,jdbcType=BIGINT},
+      </if>
+      <if test="record.universityId != null" >
+        university_id = #{record.universityId,jdbcType=BIGINT},
+      </if>
+      <if test="record.datetime != null" >
+        datetime = #{record.datetime,jdbcType=DATE},
+      </if>
+      <if test="record.byWho != null" >
+        by_who = #{record.byWho,jdbcType=VARCHAR},
+      </if>
+      <if test="record.deleted != null" >
+        deleted = #{record.deleted,jdbcType=BIT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update lm_device_slave
+    set id = #{record.id,jdbcType=BIGINT},
+      master_id = #{record.masterId,jdbcType=BIGINT},
+      slave_id = #{record.slaveId,jdbcType=BIGINT},
+      university_id = #{record.universityId,jdbcType=BIGINT},
+      datetime = #{record.datetime,jdbcType=DATE},
+      by_who = #{record.byWho,jdbcType=VARCHAR},
+      deleted = #{record.deleted,jdbcType=BIT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="edu.uni.labManagement.bean.DeviceSlave" >
+    update lm_device_slave
+    <set >
+      <if test="masterId != null" >
+        master_id = #{masterId,jdbcType=BIGINT},
+      </if>
+      <if test="slaveId != null" >
+        slave_id = #{slaveId,jdbcType=BIGINT},
+      </if>
+      <if test="universityId != null" >
+        university_id = #{universityId,jdbcType=BIGINT},
+      </if>
+      <if test="datetime != null" >
+        datetime = #{datetime,jdbcType=DATE},
+      </if>
+      <if test="byWho != null" >
+        by_who = #{byWho,jdbcType=VARCHAR},
+      </if>
+      <if test="deleted != null" >
+        deleted = #{deleted,jdbcType=BIT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="edu.uni.labManagement.bean.DeviceSlave" >
+    update lm_device_slave
+    set master_id = #{masterId,jdbcType=BIGINT},
+      slave_id = #{slaveId,jdbcType=BIGINT},
+      university_id = #{universityId,jdbcType=BIGINT},
+      datetime = #{datetime,jdbcType=DATE},
+      by_who = #{byWho,jdbcType=VARCHAR},
+      deleted = #{deleted,jdbcType=BIT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>
