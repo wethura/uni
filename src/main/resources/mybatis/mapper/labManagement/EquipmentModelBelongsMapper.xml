@@ -4,7 +4,6 @@
   <resultMap id="BaseResultMap" type="edu.uni.labManagement.bean.EquipmentModelBelongs" >
     <result column="mater_id" property="materId" jdbcType="BIGINT" />
     <result column="slave_id" property="slaveId" jdbcType="BIGINT" />
-    <result column="amount" property="amount" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -65,7 +64,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    mater_id, slave_id, amount
+    mater_id, slave_id
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="edu.uni.labManagement.bean.EquipmentModelBelongsExample" >
     select
@@ -88,10 +87,8 @@
     </if>
   </delete>
   <insert id="insert" parameterType="edu.uni.labManagement.bean.EquipmentModelBelongs" >
-    insert into lm_equipment_model_belongs (mater_id, slave_id, amount
-      )
-    values (#{materId,jdbcType=BIGINT}, #{slaveId,jdbcType=BIGINT}, #{amount,jdbcType=INTEGER}
-      )
+    insert into lm_equipment_model_belongs (mater_id, slave_id)
+    values (#{materId,jdbcType=BIGINT}, #{slaveId,jdbcType=BIGINT})
   </insert>
   <insert id="insertSelective" parameterType="edu.uni.labManagement.bean.EquipmentModelBelongs" >
     insert into lm_equipment_model_belongs
@@ -102,9 +99,6 @@
       <if test="slaveId != null" >
         slave_id,
       </if>
-      <if test="amount != null" >
-        amount,
-      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="materId != null" >
@@ -112,9 +106,6 @@
       </if>
       <if test="slaveId != null" >
         #{slaveId,jdbcType=BIGINT},
-      </if>
-      <if test="amount != null" >
-        #{amount,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
@@ -133,9 +124,6 @@
       <if test="record.slaveId != null" >
         slave_id = #{record.slaveId,jdbcType=BIGINT},
       </if>
-      <if test="record.amount != null" >
-        amount = #{record.amount,jdbcType=INTEGER},
-      </if>
     </set>
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -144,8 +132,7 @@
   <update id="updateByExample" parameterType="map" >
     update lm_equipment_model_belongs
     set mater_id = #{record.materId,jdbcType=BIGINT},
-      slave_id = #{record.slaveId,jdbcType=BIGINT},
-      amount = #{record.amount,jdbcType=INTEGER}
+      slave_id = #{record.slaveId,jdbcType=BIGINT}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>

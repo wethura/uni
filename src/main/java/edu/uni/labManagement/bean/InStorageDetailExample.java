@@ -165,63 +165,63 @@ public class InStorageDetailExample {
             return (Criteria) this;
         }
 
-        public Criteria andDeviceModelIdIsNull() {
-            addCriterion("device_model_id is null");
+        public Criteria andDeviceIdIsNull() {
+            addCriterion("device_id is null");
             return (Criteria) this;
         }
 
-        public Criteria andDeviceModelIdIsNotNull() {
-            addCriterion("device_model_id is not null");
+        public Criteria andDeviceIdIsNotNull() {
+            addCriterion("device_id is not null");
             return (Criteria) this;
         }
 
-        public Criteria andDeviceModelIdEqualTo(Long value) {
-            addCriterion("device_model_id =", value, "deviceModelId");
+        public Criteria andDeviceIdEqualTo(Long value) {
+            addCriterion("device_id =", value, "deviceId");
             return (Criteria) this;
         }
 
-        public Criteria andDeviceModelIdNotEqualTo(Long value) {
-            addCriterion("device_model_id <>", value, "deviceModelId");
+        public Criteria andDeviceIdNotEqualTo(Long value) {
+            addCriterion("device_id <>", value, "deviceId");
             return (Criteria) this;
         }
 
-        public Criteria andDeviceModelIdGreaterThan(Long value) {
-            addCriterion("device_model_id >", value, "deviceModelId");
+        public Criteria andDeviceIdGreaterThan(Long value) {
+            addCriterion("device_id >", value, "deviceId");
             return (Criteria) this;
         }
 
-        public Criteria andDeviceModelIdGreaterThanOrEqualTo(Long value) {
-            addCriterion("device_model_id >=", value, "deviceModelId");
+        public Criteria andDeviceIdGreaterThanOrEqualTo(Long value) {
+            addCriterion("device_id >=", value, "deviceId");
             return (Criteria) this;
         }
 
-        public Criteria andDeviceModelIdLessThan(Long value) {
-            addCriterion("device_model_id <", value, "deviceModelId");
+        public Criteria andDeviceIdLessThan(Long value) {
+            addCriterion("device_id <", value, "deviceId");
             return (Criteria) this;
         }
 
-        public Criteria andDeviceModelIdLessThanOrEqualTo(Long value) {
-            addCriterion("device_model_id <=", value, "deviceModelId");
+        public Criteria andDeviceIdLessThanOrEqualTo(Long value) {
+            addCriterion("device_id <=", value, "deviceId");
             return (Criteria) this;
         }
 
-        public Criteria andDeviceModelIdIn(List<Long> values) {
-            addCriterion("device_model_id in", values, "deviceModelId");
+        public Criteria andDeviceIdIn(List<Long> values) {
+            addCriterion("device_id in", values, "deviceId");
             return (Criteria) this;
         }
 
-        public Criteria andDeviceModelIdNotIn(List<Long> values) {
-            addCriterion("device_model_id not in", values, "deviceModelId");
+        public Criteria andDeviceIdNotIn(List<Long> values) {
+            addCriterion("device_id not in", values, "deviceId");
             return (Criteria) this;
         }
 
-        public Criteria andDeviceModelIdBetween(Long value1, Long value2) {
-            addCriterion("device_model_id between", value1, value2, "deviceModelId");
+        public Criteria andDeviceIdBetween(Long value1, Long value2) {
+            addCriterion("device_id between", value1, value2, "deviceId");
             return (Criteria) this;
         }
 
-        public Criteria andDeviceModelIdNotBetween(Long value1, Long value2) {
-            addCriterion("device_model_id not between", value1, value2, "deviceModelId");
+        public Criteria andDeviceIdNotBetween(Long value1, Long value2) {
+            addCriterion("device_id not between", value1, value2, "deviceId");
             return (Criteria) this;
         }
 
@@ -282,66 +282,6 @@ public class InStorageDetailExample {
 
         public Criteria andStorageIdNotBetween(Long value1, Long value2) {
             addCriterion("storage_id not between", value1, value2, "storageId");
-            return (Criteria) this;
-        }
-
-        public Criteria andNumIsNull() {
-            addCriterion("num is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andNumIsNotNull() {
-            addCriterion("num is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andNumEqualTo(Integer value) {
-            addCriterion("num =", value, "num");
-            return (Criteria) this;
-        }
-
-        public Criteria andNumNotEqualTo(Integer value) {
-            addCriterion("num <>", value, "num");
-            return (Criteria) this;
-        }
-
-        public Criteria andNumGreaterThan(Integer value) {
-            addCriterion("num >", value, "num");
-            return (Criteria) this;
-        }
-
-        public Criteria andNumGreaterThanOrEqualTo(Integer value) {
-            addCriterion("num >=", value, "num");
-            return (Criteria) this;
-        }
-
-        public Criteria andNumLessThan(Integer value) {
-            addCriterion("num <", value, "num");
-            return (Criteria) this;
-        }
-
-        public Criteria andNumLessThanOrEqualTo(Integer value) {
-            addCriterion("num <=", value, "num");
-            return (Criteria) this;
-        }
-
-        public Criteria andNumIn(List<Integer> values) {
-            addCriterion("num in", values, "num");
-            return (Criteria) this;
-        }
-
-        public Criteria andNumNotIn(List<Integer> values) {
-            addCriterion("num not in", values, "num");
-            return (Criteria) this;
-        }
-
-        public Criteria andNumBetween(Integer value1, Integer value2) {
-            addCriterion("num between", value1, value2, "num");
-            return (Criteria) this;
-        }
-
-        public Criteria andNumNotBetween(Integer value1, Integer value2) {
-            addCriterion("num not between", value1, value2, "num");
             return (Criteria) this;
         }
 

@@ -5,8 +5,6 @@ public class EquipmentModelBelongs {
 
     private Long slaveId;
 
-    private Integer amount;
-
     public Long getMaterId() {
         return materId;
     }
@@ -21,13 +19,5 @@ public class EquipmentModelBelongs {
 
     public void setSlaveId(Long slaveId) {
         this.slaveId = slaveId;
-    }
-
-    public Integer getAmount() {
-        return amount;
-    }
-
-    public void setAmount(Integer amount) {
-        this.amount = amount;
     }
 }

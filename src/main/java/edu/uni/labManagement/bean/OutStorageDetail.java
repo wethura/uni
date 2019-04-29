@@ -5,11 +5,9 @@ import java.time.LocalDateTime;
 public class OutStorageDetail {
     private Long id;
 
-    private Long deviceModelId;
+    private Long deviceId;
 
     private Long storageId;
-
-    private Integer num;
 
     private Long universityId;
 
@@ -27,12 +25,12 @@ public class OutStorageDetail {
         this.id = id;
     }
 
-    public Long getDeviceModelId() {
-        return deviceModelId;
+    public Long getDeviceId() {
+        return deviceId;
     }
 
-    public void setDeviceModelId(Long deviceModelId) {
-        this.deviceModelId = deviceModelId;
+    public void setDeviceId(Long deviceId) {
+        this.deviceId = deviceId;
     }
 
     public Long getStorageId() {
@@ -41,14 +39,6 @@ public class OutStorageDetail {
 
     public void setStorageId(Long storageId) {
         this.storageId = storageId;
-    }
-
-    public Integer getNum() {
-        return num;
-    }
-
-    public void setNum(Integer num) {
-        this.num = num;
     }
 
     public Long getUniversityId() {
