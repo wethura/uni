@@ -7,7 +7,7 @@ public class OutStorageDetail {
 
     private Long deviceId;
 
-    private Long storageId;
+    private Long inStorageId;
 
     private Long universityId;
 
@@ -33,12 +33,12 @@ public class OutStorageDetail {
         this.deviceId = deviceId;
     }
 
-    public Long getStorageId() {
-        return storageId;
+    public Long getInStorageId() {
+        return inStorageId;
     }
 
-    public void setStorageId(Long storageId) {
-        this.storageId = storageId;
+    public void setInStorageId(Long inStorageId) {
+        this.inStorageId = inStorageId;
     }
 
     public Long getUniversityId() {

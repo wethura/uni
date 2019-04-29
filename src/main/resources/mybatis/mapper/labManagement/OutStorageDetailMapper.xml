@@ -4,7 +4,7 @@
   <resultMap id="BaseResultMap" type="edu.uni.labManagement.bean.OutStorageDetail" >
     <id column="id" property="id" jdbcType="BIGINT" />
     <result column="device_id" property="deviceId" jdbcType="BIGINT" />
-    <result column="storage_id" property="storageId" jdbcType="BIGINT" />
+    <result column="in_storage_id" property="inStorageId" jdbcType="BIGINT" />
     <result column="university_id" property="universityId" jdbcType="BIGINT" />
     <result column="datetime" property="datetime" jdbcType="DATE" />
     <result column="by_who" property="byWho" jdbcType="BIGINT" />
@@ -69,7 +69,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, device_id, storage_id, university_id, datetime, by_who, deleted
+    id, device_id, in_storage_id, university_id, datetime, by_who, deleted
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="edu.uni.labManagement.bean.OutStorageDetailExample" >
     select
@@ -102,10 +102,10 @@
     </if>
   </delete>
   <insert id="insert" parameterType="edu.uni.labManagement.bean.OutStorageDetail" >
-    insert into lm_out_storage_detail (id, device_id, storage_id, 
+    insert into lm_out_storage_detail (id, device_id, in_storage_id, 
       university_id, datetime, by_who, 
       deleted)
-    values (#{id,jdbcType=BIGINT}, #{deviceId,jdbcType=BIGINT}, #{storageId,jdbcType=BIGINT}, 
+    values (#{id,jdbcType=BIGINT}, #{deviceId,jdbcType=BIGINT}, #{inStorageId,jdbcType=BIGINT}, 
       #{universityId,jdbcType=BIGINT}, #{datetime,jdbcType=DATE}, #{byWho,jdbcType=BIGINT}, 
       #{deleted,jdbcType=BIT})
   </insert>
@@ -118,8 +118,8 @@
       <if test="deviceId != null" >
         device_id,
       </if>
-      <if test="storageId != null" >
-        storage_id,
+      <if test="inStorageId != null" >
+        in_storage_id,
       </if>
       <if test="universityId != null" >
         university_id,
@@ -141,8 +141,8 @@
       <if test="deviceId != null" >
         #{deviceId,jdbcType=BIGINT},
       </if>
-      <if test="storageId != null" >
-        #{storageId,jdbcType=BIGINT},
+      <if test="inStorageId != null" >
+        #{inStorageId,jdbcType=BIGINT},
       </if>
       <if test="universityId != null" >
         #{universityId,jdbcType=BIGINT},
@@ -173,8 +173,8 @@
       <if test="record.deviceId != null" >
         device_id = #{record.deviceId,jdbcType=BIGINT},
       </if>
-      <if test="record.storageId != null" >
-        storage_id = #{record.storageId,jdbcType=BIGINT},
+      <if test="record.inStorageId != null" >
+        in_storage_id = #{record.inStorageId,jdbcType=BIGINT},
       </if>
       <if test="record.universityId != null" >
         university_id = #{record.universityId,jdbcType=BIGINT},
@@ -197,7 +197,7 @@
     update lm_out_storage_detail
     set id = #{record.id,jdbcType=BIGINT},
       device_id = #{record.deviceId,jdbcType=BIGINT},
-      storage_id = #{record.storageId,jdbcType=BIGINT},
+      in_storage_id = #{record.inStorageId,jdbcType=BIGINT},
       university_id = #{record.universityId,jdbcType=BIGINT},
       datetime = #{record.datetime,jdbcType=DATE},
       by_who = #{record.byWho,jdbcType=BIGINT},
@@ -212,8 +212,8 @@
       <if test="deviceId != null" >
         device_id = #{deviceId,jdbcType=BIGINT},
       </if>
-      <if test="storageId != null" >
-        storage_id = #{storageId,jdbcType=BIGINT},
+      <if test="inStorageId != null" >
+        in_storage_id = #{inStorageId,jdbcType=BIGINT},
       </if>
       <if test="universityId != null" >
         university_id = #{universityId,jdbcType=BIGINT},
@@ -233,7 +233,7 @@
   <update id="updateByPrimaryKey" parameterType="edu.uni.labManagement.bean.OutStorageDetail" >
     update lm_out_storage_detail
     set device_id = #{deviceId,jdbcType=BIGINT},
-      storage_id = #{storageId,jdbcType=BIGINT},
+      in_storage_id = #{inStorageId,jdbcType=BIGINT},
       university_id = #{universityId,jdbcType=BIGINT},
       datetime = #{datetime,jdbcType=DATE},
       by_who = #{byWho,jdbcType=BIGINT},

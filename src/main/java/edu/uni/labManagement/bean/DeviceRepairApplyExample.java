@@ -625,52 +625,52 @@ public class DeviceRepairApplyExample {
             return (Criteria) this;
         }
 
-        public Criteria andAssersorIdEqualTo(Integer value) {
+        public Criteria andAssersorIdEqualTo(Long value) {
             addCriterion("assersor_id =", value, "assersorId");
             return (Criteria) this;
         }
 
-        public Criteria andAssersorIdNotEqualTo(Integer value) {
+        public Criteria andAssersorIdNotEqualTo(Long value) {
             addCriterion("assersor_id <>", value, "assersorId");
             return (Criteria) this;
         }
 
-        public Criteria andAssersorIdGreaterThan(Integer value) {
+        public Criteria andAssersorIdGreaterThan(Long value) {
             addCriterion("assersor_id >", value, "assersorId");
             return (Criteria) this;
         }
 
-        public Criteria andAssersorIdGreaterThanOrEqualTo(Integer value) {
+        public Criteria andAssersorIdGreaterThanOrEqualTo(Long value) {
             addCriterion("assersor_id >=", value, "assersorId");
             return (Criteria) this;
         }
 
-        public Criteria andAssersorIdLessThan(Integer value) {
+        public Criteria andAssersorIdLessThan(Long value) {
             addCriterion("assersor_id <", value, "assersorId");
             return (Criteria) this;
         }
 
-        public Criteria andAssersorIdLessThanOrEqualTo(Integer value) {
+        public Criteria andAssersorIdLessThanOrEqualTo(Long value) {
             addCriterion("assersor_id <=", value, "assersorId");
             return (Criteria) this;
         }
 
-        public Criteria andAssersorIdIn(List<Integer> values) {
+        public Criteria andAssersorIdIn(List<Long> values) {
             addCriterion("assersor_id in", values, "assersorId");
             return (Criteria) this;
         }
 
-        public Criteria andAssersorIdNotIn(List<Integer> values) {
+        public Criteria andAssersorIdNotIn(List<Long> values) {
             addCriterion("assersor_id not in", values, "assersorId");
             return (Criteria) this;
         }
 
-        public Criteria andAssersorIdBetween(Integer value1, Integer value2) {
+        public Criteria andAssersorIdBetween(Long value1, Long value2) {
             addCriterion("assersor_id between", value1, value2, "assersorId");
             return (Criteria) this;
         }
 
-        public Criteria andAssersorIdNotBetween(Integer value1, Integer value2) {
+        public Criteria andAssersorIdNotBetween(Long value1, Long value2) {
             addCriterion("assersor_id not between", value1, value2, "assersorId");
             return (Criteria) this;
         }

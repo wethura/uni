@@ -4,6 +4,11 @@
   <resultMap id="BaseResultMap" type="edu.uni.labManagement.bean.EquipmentModelBelongs" >
     <result column="mater_id" property="materId" jdbcType="BIGINT" />
     <result column="slave_id" property="slaveId" jdbcType="BIGINT" />
+    <result column="amount" property="amount" jdbcType="INTEGER" />
+    <result column="university_id" property="universityId" jdbcType="BIGINT" />
+    <result column="datetime" property="datetime" jdbcType="DATE" />
+    <result column="by_who" property="byWho" jdbcType="BIGINT" />
+    <result column="deleted" property="deleted" jdbcType="TINYINT" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -64,7 +69,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    mater_id, slave_id
+    mater_id, slave_id, amount, university_id, datetime, by_who, deleted
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="edu.uni.labManagement.bean.EquipmentModelBelongsExample" >
     select
@@ -72,7 +77,7 @@
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from lm_equipment_model_belongs
+    from lm_device_model_slaves
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
@@ -81,23 +86,42 @@
     </if>
   </select>
   <delete id="deleteByExample" parameterType="edu.uni.labManagement.bean.EquipmentModelBelongsExample" >
-    delete from lm_equipment_model_belongs
+    delete from lm_device_model_slaves
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
   <insert id="insert" parameterType="edu.uni.labManagement.bean.EquipmentModelBelongs" >
-    insert into lm_equipment_model_belongs (mater_id, slave_id)
-    values (#{materId,jdbcType=BIGINT}, #{slaveId,jdbcType=BIGINT})
+    insert into lm_device_model_slaves (mater_id, slave_id, amount, 
+      university_id, datetime, by_who, 
+      deleted)
+    values (#{materId,jdbcType=BIGINT}, #{slaveId,jdbcType=BIGINT}, #{amount,jdbcType=INTEGER}, 
+      #{universityId,jdbcType=BIGINT}, #{datetime,jdbcType=DATE}, #{byWho,jdbcType=BIGINT}, 
+      #{deleted,jdbcType=TINYINT})
   </insert>
   <insert id="insertSelective" parameterType="edu.uni.labManagement.bean.EquipmentModelBelongs" >
-    insert into lm_equipment_model_belongs
+    insert into lm_device_model_slaves
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="materId != null" >
         mater_id,
       </if>
       <if test="slaveId != null" >
         slave_id,
+      </if>
+      <if test="amount != null" >
+        amount,
+      </if>
+      <if test="universityId != null" >
+        university_id,
+      </if>
+      <if test="datetime != null" >
+        datetime,
+      </if>
+      <if test="byWho != null" >
+        by_who,
+      </if>
+      <if test="deleted != null" >
+        deleted,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
@@ -107,16 +131,31 @@
       <if test="slaveId != null" >
         #{slaveId,jdbcType=BIGINT},
       </if>
+      <if test="amount != null" >
+        #{amount,jdbcType=INTEGER},
+      </if>
+      <if test="universityId != null" >
+        #{universityId,jdbcType=BIGINT},
+      </if>
+      <if test="datetime != null" >
+        #{datetime,jdbcType=DATE},
+      </if>
+      <if test="byWho != null" >
+        #{byWho,jdbcType=BIGINT},
+      </if>
+      <if test="deleted != null" >
+        #{deleted,jdbcType=TINYINT},
+      </if>
     </trim>
   </insert>
   <select id="countByExample" parameterType="edu.uni.labManagement.bean.EquipmentModelBelongsExample" resultType="java.lang.Integer" >
-    select count(*) from lm_equipment_model_belongs
+    select count(*) from lm_device_model_slaves
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map" >
-    update lm_equipment_model_belongs
+    update lm_device_model_slaves
     <set >
       <if test="record.materId != null" >
         mater_id = #{record.materId,jdbcType=BIGINT},
@@ -124,15 +163,35 @@
       <if test="record.slaveId != null" >
         slave_id = #{record.slaveId,jdbcType=BIGINT},
       </if>
+      <if test="record.amount != null" >
+        amount = #{record.amount,jdbcType=INTEGER},
+      </if>
+      <if test="record.universityId != null" >
+        university_id = #{record.universityId,jdbcType=BIGINT},
+      </if>
+      <if test="record.datetime != null" >
+        datetime = #{record.datetime,jdbcType=DATE},
+      </if>
+      <if test="record.byWho != null" >
+        by_who = #{record.byWho,jdbcType=BIGINT},
+      </if>
+      <if test="record.deleted != null" >
+        deleted = #{record.deleted,jdbcType=TINYINT},
+      </if>
     </set>
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
   <update id="updateByExample" parameterType="map" >
-    update lm_equipment_model_belongs
+    update lm_device_model_slaves
     set mater_id = #{record.materId,jdbcType=BIGINT},
-      slave_id = #{record.slaveId,jdbcType=BIGINT}
+      slave_id = #{record.slaveId,jdbcType=BIGINT},
+      amount = #{record.amount,jdbcType=INTEGER},
+      university_id = #{record.universityId,jdbcType=BIGINT},
+      datetime = #{record.datetime,jdbcType=DATE},
+      by_who = #{record.byWho,jdbcType=BIGINT},
+      deleted = #{record.deleted,jdbcType=TINYINT}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>

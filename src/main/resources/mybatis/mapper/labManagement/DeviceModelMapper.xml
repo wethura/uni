@@ -11,7 +11,7 @@
     <result column="is_slave" property="isSlave" jdbcType="BIT" />
     <result column="university_id" property="universityId" jdbcType="BIGINT" />
     <result column="datetime" property="datetime" jdbcType="DATE" />
-    <result column="by_who" property="byWho" jdbcType="VARCHAR" />
+    <result column="by_who" property="byWho" jdbcType="BIGINT" />
     <result column="deleted" property="deleted" jdbcType="BIT" />
   </resultMap>
   <sql id="Example_Where_Clause" >
@@ -114,7 +114,7 @@
     values (#{id,jdbcType=BIGINT}, #{deviceCategoryId,jdbcType=BIGINT}, #{version,jdbcType=VARCHAR}, 
       #{name,jdbcType=VARCHAR}, #{producter,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, 
       #{isSlave,jdbcType=BIT}, #{universityId,jdbcType=BIGINT}, #{datetime,jdbcType=DATE}, 
-      #{byWho,jdbcType=VARCHAR}, #{deleted,jdbcType=BIT})
+      #{byWho,jdbcType=BIGINT}, #{deleted,jdbcType=BIT})
   </insert>
   <insert id="insertSelective" parameterType="edu.uni.labManagement.bean.DeviceModel" >
     insert into lm_device_model
@@ -182,7 +182,7 @@
         #{datetime,jdbcType=DATE},
       </if>
       <if test="byWho != null" >
-        #{byWho,jdbcType=VARCHAR},
+        #{byWho,jdbcType=BIGINT},
       </if>
       <if test="deleted != null" >
         #{deleted,jdbcType=BIT},
@@ -226,7 +226,7 @@
         datetime = #{record.datetime,jdbcType=DATE},
       </if>
       <if test="record.byWho != null" >
-        by_who = #{record.byWho,jdbcType=VARCHAR},
+        by_who = #{record.byWho,jdbcType=BIGINT},
       </if>
       <if test="record.deleted != null" >
         deleted = #{record.deleted,jdbcType=BIT},
@@ -247,7 +247,7 @@
       is_slave = #{record.isSlave,jdbcType=BIT},
       university_id = #{record.universityId,jdbcType=BIGINT},
       datetime = #{record.datetime,jdbcType=DATE},
-      by_who = #{record.byWho,jdbcType=VARCHAR},
+      by_who = #{record.byWho,jdbcType=BIGINT},
       deleted = #{record.deleted,jdbcType=BIT}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -281,7 +281,7 @@
         datetime = #{datetime,jdbcType=DATE},
       </if>
       <if test="byWho != null" >
-        by_who = #{byWho,jdbcType=VARCHAR},
+        by_who = #{byWho,jdbcType=BIGINT},
       </if>
       <if test="deleted != null" >
         deleted = #{deleted,jdbcType=BIT},
@@ -299,7 +299,7 @@
       is_slave = #{isSlave,jdbcType=BIT},
       university_id = #{universityId,jdbcType=BIGINT},
       datetime = #{datetime,jdbcType=DATE},
-      by_who = #{byWho,jdbcType=VARCHAR},
+      by_who = #{byWho,jdbcType=BIGINT},
       deleted = #{deleted,jdbcType=BIT}
     where id = #{id,jdbcType=BIGINT}
   </update>

@@ -10,7 +10,7 @@
     <result column="upload_path" property="uploadPath" jdbcType="VARCHAR" />
     <result column="is_success" property="isSuccess" jdbcType="INTEGER" />
     <result column="refuse_reason" property="refuseReason" jdbcType="VARCHAR" />
-    <result column="assersor_id" property="assersorId" jdbcType="INTEGER" />
+    <result column="assersor_id" property="assersorId" jdbcType="BIGINT" />
     <result column="review_time" property="reviewTime" jdbcType="DATE" />
     <result column="university_id" property="universityId" jdbcType="BIGINT" />
     <result column="datetime" property="datetime" jdbcType="DATE" />
@@ -117,7 +117,7 @@
       by_who, deleted)
     values (#{id,jdbcType=BIGINT}, #{deviceId,jdbcType=BIGINT}, #{description,jdbcType=VARCHAR}, 
       #{userId,jdbcType=BIGINT}, #{applyTime,jdbcType=DATE}, #{uploadPath,jdbcType=VARCHAR}, 
-      #{isSuccess,jdbcType=INTEGER}, #{refuseReason,jdbcType=VARCHAR}, #{assersorId,jdbcType=INTEGER}, 
+      #{isSuccess,jdbcType=INTEGER}, #{refuseReason,jdbcType=VARCHAR}, #{assersorId,jdbcType=BIGINT}, 
       #{reviewTime,jdbcType=DATE}, #{universityId,jdbcType=BIGINT}, #{datetime,jdbcType=DATE}, 
       #{byWho,jdbcType=BIGINT}, #{deleted,jdbcType=BIT})
   </insert>
@@ -193,7 +193,7 @@
         #{refuseReason,jdbcType=VARCHAR},
       </if>
       <if test="assersorId != null" >
-        #{assersorId,jdbcType=INTEGER},
+        #{assersorId,jdbcType=BIGINT},
       </if>
       <if test="reviewTime != null" >
         #{reviewTime,jdbcType=DATE},
@@ -246,7 +246,7 @@
         refuse_reason = #{record.refuseReason,jdbcType=VARCHAR},
       </if>
       <if test="record.assersorId != null" >
-        assersor_id = #{record.assersorId,jdbcType=INTEGER},
+        assersor_id = #{record.assersorId,jdbcType=BIGINT},
       </if>
       <if test="record.reviewTime != null" >
         review_time = #{record.reviewTime,jdbcType=DATE},
@@ -278,7 +278,7 @@
       upload_path = #{record.uploadPath,jdbcType=VARCHAR},
       is_success = #{record.isSuccess,jdbcType=INTEGER},
       refuse_reason = #{record.refuseReason,jdbcType=VARCHAR},
-      assersor_id = #{record.assersorId,jdbcType=INTEGER},
+      assersor_id = #{record.assersorId,jdbcType=BIGINT},
       review_time = #{record.reviewTime,jdbcType=DATE},
       university_id = #{record.universityId,jdbcType=BIGINT},
       datetime = #{record.datetime,jdbcType=DATE},
@@ -313,7 +313,7 @@
         refuse_reason = #{refuseReason,jdbcType=VARCHAR},
       </if>
       <if test="assersorId != null" >
-        assersor_id = #{assersorId,jdbcType=INTEGER},
+        assersor_id = #{assersorId,jdbcType=BIGINT},
       </if>
       <if test="reviewTime != null" >
         review_time = #{reviewTime,jdbcType=DATE},
@@ -342,7 +342,7 @@
       upload_path = #{uploadPath,jdbcType=VARCHAR},
       is_success = #{isSuccess,jdbcType=INTEGER},
       refuse_reason = #{refuseReason,jdbcType=VARCHAR},
-      assersor_id = #{assersorId,jdbcType=INTEGER},
+      assersor_id = #{assersorId,jdbcType=BIGINT},
       review_time = #{reviewTime,jdbcType=DATE},
       university_id = #{universityId,jdbcType=BIGINT},
       datetime = #{datetime,jdbcType=DATE},

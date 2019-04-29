@@ -31,7 +31,7 @@ public class Device {
 
     private LocalDateTime datetime;
 
-    private String byWho;
+    private Long byWho;
 
     private Boolean deleted;
 
@@ -147,12 +147,12 @@ public class Device {
         this.datetime = datetime;
     }
 
-    public String getByWho() {
+    public Long getByWho() {
         return byWho;
     }
 
-    public void setByWho(String byWho) {
-        this.byWho = byWho == null ? null : byWho.trim();
+    public void setByWho(Long byWho) {
+        this.byWho = byWho;
     }
 
     public Boolean getDeleted() {

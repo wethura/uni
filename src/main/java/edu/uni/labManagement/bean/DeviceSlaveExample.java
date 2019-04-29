@@ -415,62 +415,52 @@ public class DeviceSlaveExample {
             return (Criteria) this;
         }
 
-        public Criteria andByWhoEqualTo(String value) {
+        public Criteria andByWhoEqualTo(Long value) {
             addCriterion("by_who =", value, "byWho");
             return (Criteria) this;
         }
 
-        public Criteria andByWhoNotEqualTo(String value) {
+        public Criteria andByWhoNotEqualTo(Long value) {
             addCriterion("by_who <>", value, "byWho");
             return (Criteria) this;
         }
 
-        public Criteria andByWhoGreaterThan(String value) {
+        public Criteria andByWhoGreaterThan(Long value) {
             addCriterion("by_who >", value, "byWho");
             return (Criteria) this;
         }
 
-        public Criteria andByWhoGreaterThanOrEqualTo(String value) {
+        public Criteria andByWhoGreaterThanOrEqualTo(Long value) {
             addCriterion("by_who >=", value, "byWho");
             return (Criteria) this;
         }
 
-        public Criteria andByWhoLessThan(String value) {
+        public Criteria andByWhoLessThan(Long value) {
             addCriterion("by_who <", value, "byWho");
             return (Criteria) this;
         }
 
-        public Criteria andByWhoLessThanOrEqualTo(String value) {
+        public Criteria andByWhoLessThanOrEqualTo(Long value) {
             addCriterion("by_who <=", value, "byWho");
             return (Criteria) this;
         }
 
-        public Criteria andByWhoLike(String value) {
-            addCriterion("by_who like", value, "byWho");
-            return (Criteria) this;
-        }
-
-        public Criteria andByWhoNotLike(String value) {
-            addCriterion("by_who not like", value, "byWho");
-            return (Criteria) this;
-        }
-
-        public Criteria andByWhoIn(List<String> values) {
+        public Criteria andByWhoIn(List<Long> values) {
             addCriterion("by_who in", values, "byWho");
             return (Criteria) this;
         }
 
-        public Criteria andByWhoNotIn(List<String> values) {
+        public Criteria andByWhoNotIn(List<Long> values) {
             addCriterion("by_who not in", values, "byWho");
             return (Criteria) this;
         }
 
-        public Criteria andByWhoBetween(String value1, String value2) {
+        public Criteria andByWhoBetween(Long value1, Long value2) {
             addCriterion("by_who between", value1, value2, "byWho");
             return (Criteria) this;
         }
 
-        public Criteria andByWhoNotBetween(String value1, String value2) {
+        public Criteria andByWhoNotBetween(Long value1, Long value2) {
             addCriterion("by_who not between", value1, value2, "byWho");
             return (Criteria) this;
         }

@@ -19,7 +19,7 @@ public class DeviceRepairApply {
 
     private String refuseReason;
 
-    private Integer assersorId;
+    private Long assersorId;
 
     private LocalDateTime reviewTime;
 
@@ -95,11 +95,11 @@ public class DeviceRepairApply {
         this.refuseReason = refuseReason == null ? null : refuseReason.trim();
     }
 
-    public Integer getAssersorId() {
+    public Long getAssersorId() {
         return assersorId;
     }
 
-    public void setAssersorId(Integer assersorId) {
+    public void setAssersorId(Long assersorId) {
         this.assersorId = assersorId;
     }
 
