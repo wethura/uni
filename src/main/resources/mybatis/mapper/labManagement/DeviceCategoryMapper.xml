@@ -102,19 +102,20 @@
     </if>
   </delete>
   <insert id="insert" parameterType="edu.uni.labManagement.bean.DeviceCategory" >
-    insert into lm_device_category (id, pid, name, 
-      university_id, datetime, by_who, 
-      deleted)
-    values (#{id,jdbcType=BIGINT}, #{pid,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, 
-      #{universityId,jdbcType=BIGINT}, #{datetime,jdbcType=DATE}, #{byWho,jdbcType=BIGINT}, 
-      #{deleted,jdbcType=BIT})
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into lm_device_category (pid, name, university_id, 
+      datetime, by_who, deleted)
+    values (#{pid,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{universityId,jdbcType=BIGINT}, 
+      #{datetime,jdbcType=DATE}, #{byWho,jdbcType=BIGINT}, #{deleted,jdbcType=BIT})
   </insert>
   <insert id="insertSelective" parameterType="edu.uni.labManagement.bean.DeviceCategory" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
     insert into lm_device_category
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        id,
-      </if>
       <if test="pid != null" >
         pid,
       </if>
@@ -135,9 +136,6 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        #{id,jdbcType=BIGINT},
-      </if>
       <if test="pid != null" >
         #{pid,jdbcType=BIGINT},
       </if>

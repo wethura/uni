@@ -110,23 +110,26 @@
     </if>
   </delete>
   <insert id="insert" parameterType="edu.uni.labManagement.bean.DeviceRepairApply" >
-    insert into lm_device_repair_apply (id, device_id, description, 
-      user_id, apply_time, upload_path, 
-      is_success, refuse_reason, assersor_id, 
-      review_time, university_id, datetime, 
-      by_who, deleted)
-    values (#{id,jdbcType=BIGINT}, #{deviceId,jdbcType=BIGINT}, #{description,jdbcType=VARCHAR}, 
-      #{userId,jdbcType=BIGINT}, #{applyTime,jdbcType=DATE}, #{uploadPath,jdbcType=VARCHAR}, 
-      #{isSuccess,jdbcType=INTEGER}, #{refuseReason,jdbcType=VARCHAR}, #{assersorId,jdbcType=BIGINT}, 
-      #{reviewTime,jdbcType=DATE}, #{universityId,jdbcType=BIGINT}, #{datetime,jdbcType=DATE}, 
-      #{byWho,jdbcType=BIGINT}, #{deleted,jdbcType=BIT})
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into lm_device_repair_apply (device_id, description, user_id, 
+      apply_time, upload_path, is_success, 
+      refuse_reason, assersor_id, review_time, 
+      university_id, datetime, by_who, 
+      deleted)
+    values (#{deviceId,jdbcType=BIGINT}, #{description,jdbcType=VARCHAR}, #{userId,jdbcType=BIGINT}, 
+      #{applyTime,jdbcType=DATE}, #{uploadPath,jdbcType=VARCHAR}, #{isSuccess,jdbcType=INTEGER}, 
+      #{refuseReason,jdbcType=VARCHAR}, #{assersorId,jdbcType=BIGINT}, #{reviewTime,jdbcType=DATE}, 
+      #{universityId,jdbcType=BIGINT}, #{datetime,jdbcType=DATE}, #{byWho,jdbcType=BIGINT}, 
+      #{deleted,jdbcType=BIT})
   </insert>
   <insert id="insertSelective" parameterType="edu.uni.labManagement.bean.DeviceRepairApply" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
     insert into lm_device_repair_apply
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        id,
-      </if>
       <if test="deviceId != null" >
         device_id,
       </if>
@@ -168,9 +171,6 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        #{id,jdbcType=BIGINT},
-      </if>
       <if test="deviceId != null" >
         #{deviceId,jdbcType=BIGINT},
       </if>

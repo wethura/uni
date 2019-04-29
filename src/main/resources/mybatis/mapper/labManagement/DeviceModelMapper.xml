@@ -107,21 +107,24 @@
     </if>
   </delete>
   <insert id="insert" parameterType="edu.uni.labManagement.bean.DeviceModel" >
-    insert into lm_device_model (id, device_category_id, version, 
-      name, producter, description, 
-      is_slave, university_id, datetime, 
-      by_who, deleted)
-    values (#{id,jdbcType=BIGINT}, #{deviceCategoryId,jdbcType=BIGINT}, #{version,jdbcType=VARCHAR}, 
-      #{name,jdbcType=VARCHAR}, #{producter,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, 
-      #{isSlave,jdbcType=BIT}, #{universityId,jdbcType=BIGINT}, #{datetime,jdbcType=DATE}, 
-      #{byWho,jdbcType=BIGINT}, #{deleted,jdbcType=BIT})
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into lm_device_model (device_category_id, version, name, 
+      producter, description, is_slave, 
+      university_id, datetime, by_who, 
+      deleted)
+    values (#{deviceCategoryId,jdbcType=BIGINT}, #{version,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{producter,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, #{isSlave,jdbcType=BIT}, 
+      #{universityId,jdbcType=BIGINT}, #{datetime,jdbcType=DATE}, #{byWho,jdbcType=BIGINT}, 
+      #{deleted,jdbcType=BIT})
   </insert>
   <insert id="insertSelective" parameterType="edu.uni.labManagement.bean.DeviceModel" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
     insert into lm_device_model
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        id,
-      </if>
       <if test="deviceCategoryId != null" >
         device_category_id,
       </if>
@@ -154,9 +157,6 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        #{id,jdbcType=BIGINT},
-      </if>
       <if test="deviceCategoryId != null" >
         #{deviceCategoryId,jdbcType=BIGINT},
       </if>

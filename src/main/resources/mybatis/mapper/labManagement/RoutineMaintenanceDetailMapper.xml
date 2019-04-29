@@ -105,19 +105,22 @@
     </if>
   </delete>
   <insert id="insert" parameterType="edu.uni.labManagement.bean.RoutineMaintenanceDetail" >
-    insert into lm_routine_maintenance_detail (id, device_id, routine_maintenance_id, 
-      is_fault, description, university_id, 
-      datetime, by_who, deleted)
-    values (#{id,jdbcType=BIGINT}, #{deviceId,jdbcType=BIGINT}, #{routineMaintenanceId,jdbcType=BIGINT}, 
-      #{isFault,jdbcType=BIT}, #{description,jdbcType=VARCHAR}, #{universityId,jdbcType=BIGINT}, 
-      #{datetime,jdbcType=DATE}, #{byWho,jdbcType=BIGINT}, #{deleted,jdbcType=BIT})
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into lm_routine_maintenance_detail (device_id, routine_maintenance_id, is_fault, 
+      description, university_id, datetime, 
+      by_who, deleted)
+    values (#{deviceId,jdbcType=BIGINT}, #{routineMaintenanceId,jdbcType=BIGINT}, #{isFault,jdbcType=BIT}, 
+      #{description,jdbcType=VARCHAR}, #{universityId,jdbcType=BIGINT}, #{datetime,jdbcType=DATE}, 
+      #{byWho,jdbcType=BIGINT}, #{deleted,jdbcType=BIT})
   </insert>
   <insert id="insertSelective" parameterType="edu.uni.labManagement.bean.RoutineMaintenanceDetail" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
     insert into lm_routine_maintenance_detail
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        id,
-      </if>
       <if test="deviceId != null" >
         device_id,
       </if>
@@ -144,9 +147,6 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        #{id,jdbcType=BIGINT},
-      </if>
       <if test="deviceId != null" >
         #{deviceId,jdbcType=BIGINT},
       </if>

@@ -112,25 +112,26 @@
     </if>
   </delete>
   <insert id="insert" parameterType="edu.uni.labManagement.bean.Device" >
-    insert into lm_device (id, device_category_id, department_id, 
-      batch, number, model, 
-      name, serial_number, description, 
-      product_date, is_master, status, 
-      university_id, datetime, by_who, 
-      deleted)
-    values (#{id,jdbcType=BIGINT}, #{deviceCategoryId,jdbcType=BIGINT}, #{departmentId,jdbcType=BIGINT}, 
-      #{batch,jdbcType=BIGINT}, #{number,jdbcType=VARCHAR}, #{model,jdbcType=VARCHAR}, 
-      #{name,jdbcType=VARCHAR}, #{serialNumber,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, 
-      #{productDate,jdbcType=DATE}, #{isMaster,jdbcType=BIT}, #{status,jdbcType=INTEGER}, 
-      #{universityId,jdbcType=BIGINT}, #{datetime,jdbcType=DATE}, #{byWho,jdbcType=BIGINT}, 
-      #{deleted,jdbcType=BIT})
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into lm_device (device_category_id, department_id, batch, 
+      number, model, name, 
+      serial_number, description, product_date, 
+      is_master, status, university_id, 
+      datetime, by_who, deleted)
+    values (#{deviceCategoryId,jdbcType=BIGINT}, #{departmentId,jdbcType=BIGINT}, #{batch,jdbcType=BIGINT}, 
+      #{number,jdbcType=VARCHAR}, #{model,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{serialNumber,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, #{productDate,jdbcType=DATE}, 
+      #{isMaster,jdbcType=BIT}, #{status,jdbcType=INTEGER}, #{universityId,jdbcType=BIGINT}, 
+      #{datetime,jdbcType=DATE}, #{byWho,jdbcType=BIGINT}, #{deleted,jdbcType=BIT})
   </insert>
   <insert id="insertSelective" parameterType="edu.uni.labManagement.bean.Device" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
     insert into lm_device
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        id,
-      </if>
       <if test="deviceCategoryId != null" >
         device_category_id,
       </if>
@@ -178,9 +179,6 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        #{id,jdbcType=BIGINT},
-      </if>
       <if test="deviceCategoryId != null" >
         #{deviceCategoryId,jdbcType=BIGINT},
       </if>

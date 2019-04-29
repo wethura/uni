@@ -106,21 +106,22 @@
     </if>
   </delete>
   <insert id="insert" parameterType="edu.uni.labManagement.bean.Lab" >
-    insert into lm_lab (id, name, ename, 
-      department_id, field_id, description, 
-      university_id, datetime, by_who, 
-      deleted)
-    values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{ename,jdbcType=VARCHAR}, 
-      #{departmentId,jdbcType=BIGINT}, #{fieldId,jdbcType=BIGINT}, #{description,jdbcType=VARCHAR}, 
-      #{universityId,jdbcType=BIGINT}, #{datetime,jdbcType=DATE}, #{byWho,jdbcType=BIGINT}, 
-      #{deleted,jdbcType=BIT})
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into lm_lab (name, ename, department_id, 
+      field_id, description, university_id, 
+      datetime, by_who, deleted)
+    values (#{name,jdbcType=VARCHAR}, #{ename,jdbcType=VARCHAR}, #{departmentId,jdbcType=BIGINT}, 
+      #{fieldId,jdbcType=BIGINT}, #{description,jdbcType=VARCHAR}, #{universityId,jdbcType=BIGINT}, 
+      #{datetime,jdbcType=DATE}, #{byWho,jdbcType=BIGINT}, #{deleted,jdbcType=BIT})
   </insert>
   <insert id="insertSelective" parameterType="edu.uni.labManagement.bean.Lab" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
     insert into lm_lab
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        id,
-      </if>
       <if test="name != null" >
         name,
       </if>
@@ -150,9 +151,6 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        #{id,jdbcType=BIGINT},
-      </if>
       <if test="name != null" >
         #{name,jdbcType=VARCHAR},
       </if>

@@ -2,6 +2,7 @@ package edu.uni.labManagement.service.impl;
 
 import edu.uni.labManagement.bean.DeviceModel;
 import edu.uni.labManagement.mapper.DeviceModelMapper;
+import edu.uni.labManagement.mapper.DeviceModelSlavesMapper;
 import edu.uni.labManagement.service.DeviceModelService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,7 +22,7 @@ public class DeviceModelServiceImpl implements DeviceModelService {
 	private DeviceModelMapper deviceModelMapper;
 
 	@Resource
-	private DeviceModel
+	private DeviceModelSlavesMapper deviceModelSlavesMapper;
 	@Override
 	public long insertSlaveDeviceModel(DeviceModel deviceModel) {
 		if(deviceModel.getIsSlave() == null) {

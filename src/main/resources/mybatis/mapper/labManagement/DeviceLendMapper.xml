@@ -103,19 +103,22 @@
     </if>
   </delete>
   <insert id="insert" parameterType="edu.uni.labManagement.bean.DeviceLend" >
-    insert into lm_device_lend (id, user_id, reason, 
-      return_time, university_id, datetime, 
-      by_who, deleted)
-    values (#{id,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{reason,jdbcType=VARCHAR}, 
-      #{returnTime,jdbcType=DATE}, #{universityId,jdbcType=BIGINT}, #{datetime,jdbcType=DATE}, 
-      #{byWho,jdbcType=BIGINT}, #{deleted,jdbcType=BIT})
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into lm_device_lend (user_id, reason, return_time, 
+      university_id, datetime, by_who, 
+      deleted)
+    values (#{userId,jdbcType=BIGINT}, #{reason,jdbcType=VARCHAR}, #{returnTime,jdbcType=DATE}, 
+      #{universityId,jdbcType=BIGINT}, #{datetime,jdbcType=DATE}, #{byWho,jdbcType=BIGINT}, 
+      #{deleted,jdbcType=BIT})
   </insert>
   <insert id="insertSelective" parameterType="edu.uni.labManagement.bean.DeviceLend" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
     insert into lm_device_lend
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        id,
-      </if>
       <if test="userId != null" >
         user_id,
       </if>
@@ -139,9 +142,6 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        #{id,jdbcType=BIGINT},
-      </if>
       <if test="userId != null" >
         #{userId,jdbcType=BIGINT},
       </if>

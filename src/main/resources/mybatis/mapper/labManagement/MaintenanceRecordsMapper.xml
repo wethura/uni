@@ -108,21 +108,24 @@
     </if>
   </delete>
   <insert id="insert" parameterType="edu.uni.labManagement.bean.MaintenanceRecords" >
-    insert into lm_maintenance_records (id, user_id, device_id, 
-      device_repair_apply_id, start_time, end_time, 
-      description, result, university_id, 
-      datetime, by_who, deleted)
-    values (#{id,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{deviceId,jdbcType=BIGINT}, 
-      #{deviceRepairApplyId,jdbcType=BIGINT}, #{startTime,jdbcType=DATE}, #{endTime,jdbcType=DATE}, 
-      #{description,jdbcType=VARCHAR}, #{result,jdbcType=VARCHAR}, #{universityId,jdbcType=BIGINT}, 
-      #{datetime,jdbcType=DATE}, #{byWho,jdbcType=BIGINT}, #{deleted,jdbcType=BIT})
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into lm_maintenance_records (user_id, device_id, device_repair_apply_id, 
+      start_time, end_time, description, 
+      result, university_id, datetime, 
+      by_who, deleted)
+    values (#{userId,jdbcType=BIGINT}, #{deviceId,jdbcType=BIGINT}, #{deviceRepairApplyId,jdbcType=BIGINT}, 
+      #{startTime,jdbcType=DATE}, #{endTime,jdbcType=DATE}, #{description,jdbcType=VARCHAR}, 
+      #{result,jdbcType=VARCHAR}, #{universityId,jdbcType=BIGINT}, #{datetime,jdbcType=DATE}, 
+      #{byWho,jdbcType=BIGINT}, #{deleted,jdbcType=BIT})
   </insert>
   <insert id="insertSelective" parameterType="edu.uni.labManagement.bean.MaintenanceRecords" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
     insert into lm_maintenance_records
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        id,
-      </if>
       <if test="userId != null" >
         user_id,
       </if>
@@ -158,9 +161,6 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        #{id,jdbcType=BIGINT},
-      </if>
       <if test="userId != null" >
         #{userId,jdbcType=BIGINT},
       </if>
