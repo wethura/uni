@@ -2,7 +2,7 @@ package edu.uni.labManagement.bean;
 
 import java.time.LocalDateTime;
 
-public class EquipmentModelBelongs {
+public class DeviceModelSlaves {
     private Long materId;
 
     private Long slaveId;

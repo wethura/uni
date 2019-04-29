@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="edu.uni.labManagement.mapper.EquipmentModelBelongsMapper" >
-  <resultMap id="BaseResultMap" type="edu.uni.labManagement.bean.EquipmentModelBelongs" >
+<mapper namespace="edu.uni.labManagement.mapper.DeviceModelSlavesMapper" >
+  <resultMap id="BaseResultMap" type="edu.uni.labManagement.bean.DeviceModelSlaves" >
     <result column="mater_id" property="materId" jdbcType="BIGINT" />
     <result column="slave_id" property="slaveId" jdbcType="BIGINT" />
     <result column="amount" property="amount" jdbcType="INTEGER" />
@@ -71,7 +71,7 @@
   <sql id="Base_Column_List" >
     mater_id, slave_id, amount, university_id, datetime, by_who, deleted
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="edu.uni.labManagement.bean.EquipmentModelBelongsExample" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="edu.uni.labManagement.bean.DeviceModelSlavesExample" >
     select
     <if test="distinct" >
       distinct
@@ -85,13 +85,13 @@
       order by ${orderByClause}
     </if>
   </select>
-  <delete id="deleteByExample" parameterType="edu.uni.labManagement.bean.EquipmentModelBelongsExample" >
+  <delete id="deleteByExample" parameterType="edu.uni.labManagement.bean.DeviceModelSlavesExample" >
     delete from lm_device_model_slaves
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="edu.uni.labManagement.bean.EquipmentModelBelongs" >
+  <insert id="insert" parameterType="edu.uni.labManagement.bean.DeviceModelSlaves" >
     insert into lm_device_model_slaves (mater_id, slave_id, amount, 
       university_id, datetime, by_who, 
       deleted)
@@ -99,7 +99,7 @@
       #{universityId,jdbcType=BIGINT}, #{datetime,jdbcType=DATE}, #{byWho,jdbcType=BIGINT}, 
       #{deleted,jdbcType=TINYINT})
   </insert>
-  <insert id="insertSelective" parameterType="edu.uni.labManagement.bean.EquipmentModelBelongs" >
+  <insert id="insertSelective" parameterType="edu.uni.labManagement.bean.DeviceModelSlaves" >
     insert into lm_device_model_slaves
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="materId != null" >
@@ -148,7 +148,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="edu.uni.labManagement.bean.EquipmentModelBelongsExample" resultType="java.lang.Integer" >
+  <select id="countByExample" parameterType="edu.uni.labManagement.bean.DeviceModelSlavesExample" resultType="java.lang.Integer" >
     select count(*) from lm_device_model_slaves
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
