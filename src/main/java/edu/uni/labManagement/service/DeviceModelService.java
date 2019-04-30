@@ -1,6 +1,7 @@
 package edu.uni.labManagement.service;
 
 import edu.uni.labManagement.bean.DeviceModel;
+import edu.uni.labManagement.bean.DeviceModelSlaves;
 
 /**
  * Create by Administrator
@@ -15,5 +16,14 @@ public interface DeviceModelService {
 	 */
 	long insertSlaveDeviceModel(DeviceModel deviceModel);
 
-	long insertParentDeviceModel(DeviceModel deviceModel, long pid);
+
+	/**
+	 * 说明：用于创建至模板，需要传递父模板的主键id
+	 * @param deviceModel
+	 * @param pid
+	 * @param amount
+	 * @param userid
+	 * @return
+	 */
+	long insertSonDeviceModel(DeviceModel deviceModel, long pid, int amount, long userid, long universityid);
 }
