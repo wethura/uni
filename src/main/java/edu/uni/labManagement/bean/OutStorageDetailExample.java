@@ -225,63 +225,63 @@ public class OutStorageDetailExample {
             return (Criteria) this;
         }
 
-        public Criteria andInStorageIdIsNull() {
-            addCriterion("in_storage_id is null");
+        public Criteria andStorageIdIsNull() {
+            addCriterion("storage_id is null");
             return (Criteria) this;
         }
 
-        public Criteria andInStorageIdIsNotNull() {
-            addCriterion("in_storage_id is not null");
+        public Criteria andStorageIdIsNotNull() {
+            addCriterion("storage_id is not null");
             return (Criteria) this;
         }
 
-        public Criteria andInStorageIdEqualTo(Long value) {
-            addCriterion("in_storage_id =", value, "inStorageId");
+        public Criteria andStorageIdEqualTo(Long value) {
+            addCriterion("storage_id =", value, "storageId");
             return (Criteria) this;
         }
 
-        public Criteria andInStorageIdNotEqualTo(Long value) {
-            addCriterion("in_storage_id <>", value, "inStorageId");
+        public Criteria andStorageIdNotEqualTo(Long value) {
+            addCriterion("storage_id <>", value, "storageId");
             return (Criteria) this;
         }
 
-        public Criteria andInStorageIdGreaterThan(Long value) {
-            addCriterion("in_storage_id >", value, "inStorageId");
+        public Criteria andStorageIdGreaterThan(Long value) {
+            addCriterion("storage_id >", value, "storageId");
             return (Criteria) this;
         }
 
-        public Criteria andInStorageIdGreaterThanOrEqualTo(Long value) {
-            addCriterion("in_storage_id >=", value, "inStorageId");
+        public Criteria andStorageIdGreaterThanOrEqualTo(Long value) {
+            addCriterion("storage_id >=", value, "storageId");
             return (Criteria) this;
         }
 
-        public Criteria andInStorageIdLessThan(Long value) {
-            addCriterion("in_storage_id <", value, "inStorageId");
+        public Criteria andStorageIdLessThan(Long value) {
+            addCriterion("storage_id <", value, "storageId");
             return (Criteria) this;
         }
 
-        public Criteria andInStorageIdLessThanOrEqualTo(Long value) {
-            addCriterion("in_storage_id <=", value, "inStorageId");
+        public Criteria andStorageIdLessThanOrEqualTo(Long value) {
+            addCriterion("storage_id <=", value, "storageId");
             return (Criteria) this;
         }
 
-        public Criteria andInStorageIdIn(List<Long> values) {
-            addCriterion("in_storage_id in", values, "inStorageId");
+        public Criteria andStorageIdIn(List<Long> values) {
+            addCriterion("storage_id in", values, "storageId");
             return (Criteria) this;
         }
 
-        public Criteria andInStorageIdNotIn(List<Long> values) {
-            addCriterion("in_storage_id not in", values, "inStorageId");
+        public Criteria andStorageIdNotIn(List<Long> values) {
+            addCriterion("storage_id not in", values, "storageId");
             return (Criteria) this;
         }
 
-        public Criteria andInStorageIdBetween(Long value1, Long value2) {
-            addCriterion("in_storage_id between", value1, value2, "inStorageId");
+        public Criteria andStorageIdBetween(Long value1, Long value2) {
+            addCriterion("storage_id between", value1, value2, "storageId");
             return (Criteria) this;
         }
 
-        public Criteria andInStorageIdNotBetween(Long value1, Long value2) {
-            addCriterion("in_storage_id not between", value1, value2, "inStorageId");
+        public Criteria andStorageIdNotBetween(Long value1, Long value2) {
+            addCriterion("storage_id not between", value1, value2, "storageId");
             return (Criteria) this;
         }
 

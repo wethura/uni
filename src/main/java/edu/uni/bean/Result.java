@@ -10,7 +10,8 @@ public class Result extends HashMap<String, Object>{
 
 
     private Result(int code, String msg) {    
-        this.put("code", code);    this.put("msg", msg);   
+        this.put("code", code);
+        this.put("msg", msg);
     }
 
     public static Result build(ResultType resultType){

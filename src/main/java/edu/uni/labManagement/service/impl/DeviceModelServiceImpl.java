@@ -28,19 +28,27 @@ public class DeviceModelServiceImpl implements DeviceModelService {
 	@Resource
 	private DeviceModelSlavesMapper deviceModelSlavesMapper;
 	@Override
-	public long insertSlaveDeviceModel(DeviceModel deviceModel) {
-		if(deviceModel.getIsSlave() == null) {
-			deviceModel.setIsSlave(false);
-		}
+	public long insertParentDeviceModel(DeviceModel deviceModel, long userid, long universityid, long categoryid) {
+
+		deviceModel.setByWho(userid);
+		deviceModel.setUniversityId(universityid);
+		deviceModel.setIsSlave(false);
+		deviceModel.setDatetime(LocalDateTime.now());
+		deviceModel.setDeviceCategoryId(categoryid);
+
 		long id = deviceModelMapper.insert(deviceModel);
 		return id;
 	}
 
 	@Override
-	public long insertSonDeviceModel(DeviceModel deviceModel, long pid, int amount, long userid, long universityid) {
-		if(deviceModel.getIsSlave() == null) {
-			deviceModel.setIsSlave(false);
-		}
+	public long insertSonDeviceModel(DeviceModel deviceModel, long pid, int amount, long userid, long universityid, long categoryid) {
+
+		deviceModel.setByWho(userid);
+		deviceModel.setUniversityId(universityid);
+		deviceModel.setIsSlave(false);
+		deviceModel.setDatetime(LocalDateTime.now());
+		deviceModel.setDeviceCategoryId(categoryid);
+
 		long id = deviceModelMapper.insert(deviceModel);
 
 

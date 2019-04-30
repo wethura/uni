@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 public class OutStorage {
     private Long id;
 
-    private Integer version;
+    private Integer batch;
 
     private String description;
 
@@ -29,12 +29,12 @@ public class OutStorage {
         this.id = id;
     }
 
-    public Integer getVersion() {
-        return version;
+    public Integer getBatch() {
+        return batch;
     }
 
-    public void setVersion(Integer version) {
-        this.version = version;
+    public void setBatch(Integer batch) {
+        this.batch = batch;
     }
 
     public String getDescription() {

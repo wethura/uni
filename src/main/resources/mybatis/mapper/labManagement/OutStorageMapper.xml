@@ -3,7 +3,7 @@
 <mapper namespace="edu.uni.labManagement.mapper.OutStorageMapper" >
   <resultMap id="BaseResultMap" type="edu.uni.labManagement.bean.OutStorage" >
     <id column="id" property="id" jdbcType="BIGINT" />
-    <result column="version" property="version" jdbcType="INTEGER" />
+    <result column="batch" property="batch" jdbcType="INTEGER" />
     <result column="description" property="description" jdbcType="VARCHAR" />
     <result column="source" property="source" jdbcType="VARCHAR" />
     <result column="department_id" property="departmentId" jdbcType="BIGINT" />
@@ -71,8 +71,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, version, description, source, department_id, university_id, datetime, by_who, 
-    deleted
+    id, batch, description, source, department_id, university_id, datetime, by_who, deleted
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="edu.uni.labManagement.bean.OutStorageExample" >
     select
@@ -108,10 +107,10 @@
     <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into lm_out_storage (version, description, source, 
+    insert into lm_out_storage (batch, description, source, 
       department_id, university_id, datetime, 
       by_who, deleted)
-    values (#{version,jdbcType=INTEGER}, #{description,jdbcType=VARCHAR}, #{source,jdbcType=VARCHAR}, 
+    values (#{batch,jdbcType=INTEGER}, #{description,jdbcType=VARCHAR}, #{source,jdbcType=VARCHAR}, 
       #{departmentId,jdbcType=BIGINT}, #{universityId,jdbcType=BIGINT}, #{datetime,jdbcType=DATE}, 
       #{byWho,jdbcType=BIGINT}, #{deleted,jdbcType=BIT})
   </insert>
@@ -121,8 +120,8 @@
     </selectKey>
     insert into lm_out_storage
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="version != null" >
-        version,
+      <if test="batch != null" >
+        batch,
       </if>
       <if test="description != null" >
         description,
@@ -147,8 +146,8 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="version != null" >
-        #{version,jdbcType=INTEGER},
+      <if test="batch != null" >
+        #{batch,jdbcType=INTEGER},
       </if>
       <if test="description != null" >
         #{description,jdbcType=VARCHAR},
@@ -185,8 +184,8 @@
       <if test="record.id != null" >
         id = #{record.id,jdbcType=BIGINT},
       </if>
-      <if test="record.version != null" >
-        version = #{record.version,jdbcType=INTEGER},
+      <if test="record.batch != null" >
+        batch = #{record.batch,jdbcType=INTEGER},
       </if>
       <if test="record.description != null" >
         description = #{record.description,jdbcType=VARCHAR},
@@ -217,7 +216,7 @@
   <update id="updateByExample" parameterType="map" >
     update lm_out_storage
     set id = #{record.id,jdbcType=BIGINT},
-      version = #{record.version,jdbcType=INTEGER},
+      batch = #{record.batch,jdbcType=INTEGER},
       description = #{record.description,jdbcType=VARCHAR},
       source = #{record.source,jdbcType=VARCHAR},
       department_id = #{record.departmentId,jdbcType=BIGINT},
@@ -232,8 +231,8 @@
   <update id="updateByPrimaryKeySelective" parameterType="edu.uni.labManagement.bean.OutStorage" >
     update lm_out_storage
     <set >
-      <if test="version != null" >
-        version = #{version,jdbcType=INTEGER},
+      <if test="batch != null" >
+        batch = #{batch,jdbcType=INTEGER},
       </if>
       <if test="description != null" >
         description = #{description,jdbcType=VARCHAR},
@@ -261,7 +260,7 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="edu.uni.labManagement.bean.OutStorage" >
     update lm_out_storage
-    set version = #{version,jdbcType=INTEGER},
+    set batch = #{batch,jdbcType=INTEGER},
       description = #{description,jdbcType=VARCHAR},
       source = #{source,jdbcType=VARCHAR},
       department_id = #{departmentId,jdbcType=BIGINT},

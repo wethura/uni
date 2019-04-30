@@ -64,10 +64,12 @@ public class ProductServiceImpl implements ProductService {
     public PageInfo<Product> selectPage(int pageNum){
         PageHelper.startPage(pageNum, globalConfig.getPageSize());    // 开启分页查询，第一次切仅第一次查询时生效
         List<Product> products = productMapper.selectByExample(null);   //  无条件查找商品
-        if(products != null)
+        if(products != null){
             return new PageInfo<>(products);
-        else
+        }
+        else{
             return null;
+        }
     }
 
     /**
@@ -84,9 +86,11 @@ public class ProductServiceImpl implements ProductService {
         criteria.andCidEqualTo(categoryId);
         // 根据条件查询
         List<Product> products = productMapper.selectByExample(example);   //  无条件查找商品
-        if(products != null)
+        if(products != null){
             return new PageInfo<>(products);
-        else
+        }
+        else {
             return null;
+        }
     }
 }
