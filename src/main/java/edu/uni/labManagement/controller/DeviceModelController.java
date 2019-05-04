@@ -43,13 +43,29 @@ public class DeviceModelController {
 	@Autowired
 	private RedisCache cache;
 
-	@ApiOperation(value = "创建设备模型")
+	@ApiOperation(value = "创建父设备模型")
 	@ApiImplicitParam(name="deviceModel", value = "设备模型实体类", required = true, dataType = "deviceModel")
 	@PostMapping
 	@ResponseBody
-	public Result create(@RequestBody(required = false) DeviceModel deviceModel){
+	public Result createParent(@RequestBody(required = false) DeviceModel deviceModel){
 		if(deviceModel != null){
 			boolean success = deviceModelService.insertParentDeviceModel(deviceModel);
+			if(success){
+				cache.deleteByPaterm(CacheNameHelper.listByPid);
+				return Result.build(ResultType.Success);
+			} else {
+				return Result.build(ResultType.Failed);
+			}
+		}
+		return Result.build(ResultType.ParamError);
+	}
+
+	@ApiOperation(value = "创建子设备模型")
+	@PostMapping("{pid}/{amount}")
+	@ResponseBody
+	public Result createSon(@RequestBody(required = false) DeviceModel deviceModel, @PathVariable long pid, @PathVariable Integer amount){
+		if(deviceModel != null){
+			boolean success = deviceModelService.insertSonDeviceModel(deviceModel, pid, amount);
 			if(success){
 				cache.deleteByPaterm(CacheNameHelper.listByPid);
 				return Result.build(ResultType.Success);

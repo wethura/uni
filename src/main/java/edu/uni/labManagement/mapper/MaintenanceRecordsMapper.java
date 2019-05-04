@@ -28,4 +28,6 @@ public interface MaintenanceRecordsMapper {
     int updateByPrimaryKeySelective(MaintenanceRecords record);
 
     int updateByPrimaryKey(MaintenanceRecords record);
+
+//    MaintenanceRecords selectByRepairApplyId(Long id);
 }

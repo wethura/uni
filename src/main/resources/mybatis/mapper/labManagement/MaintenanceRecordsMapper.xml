@@ -318,4 +318,11 @@
       deleted = #{deleted,jdbcType=BIT}
     where id = #{id,jdbcType=BIGINT}
   </update>
+
+<!--  <select id="selectByRepairApplyId" parameterType="long" resultType="edu.uni.labManagement.bean.MaintenanceRecords">-->
+<!--    select id, user_id AS userID, device_id AS deviceID, device_repair_apply_id AS deviceRepairApplyId, start_time AS startTime, end_time AS endTime, description, result, lm_maintenance_records.university_id as universityId, lm_maintenance_records.datetime, lm_maintenance_records.by_who AS byWho, lm_maintenance_records.deleted-->
+<!--    from lm_maintenance_records, lm_device_repair_apply-->
+<!--    where lm_device_repair_apply.id = lm_maintenance_records.device_repair_apply_id AND lm_device_repair_apply.id = #{id, jdbcType=BIGINT}-->
+<!--  </select>-->
+
 </mapper>

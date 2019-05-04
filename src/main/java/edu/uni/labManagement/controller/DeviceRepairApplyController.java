@@ -21,7 +21,7 @@ import java.util.List;
  * @author sola
  * @date 2019/05/03 23:50
  */
-@Api(description = "设备维修申请")
+@Api(description = "设备维修申请模块")
 @Controller
 @RequestMapping("json/labManagement/deviceRepair")
 public class DeviceRepairApplyController {
