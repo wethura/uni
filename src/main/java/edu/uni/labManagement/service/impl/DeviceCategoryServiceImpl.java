@@ -24,29 +24,28 @@ public class DeviceCategoryServiceImpl implements DeviceCategoryService {
 	private DeviceCategoryMapper deviceCategoryMapper;
 
 	@Override
-	public long insert(DeviceCategory deviceCategory) {
+	public boolean insert(DeviceCategory deviceCategory) {
 		deviceCategory.setDatetime(LocalDateTime.now());
-		long id = deviceCategoryMapper.insert(deviceCategory);
-		return id;
+		return deviceCategoryMapper.insert(deviceCategory) > 0 ? true : false;
 	}
 
 	@Override
-	public void update(DeviceCategory deviceCategory) {
-		deviceCategoryMapper.updateByPrimaryKey(deviceCategory);
+	public boolean update(DeviceCategory deviceCategory) {
+		return deviceCategoryMapper.updateByPrimaryKey(deviceCategory) > 0 ? true :false;
+	}
+
+	@Override
+	public boolean deleted(long id) {
+		return deviceCategoryMapper.deleteByPrimaryKey(id) > 0 ? true : false;
 	}
 
 	@Override
 	public List<DeviceCategory> listAll() {
 		DeviceCategoryExample example = new DeviceCategoryExample();
 		DeviceCategoryExample.Criteria criteria = example.createCriteria();
+		criteria.andDeletedEqualTo(true);
 		List<DeviceCategory> deviceCategoryList = deviceCategoryMapper.selectByExample(example);
 
-//		洗去无效数据
-		for(int i = deviceCategoryList.size() - 1; i >= 0; i --){
-			if(deviceCategoryList.get(i).getDeleted().equals(false)){
-				deviceCategoryList.remove(i);
-			}
-		}
 		return deviceCategoryList;
 	}
 

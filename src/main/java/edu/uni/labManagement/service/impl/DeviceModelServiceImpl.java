@@ -1,6 +1,7 @@
 package edu.uni.labManagement.service.impl;
 
 import edu.uni.labManagement.bean.DeviceModel;
+import edu.uni.labManagement.bean.DeviceModelExample;
 import edu.uni.labManagement.bean.DeviceModelSlaves;
 import edu.uni.labManagement.mapper.DeviceModelMapper;
 import edu.uni.labManagement.mapper.DeviceModelSlavesMapper;
@@ -12,6 +13,7 @@ import javax.annotation.Resource;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.List;
 
 /**
  * Create by Administrator
@@ -21,46 +23,47 @@ import java.time.LocalTime;
  */
 @Service
 public class DeviceModelServiceImpl implements DeviceModelService {
-
 	@Resource
 	private DeviceModelMapper deviceModelMapper;
-
 	@Resource
 	private DeviceModelSlavesMapper deviceModelSlavesMapper;
-	@Override
-	public long insertParentDeviceModel(DeviceModel deviceModel, long userid, long universityid, long categoryid) {
 
-		deviceModel.setByWho(userid);
-		deviceModel.setUniversityId(universityid);
+	@Override
+	public boolean insertParentDeviceModel(DeviceModel deviceModel) {
 		deviceModel.setIsSlave(false);
 		deviceModel.setDatetime(LocalDateTime.now());
-		deviceModel.setDeviceCategoryId(categoryid);
 
-		long id = deviceModelMapper.insert(deviceModel);
-		return id;
+		return deviceModelMapper.insert(deviceModel) > 0 ? true : false;
 	}
 
 	@Override
-	public long insertSonDeviceModel(DeviceModel deviceModel, long pid, int amount, long userid, long universityid, long categoryid) {
-
-		deviceModel.setByWho(userid);
-		deviceModel.setUniversityId(universityid);
-		deviceModel.setIsSlave(false);
+	public boolean insertSonDeviceModel(DeviceModel deviceModel, long pid, Integer amount) {
+		deviceModel.setIsSlave(true);
 		deviceModel.setDatetime(LocalDateTime.now());
-		deviceModel.setDeviceCategoryId(categoryid);
 
-		long id = deviceModelMapper.insert(deviceModel);
-
+		long slaveId = deviceModelMapper.insert(deviceModel);
 
 		DeviceModelSlaves deviceModelSlaves = new DeviceModelSlaves();
 		deviceModelSlaves.setAmount(amount);
-		deviceModelSlaves.setByWho(userid);
 		deviceModelSlaves.setDatetime(LocalDateTime.now());
-		deviceModelSlaves.setUniversityId(universityid);
 		deviceModelSlaves.setMaterId(pid);
+		deviceModelSlaves.setSlaveId(slaveId);
 
-		deviceModelSlavesMapper.insert(deviceModelSlaves);
+		return deviceModelSlavesMapper.insert(deviceModelSlaves) > 0 ? true : false;
+	}
 
-		return id;
+	@Override
+	public boolean update(DeviceModel deviceModel) {
+		return deviceModelMapper.updateByPrimaryKey(deviceModel) > 0 ? true : false;
+	}
+
+	@Override
+	public boolean deleted(long id) {
+		return deviceModelMapper.deleteByPrimaryKey(id) > 0 ? true : false;
+	}
+
+	@Override
+	public List<DeviceModel> listByPid(long id) {
+		return deviceModelMapper.selectByPid(id);
 	}
 }

@@ -28,4 +28,6 @@ public interface DeviceModelMapper {
     int updateByPrimaryKeySelective(DeviceModel record);
 
     int updateByPrimaryKey(DeviceModel record);
+
+    List<DeviceModel> selectByPid(Long pid);
 }

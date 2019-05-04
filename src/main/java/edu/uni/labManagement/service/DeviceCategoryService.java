@@ -12,11 +12,11 @@ import java.util.List;
  */
 public interface DeviceCategoryService {
 
-	long insert(DeviceCategory deviceCategory);
+	boolean insert(DeviceCategory deviceCategory);
 
-	void update(DeviceCategory deviceCategory);
+	boolean update(DeviceCategory deviceCategory);
 
-
+	boolean deleted(long id);
 
 	List<DeviceCategory> listAll();
 }
