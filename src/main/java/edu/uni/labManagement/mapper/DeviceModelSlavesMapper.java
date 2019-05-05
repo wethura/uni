@@ -11,13 +11,21 @@ public interface DeviceModelSlavesMapper {
 
     int deleteByExample(DeviceModelSlavesExample example);
 
+    int deleteByPrimaryKey(Long id);
+
     int insert(DeviceModelSlaves record);
 
     int insertSelective(DeviceModelSlaves record);
 
     List<DeviceModelSlaves> selectByExample(DeviceModelSlavesExample example);
 
+    DeviceModelSlaves selectByPrimaryKey(Long id);
+
     int updateByExampleSelective(@Param("record") DeviceModelSlaves record, @Param("example") DeviceModelSlavesExample example);
 
     int updateByExample(@Param("record") DeviceModelSlaves record, @Param("example") DeviceModelSlavesExample example);
+
+    int updateByPrimaryKeySelective(DeviceModelSlaves record);
+
+    int updateByPrimaryKey(DeviceModelSlaves record);
 }

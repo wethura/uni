@@ -5,7 +5,7 @@
     <id column="id" property="id" jdbcType="BIGINT" />
     <result column="device_category_id" property="deviceCategoryId" jdbcType="BIGINT" />
     <result column="department_id" property="departmentId" jdbcType="BIGINT" />
-    <result column="batch" property="batch" jdbcType="BIGINT" />
+    <result column="batch" property="batch" jdbcType="INTEGER" />
     <result column="number" property="number" jdbcType="VARCHAR" />
     <result column="model" property="model" jdbcType="VARCHAR" />
     <result column="name" property="name" jdbcType="VARCHAR" />
@@ -120,7 +120,7 @@
       serial_number, description, product_date, 
       is_master, status, university_id, 
       datetime, by_who, deleted)
-    values (#{deviceCategoryId,jdbcType=BIGINT}, #{departmentId,jdbcType=BIGINT}, #{batch,jdbcType=BIGINT}, 
+    values (#{deviceCategoryId,jdbcType=BIGINT}, #{departmentId,jdbcType=BIGINT}, #{batch,jdbcType=INTEGER}, 
       #{number,jdbcType=VARCHAR}, #{model,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
       #{serialNumber,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, #{productDate,jdbcType=DATE}, 
       #{isMaster,jdbcType=BIT}, #{status,jdbcType=INTEGER}, #{universityId,jdbcType=BIGINT}, 
@@ -186,7 +186,7 @@
         #{departmentId,jdbcType=BIGINT},
       </if>
       <if test="batch != null" >
-        #{batch,jdbcType=BIGINT},
+        #{batch,jdbcType=INTEGER},
       </if>
       <if test="number != null" >
         #{number,jdbcType=VARCHAR},
@@ -245,7 +245,7 @@
         department_id = #{record.departmentId,jdbcType=BIGINT},
       </if>
       <if test="record.batch != null" >
-        batch = #{record.batch,jdbcType=BIGINT},
+        batch = #{record.batch,jdbcType=INTEGER},
       </if>
       <if test="record.number != null" >
         number = #{record.number,jdbcType=VARCHAR},
@@ -293,7 +293,7 @@
     set id = #{record.id,jdbcType=BIGINT},
       device_category_id = #{record.deviceCategoryId,jdbcType=BIGINT},
       department_id = #{record.departmentId,jdbcType=BIGINT},
-      batch = #{record.batch,jdbcType=BIGINT},
+      batch = #{record.batch,jdbcType=INTEGER},
       number = #{record.number,jdbcType=VARCHAR},
       model = #{record.model,jdbcType=VARCHAR},
       name = #{record.name,jdbcType=VARCHAR},
@@ -320,7 +320,7 @@
         department_id = #{departmentId,jdbcType=BIGINT},
       </if>
       <if test="batch != null" >
-        batch = #{batch,jdbcType=BIGINT},
+        batch = #{batch,jdbcType=INTEGER},
       </if>
       <if test="number != null" >
         number = #{number,jdbcType=VARCHAR},
@@ -365,7 +365,7 @@
     update lm_device
     set device_category_id = #{deviceCategoryId,jdbcType=BIGINT},
       department_id = #{departmentId,jdbcType=BIGINT},
-      batch = #{batch,jdbcType=BIGINT},
+      batch = #{batch,jdbcType=INTEGER},
       number = #{number,jdbcType=VARCHAR},
       model = #{model,jdbcType=VARCHAR},
       name = #{name,jdbcType=VARCHAR},

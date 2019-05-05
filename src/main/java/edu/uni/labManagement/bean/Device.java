@@ -9,7 +9,7 @@ public class Device {
 
     private Long departmentId;
 
-    private Long batch;
+    private Integer batch;
 
     private String number;
 
@@ -59,11 +59,11 @@ public class Device {
         this.departmentId = departmentId;
     }
 
-    public Long getBatch() {
+    public Integer getBatch() {
         return batch;
     }
 
-    public void setBatch(Long batch) {
+    public void setBatch(Integer batch) {
         this.batch = batch;
     }
 

@@ -295,52 +295,52 @@ public class DeviceExample {
             return (Criteria) this;
         }
 
-        public Criteria andBatchEqualTo(Long value) {
+        public Criteria andBatchEqualTo(Integer value) {
             addCriterion("batch =", value, "batch");
             return (Criteria) this;
         }
 
-        public Criteria andBatchNotEqualTo(Long value) {
+        public Criteria andBatchNotEqualTo(Integer value) {
             addCriterion("batch <>", value, "batch");
             return (Criteria) this;
         }
 
-        public Criteria andBatchGreaterThan(Long value) {
+        public Criteria andBatchGreaterThan(Integer value) {
             addCriterion("batch >", value, "batch");
             return (Criteria) this;
         }
 
-        public Criteria andBatchGreaterThanOrEqualTo(Long value) {
+        public Criteria andBatchGreaterThanOrEqualTo(Integer value) {
             addCriterion("batch >=", value, "batch");
             return (Criteria) this;
         }
 
-        public Criteria andBatchLessThan(Long value) {
+        public Criteria andBatchLessThan(Integer value) {
             addCriterion("batch <", value, "batch");
             return (Criteria) this;
         }
 
-        public Criteria andBatchLessThanOrEqualTo(Long value) {
+        public Criteria andBatchLessThanOrEqualTo(Integer value) {
             addCriterion("batch <=", value, "batch");
             return (Criteria) this;
         }
 
-        public Criteria andBatchIn(List<Long> values) {
+        public Criteria andBatchIn(List<Integer> values) {
             addCriterion("batch in", values, "batch");
             return (Criteria) this;
         }
 
-        public Criteria andBatchNotIn(List<Long> values) {
+        public Criteria andBatchNotIn(List<Integer> values) {
             addCriterion("batch not in", values, "batch");
             return (Criteria) this;
         }
 
-        public Criteria andBatchBetween(Long value1, Long value2) {
+        public Criteria andBatchBetween(Integer value1, Integer value2) {
             addCriterion("batch between", value1, value2, "batch");
             return (Criteria) this;
         }
 
-        public Criteria andBatchNotBetween(Long value1, Long value2) {
+        public Criteria andBatchNotBetween(Integer value1, Integer value2) {
             addCriterion("batch not between", value1, value2, "batch");
             return (Criteria) this;
         }

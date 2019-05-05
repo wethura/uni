@@ -3,6 +3,8 @@ package edu.uni.labManagement.bean;
 import java.time.LocalDateTime;
 
 public class DeviceModelSlaves {
+    private Long id;
+
     private Long materId;
 
     private Long slaveId;
@@ -15,7 +17,15 @@ public class DeviceModelSlaves {
 
     private Long byWho;
 
-    private Byte deleted;
+    private Boolean deleted;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public Long getMaterId() {
         return materId;
@@ -65,11 +75,11 @@ public class DeviceModelSlaves {
         this.byWho = byWho;
     }
 
-    public Byte getDeleted() {
+    public Boolean getDeleted() {
         return deleted;
     }
 
-    public void setDeleted(Byte deleted) {
+    public void setDeleted(Boolean deleted) {
         this.deleted = deleted;
     }
 }
