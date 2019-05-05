@@ -27,7 +27,7 @@ public class DeviceRepairApplyServiceImpl implements DeviceRepairApplyService {
 	public boolean insert(DeviceRepairApply deviceRepairApply) {
 		deviceRepairApply.setDatetime(LocalDateTime.now());
 		deviceRepairApply.setApplyTime(LocalDateTime.now());
-		deviceRepairApply.setDeleted(true);
+		deviceRepairApply.setDeleted(false);
 		return deviceRepairApplyMapper.insert(deviceRepairApply) > 0 ? true : false;
 	}
 
@@ -47,7 +47,7 @@ public class DeviceRepairApplyServiceImpl implements DeviceRepairApplyService {
 		DeviceRepairApplyExample example = new DeviceRepairApplyExample();
 		DeviceRepairApplyExample.Criteria criteria = example.createCriteria();
 		criteria.andIsSuccessEqualTo(states);
-		criteria.andDeletedEqualTo(true);
+		criteria.andDeletedEqualTo(false);
 		return deviceRepairApplyMapper.selectByExample(example);
 	}
 
@@ -56,7 +56,7 @@ public class DeviceRepairApplyServiceImpl implements DeviceRepairApplyService {
 		DeviceRepairApplyExample example = new DeviceRepairApplyExample();
 		DeviceRepairApplyExample.Criteria criteria = example.createCriteria();
 		criteria.andDeviceIdEqualTo(id);
-		criteria.andDeletedEqualTo(true);
+		criteria.andDeletedEqualTo(false);
 		return deviceRepairApplyMapper.selectByExample(example);
 	}
 

@@ -26,7 +26,7 @@ public class DeviceCategoryServiceImpl implements DeviceCategoryService {
 	@Override
 	public boolean insert(DeviceCategory deviceCategory) {
 		deviceCategory.setDatetime(LocalDateTime.now());
-		deviceCategory.setDeleted(true);
+		deviceCategory.setDeleted(false);
 		return deviceCategoryMapper.insert(deviceCategory) > 0 ? true : false;
 	}
 
@@ -44,7 +44,7 @@ public class DeviceCategoryServiceImpl implements DeviceCategoryService {
 	public List<DeviceCategory> listAll() {
 		DeviceCategoryExample example = new DeviceCategoryExample();
 		DeviceCategoryExample.Criteria criteria = example.createCriteria();
-		criteria.andDeletedEqualTo(true);
+		criteria.andDeletedEqualTo(false);
 		List<DeviceCategory> deviceCategoryList = deviceCategoryMapper.selectByExample(example);
 
 		return deviceCategoryList;

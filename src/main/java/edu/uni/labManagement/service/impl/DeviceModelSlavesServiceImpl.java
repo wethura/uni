@@ -24,7 +24,7 @@ public class DeviceModelSlavesServiceImpl implements DeviceModelSlavesService {
 
 	@Override
 	public boolean insert(DeviceModelSlaves deviceModelSlaves) {
-		deviceModelSlaves.setDeleted(new Byte("1"));
+		deviceModelSlaves.setDeleted(new Byte("0"));
 		return deviceModelSlavesMapper.insert(deviceModelSlaves) > 0 ? true : false;
 	}
 

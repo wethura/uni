@@ -380,4 +380,12 @@
       deleted = #{deleted,jdbcType=BIT}
     where id = #{id,jdbcType=BIGINT}
   </update>
+  <select id="selectByLabId" parameterType="long" resultType="edu.uni.labManagement.bean.Device">
+    select
+        lm_device.id, device_category_id AS deviceCategoryId, department_id AS departmentId, batch,
+        number, model, name, serial_number AS serialNumber, description, product_date AS productDate,
+        is_master AS isMaster, status, lm_device.university_id AS universityId, lm_device.datetime, lm_device.by_who AS byWho, lm_device.deleted
+    FROM lm_device, lm_lab_device
+    WHERE lm_device.id = lm_lab_device.device_id AND lm_lab_device.lab_id = #{id, jdbcType=BIGINT} AND lm_device.deleted = 0 AND lm_lab_device.deleted = 0
+  </select>
 </mapper>

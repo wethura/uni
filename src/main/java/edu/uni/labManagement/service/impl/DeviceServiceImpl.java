@@ -29,4 +29,9 @@ public class DeviceServiceImpl implements DeviceService {
 		criteria.andDeletedEqualTo(true);
 		return deviceMapper.selectByExample(example);
 	}
+
+	@Override
+	public List<Device> listAllByLabId(long labId) {
+		return deviceMapper.selectByLabId(labId);
+	}
 }

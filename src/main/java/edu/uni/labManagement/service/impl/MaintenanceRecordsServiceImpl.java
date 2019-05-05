@@ -25,6 +25,7 @@ public class MaintenanceRecordsServiceImpl implements MaintenanceRecordsService 
 	@Override
 	public boolean insert(MaintenanceRecords maintenanceRecords) {
 		maintenanceRecords.setDatetime(LocalDateTime.now());
+		maintenanceRecords.setDeleted(false);
 		return maintenanceRecordsMapper.insert(maintenanceRecords) > 0 ? true : false;
 	}
 
@@ -43,7 +44,7 @@ public class MaintenanceRecordsServiceImpl implements MaintenanceRecordsService 
 		MaintenanceRecordsExample example = new MaintenanceRecordsExample();
 		MaintenanceRecordsExample.Criteria criteria = example.createCriteria();
 		criteria.andDeviceRepairApplyIdEqualTo(id);
-		criteria.andDeletedEqualTo(true);
+		criteria.andDeletedEqualTo(false);
 		List<MaintenanceRecords> list = maintenanceRecordsMapper.selectByExample(example);
 		return list != null ? list.get(0) : null;
 	}
@@ -53,7 +54,7 @@ public class MaintenanceRecordsServiceImpl implements MaintenanceRecordsService 
 		MaintenanceRecordsExample example = new MaintenanceRecordsExample();
 		MaintenanceRecordsExample.Criteria criteria = example.createCriteria();
 		criteria.andDeviceIdEqualTo(id);
-		criteria.andDeletedEqualTo(true);
+		criteria.andDeletedEqualTo(false);
 		return maintenanceRecordsMapper.selectByExample(example);
 	}
 }

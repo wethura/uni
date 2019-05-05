@@ -33,7 +33,7 @@ public class DeviceModelServiceImpl implements DeviceModelService {
 	public boolean insertParentDeviceModel(DeviceModel deviceModel) {
 		deviceModel.setIsSlave(false);
 		deviceModel.setDatetime(LocalDateTime.now());
-		deviceModel.setDeleted(true);
+		deviceModel.setDeleted(false);
 
 		return deviceModelMapper.insert(deviceModel) > 0 ? true : false;
 	}
@@ -42,7 +42,7 @@ public class DeviceModelServiceImpl implements DeviceModelService {
 	public boolean insertSonDeviceModel(DeviceModel deviceModel, long pid, Integer amount) {
 		deviceModel.setIsSlave(true);
 		deviceModel.setDatetime(LocalDateTime.now());
-		deviceModel.setDeleted(true);
+		deviceModel.setDeleted(false);
 		long slaveId = deviceModelMapper.insert(deviceModel);
 
 		DeviceModelSlaves deviceModelSlaves = new DeviceModelSlaves();
