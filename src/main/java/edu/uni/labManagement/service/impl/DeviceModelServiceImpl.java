@@ -1,5 +1,6 @@
 package edu.uni.labManagement.service.impl;
 
+import com.sun.org.apache.regexp.internal.RE;
 import edu.uni.labManagement.bean.DeviceModel;
 import edu.uni.labManagement.bean.DeviceModelExample;
 import edu.uni.labManagement.bean.DeviceModelSlaves;
@@ -32,6 +33,7 @@ public class DeviceModelServiceImpl implements DeviceModelService {
 	public boolean insertParentDeviceModel(DeviceModel deviceModel) {
 		deviceModel.setIsSlave(false);
 		deviceModel.setDatetime(LocalDateTime.now());
+		deviceModel.setDeleted(true);
 
 		return deviceModelMapper.insert(deviceModel) > 0 ? true : false;
 	}
@@ -40,7 +42,7 @@ public class DeviceModelServiceImpl implements DeviceModelService {
 	public boolean insertSonDeviceModel(DeviceModel deviceModel, long pid, Integer amount) {
 		deviceModel.setIsSlave(true);
 		deviceModel.setDatetime(LocalDateTime.now());
-
+		deviceModel.setDeleted(true);
 		long slaveId = deviceModelMapper.insert(deviceModel);
 
 		DeviceModelSlaves deviceModelSlaves = new DeviceModelSlaves();

@@ -44,7 +44,7 @@ public class DeviceModelController {
 	private RedisCache cache;
 
 	@ApiOperation(value = "创建父设备模型")
-	@ApiImplicitParam(name="deviceModel", value = "设备模型实体类", required = true, dataType = "deviceModel")
+//	@ApiImplicitParam(name="deviceModel", value = "设备模型实体类", required = true, dataType = "deviceModel")
 	@PostMapping
 	@ResponseBody
 	public Result createParent(@RequestBody(required = false) DeviceModel deviceModel){
@@ -77,7 +77,7 @@ public class DeviceModelController {
 	}
 
 	@ApiOperation(value = "删除设备模型")
-	@ApiImplicitParam(name="id", value = "设备模型实体类", required = true, dataType = "long", paramType = "path")
+//	@ApiImplicitParam(name="id", value = "设备模型实体类", required = true, dataType = "long", paramType = "path")
 	@DeleteMapping("/{id}")
 	@ResponseBody
 	public Result destroy(@PathVariable Integer id){
@@ -92,7 +92,7 @@ public class DeviceModelController {
 	}
 
 	@ApiOperation(value = "更新设备模型")
-	@ApiImplicitParam(name="deviceModel", value = "设备模型实体类", required = true, dataType = "deviceModel")
+//	@ApiImplicitParam(name="deviceModel", value = "设备模型实体类", required = true, dataType = "deviceModel")
 	@PutMapping
 	@ResponseBody
 	public Result update(@RequestBody DeviceModel deviceModel){
@@ -114,7 +114,7 @@ public class DeviceModelController {
 	}
 
 	@ApiOperation(value = "通过父id查询子设备")
-	@ApiImplicitParam(name="pid", value = "父设备ID", required = true, dataType = "long", paramType = "path")
+//	@ApiImplicitParam(name="pid", value = "父设备ID", required = true, dataType = "long", paramType = "path")
 	@GetMapping("{pid}")
 	@ResponseBody
 	void receive(HttpServletResponse response, @PathVariable Integer pid) throws IOException {

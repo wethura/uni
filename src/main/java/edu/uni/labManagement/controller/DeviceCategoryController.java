@@ -49,6 +49,7 @@ public class DeviceCategoryController {
 	 */
 	@GetMapping("listAll")
 	@ApiOperation(value = "查询所有的设备分类")
+	@ResponseBody
 	public void receive(HttpServletResponse response) throws Exception{
 
 		response.setContentType("application/json;charset=utf-8");
@@ -71,7 +72,7 @@ public class DeviceCategoryController {
 	 * @return
 	 */
 	@ApiOperation(value="根据设备类型id修改设备类型")
-	@ApiImplicitParam(name="deviceCategory", value = "设备类型实体类", required = true, dataType = "deviceCategory")
+//	@ApiImplicitParam(name="deviceCategory", value = "设备类型实体类", required = true, dataType = "deviceCategory")
 	@PutMapping
 	@ResponseBody
 	public Result update(@RequestBody(required = false) DeviceCategory deviceCategory){
@@ -93,7 +94,7 @@ public class DeviceCategoryController {
 	 * @return
 	 */
 	@ApiOperation(value = "创建设备类型")
-	@ApiImplicitParam(name = "deviceCategory", value = "设备类型实体类", required = true, dataType = "deviceCategory")
+//	@ApiImplicitParam(name = "deviceCategory", value = "设备类型实体类", required = true, dataType = "deviceCategory")
 	@PostMapping
 	@ResponseBody
 	public Result create(@RequestBody(required = false) DeviceCategory deviceCategory){
@@ -115,7 +116,7 @@ public class DeviceCategoryController {
 	 * @return
 	 */
 	@ApiOperation(value = "根据ID删除设备类型")
-	@ApiImplicitParam(name = "id", value = "设备类型id", required = true, dataType = "Integer", paramType = "path")
+//	@ApiImplicitParam(name = "id", value = "设备类型id", required = true, dataType = "Integer", paramType = "path")
 	@DeleteMapping("{id}")
 	@ResponseBody
 	public Result destroy(@PathVariable Integer id){

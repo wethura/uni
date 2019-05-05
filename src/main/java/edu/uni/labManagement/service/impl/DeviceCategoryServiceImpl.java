@@ -26,6 +26,7 @@ public class DeviceCategoryServiceImpl implements DeviceCategoryService {
 	@Override
 	public boolean insert(DeviceCategory deviceCategory) {
 		deviceCategory.setDatetime(LocalDateTime.now());
+		deviceCategory.setDeleted(true);
 		return deviceCategoryMapper.insert(deviceCategory) > 0 ? true : false;
 	}
 

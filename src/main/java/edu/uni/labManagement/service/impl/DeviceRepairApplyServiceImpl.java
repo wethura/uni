@@ -27,6 +27,7 @@ public class DeviceRepairApplyServiceImpl implements DeviceRepairApplyService {
 	public boolean insert(DeviceRepairApply deviceRepairApply) {
 		deviceRepairApply.setDatetime(LocalDateTime.now());
 		deviceRepairApply.setApplyTime(LocalDateTime.now());
+		deviceRepairApply.setDeleted(true);
 		return deviceRepairApplyMapper.insert(deviceRepairApply) > 0 ? true : false;
 	}
 

@@ -43,7 +43,7 @@ public class DeviceRepairApplyController {
 	 */
 	@ApiOperation(value = "通过设备维修申请状态查询<is_success>")
 	@GetMapping("{states}")
-	@ApiImplicitParam(name="states", value = "is_success", required = true, dataType = "long", paramType = "path")
+//	@ApiImplicitParam(name="states", value = "is_success", required = true, dataType = "long", paramType = "path")
 	@ResponseBody
 	public void receive(HttpServletResponse response, @PathVariable Integer states) throws Exception{
 
@@ -67,7 +67,7 @@ public class DeviceRepairApplyController {
 	 * @return
 	 */
 	@ApiOperation(value="根据设备维修申请id修改设备维修申请, 可以传入部分需要修改的数据，可用于审核用")
-	@ApiImplicitParam(name = "deviceRepairApply", value = "设备维修申请实体类", required = true, dataType = "deviceRepairApply")
+//	@ApiImplicitParam(name = "deviceRepairApply", value = "设备维修申请实体类", required = true, dataType = "deviceRepairApply")
 	@PutMapping
 	@ResponseBody
 	public Result update(@RequestBody(required = false) DeviceRepairApply deviceRepairApply){
@@ -111,7 +111,7 @@ public class DeviceRepairApplyController {
 	 * @return
 	 */
 	@ApiOperation(value = "根据ID删除设备类型")
-	@ApiImplicitParam(name = "id", value = "设备类型id", required = true, dataType = "Integer", paramType = "path")
+//	@ApiImplicitParam(name = "id", value = "设备类型id", required = true, dataType = "Integer", paramType = "path")
 	@DeleteMapping("{id}")
 	@ResponseBody
 	public Result destroy(@PathVariable Integer id){

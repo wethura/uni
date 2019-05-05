@@ -11,7 +11,6 @@ import java.util.List;
  * @author sola
  * @date 2019/05/04 15:06
  */
-@Service
 public interface MaintenanceRecordsService {
 
 	/**

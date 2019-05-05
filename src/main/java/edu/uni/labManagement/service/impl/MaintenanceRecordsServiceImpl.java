@@ -4,6 +4,7 @@ import edu.uni.labManagement.bean.MaintenanceRecords;
 import edu.uni.labManagement.bean.MaintenanceRecordsExample;
 import edu.uni.labManagement.mapper.MaintenanceRecordsMapper;
 import edu.uni.labManagement.service.MaintenanceRecordsService;
+import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.time.LocalDateTime;
@@ -15,6 +16,7 @@ import java.util.List;
  * @author sola
  * @date 2019/05/04 15:12
  */
+@Service
 public class MaintenanceRecordsServiceImpl implements MaintenanceRecordsService {
 
 	@Resource
