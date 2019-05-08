@@ -5,9 +5,9 @@
     <id column="id" property="id" jdbcType="BIGINT" />
     <result column="user_id" property="userId" jdbcType="BIGINT" />
     <result column="reason" property="reason" jdbcType="VARCHAR" />
-    <result column="return_time" property="returnTime" jdbcType="DATE" />
+    <result column="return_time" property="returnTime" jdbcType="TIMESTAMP" />
     <result column="university_id" property="universityId" jdbcType="BIGINT" />
-    <result column="datetime" property="datetime" jdbcType="DATE" />
+    <result column="datetime" property="datetime" jdbcType="TIMESTAMP" />
     <result column="by_who" property="byWho" jdbcType="BIGINT" />
     <result column="deleted" property="deleted" jdbcType="BIT" />
   </resultMap>
@@ -109,8 +109,8 @@
     insert into lm_device_lend (user_id, reason, return_time, 
       university_id, datetime, by_who, 
       deleted)
-    values (#{userId,jdbcType=BIGINT}, #{reason,jdbcType=VARCHAR}, #{returnTime,jdbcType=DATE}, 
-      #{universityId,jdbcType=BIGINT}, #{datetime,jdbcType=DATE}, #{byWho,jdbcType=BIGINT}, 
+    values (#{userId,jdbcType=BIGINT}, #{reason,jdbcType=VARCHAR}, #{returnTime,jdbcType=TIMESTAMP}, 
+      #{universityId,jdbcType=BIGINT}, #{datetime,jdbcType=TIMESTAMP}, #{byWho,jdbcType=BIGINT}, 
       #{deleted,jdbcType=BIT})
   </insert>
   <insert id="insertSelective" parameterType="edu.uni.labManagement.bean.DeviceLend" >
@@ -149,13 +149,13 @@
         #{reason,jdbcType=VARCHAR},
       </if>
       <if test="returnTime != null" >
-        #{returnTime,jdbcType=DATE},
+        #{returnTime,jdbcType=TIMESTAMP},
       </if>
       <if test="universityId != null" >
         #{universityId,jdbcType=BIGINT},
       </if>
       <if test="datetime != null" >
-        #{datetime,jdbcType=DATE},
+        #{datetime,jdbcType=TIMESTAMP},
       </if>
       <if test="byWho != null" >
         #{byWho,jdbcType=BIGINT},
@@ -184,13 +184,13 @@
         reason = #{record.reason,jdbcType=VARCHAR},
       </if>
       <if test="record.returnTime != null" >
-        return_time = #{record.returnTime,jdbcType=DATE},
+        return_time = #{record.returnTime,jdbcType=TIMESTAMP},
       </if>
       <if test="record.universityId != null" >
         university_id = #{record.universityId,jdbcType=BIGINT},
       </if>
       <if test="record.datetime != null" >
-        datetime = #{record.datetime,jdbcType=DATE},
+        datetime = #{record.datetime,jdbcType=TIMESTAMP},
       </if>
       <if test="record.byWho != null" >
         by_who = #{record.byWho,jdbcType=BIGINT},
@@ -208,9 +208,9 @@
     set id = #{record.id,jdbcType=BIGINT},
       user_id = #{record.userId,jdbcType=BIGINT},
       reason = #{record.reason,jdbcType=VARCHAR},
-      return_time = #{record.returnTime,jdbcType=DATE},
+      return_time = #{record.returnTime,jdbcType=TIMESTAMP},
       university_id = #{record.universityId,jdbcType=BIGINT},
-      datetime = #{record.datetime,jdbcType=DATE},
+      datetime = #{record.datetime,jdbcType=TIMESTAMP},
       by_who = #{record.byWho,jdbcType=BIGINT},
       deleted = #{record.deleted,jdbcType=BIT}
     <if test="_parameter != null" >
@@ -227,13 +227,13 @@
         reason = #{reason,jdbcType=VARCHAR},
       </if>
       <if test="returnTime != null" >
-        return_time = #{returnTime,jdbcType=DATE},
+        return_time = #{returnTime,jdbcType=TIMESTAMP},
       </if>
       <if test="universityId != null" >
         university_id = #{universityId,jdbcType=BIGINT},
       </if>
       <if test="datetime != null" >
-        datetime = #{datetime,jdbcType=DATE},
+        datetime = #{datetime,jdbcType=TIMESTAMP},
       </if>
       <if test="byWho != null" >
         by_who = #{byWho,jdbcType=BIGINT},
@@ -248,9 +248,9 @@
     update lm_device_lend
     set user_id = #{userId,jdbcType=BIGINT},
       reason = #{reason,jdbcType=VARCHAR},
-      return_time = #{returnTime,jdbcType=DATE},
+      return_time = #{returnTime,jdbcType=TIMESTAMP},
       university_id = #{universityId,jdbcType=BIGINT},
-      datetime = #{datetime,jdbcType=DATE},
+      datetime = #{datetime,jdbcType=TIMESTAMP},
       by_who = #{byWho,jdbcType=BIGINT},
       deleted = #{deleted,jdbcType=BIT}
     where id = #{id,jdbcType=BIGINT}

@@ -1,7 +1,7 @@
 package edu.uni.labManagement.bean;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class DeviceRepairApplyExample {
@@ -365,52 +365,52 @@ public class DeviceRepairApplyExample {
             return (Criteria) this;
         }
 
-        public Criteria andApplyTimeEqualTo(LocalDateTime value) {
+        public Criteria andApplyTimeEqualTo(Date value) {
             addCriterion("apply_time =", value, "applyTime");
             return (Criteria) this;
         }
 
-        public Criteria andApplyTimeNotEqualTo(LocalDateTime value) {
+        public Criteria andApplyTimeNotEqualTo(Date value) {
             addCriterion("apply_time <>", value, "applyTime");
             return (Criteria) this;
         }
 
-        public Criteria andApplyTimeGreaterThan(LocalDateTime value) {
+        public Criteria andApplyTimeGreaterThan(Date value) {
             addCriterion("apply_time >", value, "applyTime");
             return (Criteria) this;
         }
 
-        public Criteria andApplyTimeGreaterThanOrEqualTo(LocalDateTime value) {
+        public Criteria andApplyTimeGreaterThanOrEqualTo(Date value) {
             addCriterion("apply_time >=", value, "applyTime");
             return (Criteria) this;
         }
 
-        public Criteria andApplyTimeLessThan(LocalDateTime value) {
+        public Criteria andApplyTimeLessThan(Date value) {
             addCriterion("apply_time <", value, "applyTime");
             return (Criteria) this;
         }
 
-        public Criteria andApplyTimeLessThanOrEqualTo(LocalDateTime value) {
+        public Criteria andApplyTimeLessThanOrEqualTo(Date value) {
             addCriterion("apply_time <=", value, "applyTime");
             return (Criteria) this;
         }
 
-        public Criteria andApplyTimeIn(List<LocalDateTime> values) {
+        public Criteria andApplyTimeIn(List<Date> values) {
             addCriterion("apply_time in", values, "applyTime");
             return (Criteria) this;
         }
 
-        public Criteria andApplyTimeNotIn(List<LocalDateTime> values) {
+        public Criteria andApplyTimeNotIn(List<Date> values) {
             addCriterion("apply_time not in", values, "applyTime");
             return (Criteria) this;
         }
 
-        public Criteria andApplyTimeBetween(LocalDateTime value1, LocalDateTime value2) {
+        public Criteria andApplyTimeBetween(Date value1, Date value2) {
             addCriterion("apply_time between", value1, value2, "applyTime");
             return (Criteria) this;
         }
 
-        public Criteria andApplyTimeNotBetween(LocalDateTime value1, LocalDateTime value2) {
+        public Criteria andApplyTimeNotBetween(Date value1, Date value2) {
             addCriterion("apply_time not between", value1, value2, "applyTime");
             return (Criteria) this;
         }
@@ -685,52 +685,52 @@ public class DeviceRepairApplyExample {
             return (Criteria) this;
         }
 
-        public Criteria andReviewTimeEqualTo(LocalDateTime value) {
+        public Criteria andReviewTimeEqualTo(Date value) {
             addCriterion("review_time =", value, "reviewTime");
             return (Criteria) this;
         }
 
-        public Criteria andReviewTimeNotEqualTo(LocalDateTime value) {
+        public Criteria andReviewTimeNotEqualTo(Date value) {
             addCriterion("review_time <>", value, "reviewTime");
             return (Criteria) this;
         }
 
-        public Criteria andReviewTimeGreaterThan(LocalDateTime value) {
+        public Criteria andReviewTimeGreaterThan(Date value) {
             addCriterion("review_time >", value, "reviewTime");
             return (Criteria) this;
         }
 
-        public Criteria andReviewTimeGreaterThanOrEqualTo(LocalDateTime value) {
+        public Criteria andReviewTimeGreaterThanOrEqualTo(Date value) {
             addCriterion("review_time >=", value, "reviewTime");
             return (Criteria) this;
         }
 
-        public Criteria andReviewTimeLessThan(LocalDateTime value) {
+        public Criteria andReviewTimeLessThan(Date value) {
             addCriterion("review_time <", value, "reviewTime");
             return (Criteria) this;
         }
 
-        public Criteria andReviewTimeLessThanOrEqualTo(LocalDateTime value) {
+        public Criteria andReviewTimeLessThanOrEqualTo(Date value) {
             addCriterion("review_time <=", value, "reviewTime");
             return (Criteria) this;
         }
 
-        public Criteria andReviewTimeIn(List<LocalDateTime> values) {
+        public Criteria andReviewTimeIn(List<Date> values) {
             addCriterion("review_time in", values, "reviewTime");
             return (Criteria) this;
         }
 
-        public Criteria andReviewTimeNotIn(List<LocalDateTime> values) {
+        public Criteria andReviewTimeNotIn(List<Date> values) {
             addCriterion("review_time not in", values, "reviewTime");
             return (Criteria) this;
         }
 
-        public Criteria andReviewTimeBetween(LocalDateTime value1, LocalDateTime value2) {
+        public Criteria andReviewTimeBetween(Date value1, Date value2) {
             addCriterion("review_time between", value1, value2, "reviewTime");
             return (Criteria) this;
         }
 
-        public Criteria andReviewTimeNotBetween(LocalDateTime value1, LocalDateTime value2) {
+        public Criteria andReviewTimeNotBetween(Date value1, Date value2) {
             addCriterion("review_time not between", value1, value2, "reviewTime");
             return (Criteria) this;
         }
@@ -805,52 +805,52 @@ public class DeviceRepairApplyExample {
             return (Criteria) this;
         }
 
-        public Criteria andDatetimeEqualTo(LocalDateTime value) {
+        public Criteria andDatetimeEqualTo(Date value) {
             addCriterion("datetime =", value, "datetime");
             return (Criteria) this;
         }
 
-        public Criteria andDatetimeNotEqualTo(LocalDateTime value) {
+        public Criteria andDatetimeNotEqualTo(Date value) {
             addCriterion("datetime <>", value, "datetime");
             return (Criteria) this;
         }
 
-        public Criteria andDatetimeGreaterThan(LocalDateTime value) {
+        public Criteria andDatetimeGreaterThan(Date value) {
             addCriterion("datetime >", value, "datetime");
             return (Criteria) this;
         }
 
-        public Criteria andDatetimeGreaterThanOrEqualTo(LocalDateTime value) {
+        public Criteria andDatetimeGreaterThanOrEqualTo(Date value) {
             addCriterion("datetime >=", value, "datetime");
             return (Criteria) this;
         }
 
-        public Criteria andDatetimeLessThan(LocalDateTime value) {
+        public Criteria andDatetimeLessThan(Date value) {
             addCriterion("datetime <", value, "datetime");
             return (Criteria) this;
         }
 
-        public Criteria andDatetimeLessThanOrEqualTo(LocalDateTime value) {
+        public Criteria andDatetimeLessThanOrEqualTo(Date value) {
             addCriterion("datetime <=", value, "datetime");
             return (Criteria) this;
         }
 
-        public Criteria andDatetimeIn(List<LocalDateTime> values) {
+        public Criteria andDatetimeIn(List<Date> values) {
             addCriterion("datetime in", values, "datetime");
             return (Criteria) this;
         }
 
-        public Criteria andDatetimeNotIn(List<LocalDateTime> values) {
+        public Criteria andDatetimeNotIn(List<Date> values) {
             addCriterion("datetime not in", values, "datetime");
             return (Criteria) this;
         }
 
-        public Criteria andDatetimeBetween(LocalDateTime value1, LocalDateTime value2) {
+        public Criteria andDatetimeBetween(Date value1, Date value2) {
             addCriterion("datetime between", value1, value2, "datetime");
             return (Criteria) this;
         }
 
-        public Criteria andDatetimeNotBetween(LocalDateTime value1, LocalDateTime value2) {
+        public Criteria andDatetimeNotBetween(Date value1, Date value2) {
             addCriterion("datetime not between", value1, value2, "datetime");
             return (Criteria) this;
         }

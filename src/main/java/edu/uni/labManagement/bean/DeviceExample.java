@@ -1,7 +1,7 @@
 package edu.uni.labManagement.bean;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class DeviceExample {
@@ -705,52 +705,52 @@ public class DeviceExample {
             return (Criteria) this;
         }
 
-        public Criteria andProductDateEqualTo(LocalDateTime value) {
+        public Criteria andProductDateEqualTo(Date value) {
             addCriterion("product_date =", value, "productDate");
             return (Criteria) this;
         }
 
-        public Criteria andProductDateNotEqualTo(LocalDateTime value) {
+        public Criteria andProductDateNotEqualTo(Date value) {
             addCriterion("product_date <>", value, "productDate");
             return (Criteria) this;
         }
 
-        public Criteria andProductDateGreaterThan(LocalDateTime value) {
+        public Criteria andProductDateGreaterThan(Date value) {
             addCriterion("product_date >", value, "productDate");
             return (Criteria) this;
         }
 
-        public Criteria andProductDateGreaterThanOrEqualTo(LocalDateTime value) {
+        public Criteria andProductDateGreaterThanOrEqualTo(Date value) {
             addCriterion("product_date >=", value, "productDate");
             return (Criteria) this;
         }
 
-        public Criteria andProductDateLessThan(LocalDateTime value) {
+        public Criteria andProductDateLessThan(Date value) {
             addCriterion("product_date <", value, "productDate");
             return (Criteria) this;
         }
 
-        public Criteria andProductDateLessThanOrEqualTo(LocalDateTime value) {
+        public Criteria andProductDateLessThanOrEqualTo(Date value) {
             addCriterion("product_date <=", value, "productDate");
             return (Criteria) this;
         }
 
-        public Criteria andProductDateIn(List<LocalDateTime> values) {
+        public Criteria andProductDateIn(List<Date> values) {
             addCriterion("product_date in", values, "productDate");
             return (Criteria) this;
         }
 
-        public Criteria andProductDateNotIn(List<LocalDateTime> values) {
+        public Criteria andProductDateNotIn(List<Date> values) {
             addCriterion("product_date not in", values, "productDate");
             return (Criteria) this;
         }
 
-        public Criteria andProductDateBetween(LocalDateTime value1, LocalDateTime value2) {
+        public Criteria andProductDateBetween(Date value1, Date value2) {
             addCriterion("product_date between", value1, value2, "productDate");
             return (Criteria) this;
         }
 
-        public Criteria andProductDateNotBetween(LocalDateTime value1, LocalDateTime value2) {
+        public Criteria andProductDateNotBetween(Date value1, Date value2) {
             addCriterion("product_date not between", value1, value2, "productDate");
             return (Criteria) this;
         }
@@ -945,52 +945,52 @@ public class DeviceExample {
             return (Criteria) this;
         }
 
-        public Criteria andDatetimeEqualTo(LocalDateTime value) {
+        public Criteria andDatetimeEqualTo(Date value) {
             addCriterion("datetime =", value, "datetime");
             return (Criteria) this;
         }
 
-        public Criteria andDatetimeNotEqualTo(LocalDateTime value) {
+        public Criteria andDatetimeNotEqualTo(Date value) {
             addCriterion("datetime <>", value, "datetime");
             return (Criteria) this;
         }
 
-        public Criteria andDatetimeGreaterThan(LocalDateTime value) {
+        public Criteria andDatetimeGreaterThan(Date value) {
             addCriterion("datetime >", value, "datetime");
             return (Criteria) this;
         }
 
-        public Criteria andDatetimeGreaterThanOrEqualTo(LocalDateTime value) {
+        public Criteria andDatetimeGreaterThanOrEqualTo(Date value) {
             addCriterion("datetime >=", value, "datetime");
             return (Criteria) this;
         }
 
-        public Criteria andDatetimeLessThan(LocalDateTime value) {
+        public Criteria andDatetimeLessThan(Date value) {
             addCriterion("datetime <", value, "datetime");
             return (Criteria) this;
         }
 
-        public Criteria andDatetimeLessThanOrEqualTo(LocalDateTime value) {
+        public Criteria andDatetimeLessThanOrEqualTo(Date value) {
             addCriterion("datetime <=", value, "datetime");
             return (Criteria) this;
         }
 
-        public Criteria andDatetimeIn(List<LocalDateTime> values) {
+        public Criteria andDatetimeIn(List<Date> values) {
             addCriterion("datetime in", values, "datetime");
             return (Criteria) this;
         }
 
-        public Criteria andDatetimeNotIn(List<LocalDateTime> values) {
+        public Criteria andDatetimeNotIn(List<Date> values) {
             addCriterion("datetime not in", values, "datetime");
             return (Criteria) this;
         }
 
-        public Criteria andDatetimeBetween(LocalDateTime value1, LocalDateTime value2) {
+        public Criteria andDatetimeBetween(Date value1, Date value2) {
             addCriterion("datetime between", value1, value2, "datetime");
             return (Criteria) this;
         }
 
-        public Criteria andDatetimeNotBetween(LocalDateTime value1, LocalDateTime value2) {
+        public Criteria andDatetimeNotBetween(Date value1, Date value2) {
             addCriterion("datetime not between", value1, value2, "datetime");
             return (Criteria) this;
         }

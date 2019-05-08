@@ -11,11 +11,11 @@
     <result column="name" property="name" jdbcType="VARCHAR" />
     <result column="serial_number" property="serialNumber" jdbcType="VARCHAR" />
     <result column="description" property="description" jdbcType="VARCHAR" />
-    <result column="product_date" property="productDate" jdbcType="DATE" />
+    <result column="product_date" property="productDate" jdbcType="TIMESTAMP" />
     <result column="is_master" property="isMaster" jdbcType="BIT" />
     <result column="status" property="status" jdbcType="INTEGER" />
     <result column="university_id" property="universityId" jdbcType="BIGINT" />
-    <result column="datetime" property="datetime" jdbcType="DATE" />
+    <result column="datetime" property="datetime" jdbcType="TIMESTAMP" />
     <result column="by_who" property="byWho" jdbcType="BIGINT" />
     <result column="deleted" property="deleted" jdbcType="BIT" />
   </resultMap>
@@ -119,12 +119,14 @@
       number, model, name, 
       serial_number, description, product_date, 
       is_master, status, university_id, 
-      datetime, by_who, deleted)
+      datetime, by_who, deleted
+      )
     values (#{deviceCategoryId,jdbcType=BIGINT}, #{departmentId,jdbcType=BIGINT}, #{batch,jdbcType=INTEGER}, 
       #{number,jdbcType=VARCHAR}, #{model,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
-      #{serialNumber,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, #{productDate,jdbcType=DATE}, 
+      #{serialNumber,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, #{productDate,jdbcType=TIMESTAMP}, 
       #{isMaster,jdbcType=BIT}, #{status,jdbcType=INTEGER}, #{universityId,jdbcType=BIGINT}, 
-      #{datetime,jdbcType=DATE}, #{byWho,jdbcType=BIGINT}, #{deleted,jdbcType=BIT})
+      #{datetime,jdbcType=TIMESTAMP}, #{byWho,jdbcType=BIGINT}, #{deleted,jdbcType=BIT}
+      )
   </insert>
   <insert id="insertSelective" parameterType="edu.uni.labManagement.bean.Device" >
     <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
@@ -204,7 +206,7 @@
         #{description,jdbcType=VARCHAR},
       </if>
       <if test="productDate != null" >
-        #{productDate,jdbcType=DATE},
+        #{productDate,jdbcType=TIMESTAMP},
       </if>
       <if test="isMaster != null" >
         #{isMaster,jdbcType=BIT},
@@ -216,7 +218,7 @@
         #{universityId,jdbcType=BIGINT},
       </if>
       <if test="datetime != null" >
-        #{datetime,jdbcType=DATE},
+        #{datetime,jdbcType=TIMESTAMP},
       </if>
       <if test="byWho != null" >
         #{byWho,jdbcType=BIGINT},
@@ -263,7 +265,7 @@
         description = #{record.description,jdbcType=VARCHAR},
       </if>
       <if test="record.productDate != null" >
-        product_date = #{record.productDate,jdbcType=DATE},
+        product_date = #{record.productDate,jdbcType=TIMESTAMP},
       </if>
       <if test="record.isMaster != null" >
         is_master = #{record.isMaster,jdbcType=BIT},
@@ -275,7 +277,7 @@
         university_id = #{record.universityId,jdbcType=BIGINT},
       </if>
       <if test="record.datetime != null" >
-        datetime = #{record.datetime,jdbcType=DATE},
+        datetime = #{record.datetime,jdbcType=TIMESTAMP},
       </if>
       <if test="record.byWho != null" >
         by_who = #{record.byWho,jdbcType=BIGINT},
@@ -299,11 +301,11 @@
       name = #{record.name,jdbcType=VARCHAR},
       serial_number = #{record.serialNumber,jdbcType=VARCHAR},
       description = #{record.description,jdbcType=VARCHAR},
-      product_date = #{record.productDate,jdbcType=DATE},
+      product_date = #{record.productDate,jdbcType=TIMESTAMP},
       is_master = #{record.isMaster,jdbcType=BIT},
       status = #{record.status,jdbcType=INTEGER},
       university_id = #{record.universityId,jdbcType=BIGINT},
-      datetime = #{record.datetime,jdbcType=DATE},
+      datetime = #{record.datetime,jdbcType=TIMESTAMP},
       by_who = #{record.byWho,jdbcType=BIGINT},
       deleted = #{record.deleted,jdbcType=BIT}
     <if test="_parameter != null" >
@@ -338,7 +340,7 @@
         description = #{description,jdbcType=VARCHAR},
       </if>
       <if test="productDate != null" >
-        product_date = #{productDate,jdbcType=DATE},
+        product_date = #{productDate,jdbcType=TIMESTAMP},
       </if>
       <if test="isMaster != null" >
         is_master = #{isMaster,jdbcType=BIT},
@@ -350,7 +352,7 @@
         university_id = #{universityId,jdbcType=BIGINT},
       </if>
       <if test="datetime != null" >
-        datetime = #{datetime,jdbcType=DATE},
+        datetime = #{datetime,jdbcType=TIMESTAMP},
       </if>
       <if test="byWho != null" >
         by_who = #{byWho,jdbcType=BIGINT},
@@ -371,11 +373,11 @@
       name = #{name,jdbcType=VARCHAR},
       serial_number = #{serialNumber,jdbcType=VARCHAR},
       description = #{description,jdbcType=VARCHAR},
-      product_date = #{productDate,jdbcType=DATE},
+      product_date = #{productDate,jdbcType=TIMESTAMP},
       is_master = #{isMaster,jdbcType=BIT},
       status = #{status,jdbcType=INTEGER},
       university_id = #{universityId,jdbcType=BIGINT},
-      datetime = #{datetime,jdbcType=DATE},
+      datetime = #{datetime,jdbcType=TIMESTAMP},
       by_who = #{byWho,jdbcType=BIGINT},
       deleted = #{deleted,jdbcType=BIT}
     where id = #{id,jdbcType=BIGINT}

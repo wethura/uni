@@ -1,21 +1,21 @@
 package edu.uni.labManagement.bean;
 
-import java.time.LocalDateTime;
+import java.util.Date;
 
 public class RoutineMaintenance {
     private Long id;
 
     private Long labId;
 
-    private LocalDateTime startTime;
+    private Date startTime;
 
-    private LocalDateTime endTime;
+    private Date endTime;
 
     private String remainOption;
 
     private Long universityId;
 
-    private LocalDateTime datetime;
+    private Date datetime;
 
     private Long byWho;
 
@@ -37,19 +37,19 @@ public class RoutineMaintenance {
         this.labId = labId;
     }
 
-    public LocalDateTime getStartTime() {
+    public Date getStartTime() {
         return startTime;
     }
 
-    public void setStartTime(LocalDateTime startTime) {
+    public void setStartTime(Date startTime) {
         this.startTime = startTime;
     }
 
-    public LocalDateTime getEndTime() {
+    public Date getEndTime() {
         return endTime;
     }
 
-    public void setEndTime(LocalDateTime endTime) {
+    public void setEndTime(Date endTime) {
         this.endTime = endTime;
     }
 
@@ -69,11 +69,11 @@ public class RoutineMaintenance {
         this.universityId = universityId;
     }
 
-    public LocalDateTime getDatetime() {
+    public Date getDatetime() {
         return datetime;
     }
 
-    public void setDatetime(LocalDateTime datetime) {
+    public void setDatetime(Date datetime) {
         this.datetime = datetime;
     }
 

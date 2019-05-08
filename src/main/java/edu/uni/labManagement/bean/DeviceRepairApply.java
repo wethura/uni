@@ -1,6 +1,6 @@
 package edu.uni.labManagement.bean;
 
-import java.time.LocalDateTime;
+import java.util.Date;
 
 public class DeviceRepairApply {
     private Long id;
@@ -11,7 +11,7 @@ public class DeviceRepairApply {
 
     private Long userId;
 
-    private LocalDateTime applyTime;
+    private Date applyTime;
 
     private String uploadPath;
 
@@ -21,11 +21,11 @@ public class DeviceRepairApply {
 
     private Long assersorId;
 
-    private LocalDateTime reviewTime;
+    private Date reviewTime;
 
     private Long universityId;
 
-    private LocalDateTime datetime;
+    private Date datetime;
 
     private Long byWho;
 
@@ -63,11 +63,11 @@ public class DeviceRepairApply {
         this.userId = userId;
     }
 
-    public LocalDateTime getApplyTime() {
+    public Date getApplyTime() {
         return applyTime;
     }
 
-    public void setApplyTime(LocalDateTime applyTime) {
+    public void setApplyTime(Date applyTime) {
         this.applyTime = applyTime;
     }
 
@@ -103,11 +103,11 @@ public class DeviceRepairApply {
         this.assersorId = assersorId;
     }
 
-    public LocalDateTime getReviewTime() {
+    public Date getReviewTime() {
         return reviewTime;
     }
 
-    public void setReviewTime(LocalDateTime reviewTime) {
+    public void setReviewTime(Date reviewTime) {
         this.reviewTime = reviewTime;
     }
 
@@ -119,11 +119,11 @@ public class DeviceRepairApply {
         this.universityId = universityId;
     }
 
-    public LocalDateTime getDatetime() {
+    public Date getDatetime() {
         return datetime;
     }
 
-    public void setDatetime(LocalDateTime datetime) {
+    public void setDatetime(Date datetime) {
         this.datetime = datetime;
     }
 

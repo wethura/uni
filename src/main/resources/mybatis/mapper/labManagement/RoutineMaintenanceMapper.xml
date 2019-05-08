@@ -4,11 +4,11 @@
   <resultMap id="BaseResultMap" type="edu.uni.labManagement.bean.RoutineMaintenance" >
     <id column="id" property="id" jdbcType="BIGINT" />
     <result column="lab_id" property="labId" jdbcType="BIGINT" />
-    <result column="start_time" property="startTime" jdbcType="DATE" />
-    <result column="end_time" property="endTime" jdbcType="DATE" />
+    <result column="start_time" property="startTime" jdbcType="TIMESTAMP" />
+    <result column="end_time" property="endTime" jdbcType="TIMESTAMP" />
     <result column="remain_option" property="remainOption" jdbcType="VARCHAR" />
     <result column="university_id" property="universityId" jdbcType="BIGINT" />
-    <result column="datetime" property="datetime" jdbcType="DATE" />
+    <result column="datetime" property="datetime" jdbcType="TIMESTAMP" />
     <result column="by_who" property="byWho" jdbcType="BIGINT" />
     <result column="deleted" property="deleted" jdbcType="BIT" />
   </resultMap>
@@ -111,8 +111,8 @@
     insert into lm_routine_maintenance (lab_id, start_time, end_time, 
       remain_option, university_id, datetime, 
       by_who, deleted)
-    values (#{labId,jdbcType=BIGINT}, #{startTime,jdbcType=DATE}, #{endTime,jdbcType=DATE}, 
-      #{remainOption,jdbcType=VARCHAR}, #{universityId,jdbcType=BIGINT}, #{datetime,jdbcType=DATE}, 
+    values (#{labId,jdbcType=BIGINT}, #{startTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP}, 
+      #{remainOption,jdbcType=VARCHAR}, #{universityId,jdbcType=BIGINT}, #{datetime,jdbcType=TIMESTAMP}, 
       #{byWho,jdbcType=BIGINT}, #{deleted,jdbcType=BIT})
   </insert>
   <insert id="insertSelective" parameterType="edu.uni.labManagement.bean.RoutineMaintenance" >
@@ -151,10 +151,10 @@
         #{labId,jdbcType=BIGINT},
       </if>
       <if test="startTime != null" >
-        #{startTime,jdbcType=DATE},
+        #{startTime,jdbcType=TIMESTAMP},
       </if>
       <if test="endTime != null" >
-        #{endTime,jdbcType=DATE},
+        #{endTime,jdbcType=TIMESTAMP},
       </if>
       <if test="remainOption != null" >
         #{remainOption,jdbcType=VARCHAR},
@@ -163,7 +163,7 @@
         #{universityId,jdbcType=BIGINT},
       </if>
       <if test="datetime != null" >
-        #{datetime,jdbcType=DATE},
+        #{datetime,jdbcType=TIMESTAMP},
       </if>
       <if test="byWho != null" >
         #{byWho,jdbcType=BIGINT},
@@ -189,10 +189,10 @@
         lab_id = #{record.labId,jdbcType=BIGINT},
       </if>
       <if test="record.startTime != null" >
-        start_time = #{record.startTime,jdbcType=DATE},
+        start_time = #{record.startTime,jdbcType=TIMESTAMP},
       </if>
       <if test="record.endTime != null" >
-        end_time = #{record.endTime,jdbcType=DATE},
+        end_time = #{record.endTime,jdbcType=TIMESTAMP},
       </if>
       <if test="record.remainOption != null" >
         remain_option = #{record.remainOption,jdbcType=VARCHAR},
@@ -201,7 +201,7 @@
         university_id = #{record.universityId,jdbcType=BIGINT},
       </if>
       <if test="record.datetime != null" >
-        datetime = #{record.datetime,jdbcType=DATE},
+        datetime = #{record.datetime,jdbcType=TIMESTAMP},
       </if>
       <if test="record.byWho != null" >
         by_who = #{record.byWho,jdbcType=BIGINT},
@@ -218,11 +218,11 @@
     update lm_routine_maintenance
     set id = #{record.id,jdbcType=BIGINT},
       lab_id = #{record.labId,jdbcType=BIGINT},
-      start_time = #{record.startTime,jdbcType=DATE},
-      end_time = #{record.endTime,jdbcType=DATE},
+      start_time = #{record.startTime,jdbcType=TIMESTAMP},
+      end_time = #{record.endTime,jdbcType=TIMESTAMP},
       remain_option = #{record.remainOption,jdbcType=VARCHAR},
       university_id = #{record.universityId,jdbcType=BIGINT},
-      datetime = #{record.datetime,jdbcType=DATE},
+      datetime = #{record.datetime,jdbcType=TIMESTAMP},
       by_who = #{record.byWho,jdbcType=BIGINT},
       deleted = #{record.deleted,jdbcType=BIT}
     <if test="_parameter != null" >
@@ -236,10 +236,10 @@
         lab_id = #{labId,jdbcType=BIGINT},
       </if>
       <if test="startTime != null" >
-        start_time = #{startTime,jdbcType=DATE},
+        start_time = #{startTime,jdbcType=TIMESTAMP},
       </if>
       <if test="endTime != null" >
-        end_time = #{endTime,jdbcType=DATE},
+        end_time = #{endTime,jdbcType=TIMESTAMP},
       </if>
       <if test="remainOption != null" >
         remain_option = #{remainOption,jdbcType=VARCHAR},
@@ -248,7 +248,7 @@
         university_id = #{universityId,jdbcType=BIGINT},
       </if>
       <if test="datetime != null" >
-        datetime = #{datetime,jdbcType=DATE},
+        datetime = #{datetime,jdbcType=TIMESTAMP},
       </if>
       <if test="byWho != null" >
         by_who = #{byWho,jdbcType=BIGINT},
@@ -262,11 +262,11 @@
   <update id="updateByPrimaryKey" parameterType="edu.uni.labManagement.bean.RoutineMaintenance" >
     update lm_routine_maintenance
     set lab_id = #{labId,jdbcType=BIGINT},
-      start_time = #{startTime,jdbcType=DATE},
-      end_time = #{endTime,jdbcType=DATE},
+      start_time = #{startTime,jdbcType=TIMESTAMP},
+      end_time = #{endTime,jdbcType=TIMESTAMP},
       remain_option = #{remainOption,jdbcType=VARCHAR},
       university_id = #{universityId,jdbcType=BIGINT},
-      datetime = #{datetime,jdbcType=DATE},
+      datetime = #{datetime,jdbcType=TIMESTAMP},
       by_who = #{byWho,jdbcType=BIGINT},
       deleted = #{deleted,jdbcType=BIT}
     where id = #{id,jdbcType=BIGINT}

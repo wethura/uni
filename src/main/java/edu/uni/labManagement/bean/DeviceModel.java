@@ -1,6 +1,6 @@
 package edu.uni.labManagement.bean;
 
-import java.time.LocalDateTime;
+import java.util.Date;
 
 public class DeviceModel {
     private Long id;
@@ -19,7 +19,7 @@ public class DeviceModel {
 
     private Long universityId;
 
-    private LocalDateTime datetime;
+    private Date datetime;
 
     private Long byWho;
 
@@ -89,11 +89,11 @@ public class DeviceModel {
         this.universityId = universityId;
     }
 
-    public LocalDateTime getDatetime() {
+    public Date getDatetime() {
         return datetime;
     }
 
-    public void setDatetime(LocalDateTime datetime) {
+    public void setDatetime(Date datetime) {
         this.datetime = datetime;
     }
 

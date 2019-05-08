@@ -6,14 +6,14 @@
     <result column="device_id" property="deviceId" jdbcType="BIGINT" />
     <result column="description" property="description" jdbcType="VARCHAR" />
     <result column="user_id" property="userId" jdbcType="BIGINT" />
-    <result column="apply_time" property="applyTime" jdbcType="DATE" />
+    <result column="apply_time" property="applyTime" jdbcType="TIMESTAMP" />
     <result column="upload_path" property="uploadPath" jdbcType="VARCHAR" />
     <result column="is_success" property="isSuccess" jdbcType="INTEGER" />
     <result column="refuse_reason" property="refuseReason" jdbcType="VARCHAR" />
     <result column="assersor_id" property="assersorId" jdbcType="BIGINT" />
-    <result column="review_time" property="reviewTime" jdbcType="DATE" />
+    <result column="review_time" property="reviewTime" jdbcType="TIMESTAMP" />
     <result column="university_id" property="universityId" jdbcType="BIGINT" />
-    <result column="datetime" property="datetime" jdbcType="DATE" />
+    <result column="datetime" property="datetime" jdbcType="TIMESTAMP" />
     <result column="by_who" property="byWho" jdbcType="BIGINT" />
     <result column="deleted" property="deleted" jdbcType="BIT" />
   </resultMap>
@@ -119,9 +119,9 @@
       university_id, datetime, by_who, 
       deleted)
     values (#{deviceId,jdbcType=BIGINT}, #{description,jdbcType=VARCHAR}, #{userId,jdbcType=BIGINT}, 
-      #{applyTime,jdbcType=DATE}, #{uploadPath,jdbcType=VARCHAR}, #{isSuccess,jdbcType=INTEGER}, 
-      #{refuseReason,jdbcType=VARCHAR}, #{assersorId,jdbcType=BIGINT}, #{reviewTime,jdbcType=DATE}, 
-      #{universityId,jdbcType=BIGINT}, #{datetime,jdbcType=DATE}, #{byWho,jdbcType=BIGINT}, 
+      #{applyTime,jdbcType=TIMESTAMP}, #{uploadPath,jdbcType=VARCHAR}, #{isSuccess,jdbcType=INTEGER}, 
+      #{refuseReason,jdbcType=VARCHAR}, #{assersorId,jdbcType=BIGINT}, #{reviewTime,jdbcType=TIMESTAMP}, 
+      #{universityId,jdbcType=BIGINT}, #{datetime,jdbcType=TIMESTAMP}, #{byWho,jdbcType=BIGINT}, 
       #{deleted,jdbcType=BIT})
   </insert>
   <insert id="insertSelective" parameterType="edu.uni.labManagement.bean.DeviceRepairApply" >
@@ -181,7 +181,7 @@
         #{userId,jdbcType=BIGINT},
       </if>
       <if test="applyTime != null" >
-        #{applyTime,jdbcType=DATE},
+        #{applyTime,jdbcType=TIMESTAMP},
       </if>
       <if test="uploadPath != null" >
         #{uploadPath,jdbcType=VARCHAR},
@@ -196,13 +196,13 @@
         #{assersorId,jdbcType=BIGINT},
       </if>
       <if test="reviewTime != null" >
-        #{reviewTime,jdbcType=DATE},
+        #{reviewTime,jdbcType=TIMESTAMP},
       </if>
       <if test="universityId != null" >
         #{universityId,jdbcType=BIGINT},
       </if>
       <if test="datetime != null" >
-        #{datetime,jdbcType=DATE},
+        #{datetime,jdbcType=TIMESTAMP},
       </if>
       <if test="byWho != null" >
         #{byWho,jdbcType=BIGINT},
@@ -234,7 +234,7 @@
         user_id = #{record.userId,jdbcType=BIGINT},
       </if>
       <if test="record.applyTime != null" >
-        apply_time = #{record.applyTime,jdbcType=DATE},
+        apply_time = #{record.applyTime,jdbcType=TIMESTAMP},
       </if>
       <if test="record.uploadPath != null" >
         upload_path = #{record.uploadPath,jdbcType=VARCHAR},
@@ -249,13 +249,13 @@
         assersor_id = #{record.assersorId,jdbcType=BIGINT},
       </if>
       <if test="record.reviewTime != null" >
-        review_time = #{record.reviewTime,jdbcType=DATE},
+        review_time = #{record.reviewTime,jdbcType=TIMESTAMP},
       </if>
       <if test="record.universityId != null" >
         university_id = #{record.universityId,jdbcType=BIGINT},
       </if>
       <if test="record.datetime != null" >
-        datetime = #{record.datetime,jdbcType=DATE},
+        datetime = #{record.datetime,jdbcType=TIMESTAMP},
       </if>
       <if test="record.byWho != null" >
         by_who = #{record.byWho,jdbcType=BIGINT},
@@ -274,14 +274,14 @@
       device_id = #{record.deviceId,jdbcType=BIGINT},
       description = #{record.description,jdbcType=VARCHAR},
       user_id = #{record.userId,jdbcType=BIGINT},
-      apply_time = #{record.applyTime,jdbcType=DATE},
+      apply_time = #{record.applyTime,jdbcType=TIMESTAMP},
       upload_path = #{record.uploadPath,jdbcType=VARCHAR},
       is_success = #{record.isSuccess,jdbcType=INTEGER},
       refuse_reason = #{record.refuseReason,jdbcType=VARCHAR},
       assersor_id = #{record.assersorId,jdbcType=BIGINT},
-      review_time = #{record.reviewTime,jdbcType=DATE},
+      review_time = #{record.reviewTime,jdbcType=TIMESTAMP},
       university_id = #{record.universityId,jdbcType=BIGINT},
-      datetime = #{record.datetime,jdbcType=DATE},
+      datetime = #{record.datetime,jdbcType=TIMESTAMP},
       by_who = #{record.byWho,jdbcType=BIGINT},
       deleted = #{record.deleted,jdbcType=BIT}
     <if test="_parameter != null" >
@@ -301,7 +301,7 @@
         user_id = #{userId,jdbcType=BIGINT},
       </if>
       <if test="applyTime != null" >
-        apply_time = #{applyTime,jdbcType=DATE},
+        apply_time = #{applyTime,jdbcType=TIMESTAMP},
       </if>
       <if test="uploadPath != null" >
         upload_path = #{uploadPath,jdbcType=VARCHAR},
@@ -316,13 +316,13 @@
         assersor_id = #{assersorId,jdbcType=BIGINT},
       </if>
       <if test="reviewTime != null" >
-        review_time = #{reviewTime,jdbcType=DATE},
+        review_time = #{reviewTime,jdbcType=TIMESTAMP},
       </if>
       <if test="universityId != null" >
         university_id = #{universityId,jdbcType=BIGINT},
       </if>
       <if test="datetime != null" >
-        datetime = #{datetime,jdbcType=DATE},
+        datetime = #{datetime,jdbcType=TIMESTAMP},
       </if>
       <if test="byWho != null" >
         by_who = #{byWho,jdbcType=BIGINT},
@@ -338,14 +338,14 @@
     set device_id = #{deviceId,jdbcType=BIGINT},
       description = #{description,jdbcType=VARCHAR},
       user_id = #{userId,jdbcType=BIGINT},
-      apply_time = #{applyTime,jdbcType=DATE},
+      apply_time = #{applyTime,jdbcType=TIMESTAMP},
       upload_path = #{uploadPath,jdbcType=VARCHAR},
       is_success = #{isSuccess,jdbcType=INTEGER},
       refuse_reason = #{refuseReason,jdbcType=VARCHAR},
       assersor_id = #{assersorId,jdbcType=BIGINT},
-      review_time = #{reviewTime,jdbcType=DATE},
+      review_time = #{reviewTime,jdbcType=TIMESTAMP},
       university_id = #{universityId,jdbcType=BIGINT},
-      datetime = #{datetime,jdbcType=DATE},
+      datetime = #{datetime,jdbcType=TIMESTAMP},
       by_who = #{byWho,jdbcType=BIGINT},
       deleted = #{deleted,jdbcType=BIT}
     where id = #{id,jdbcType=BIGINT}

@@ -8,7 +8,7 @@
     <result column="is_fault" property="isFault" jdbcType="BIT" />
     <result column="description" property="description" jdbcType="VARCHAR" />
     <result column="university_id" property="universityId" jdbcType="BIGINT" />
-    <result column="datetime" property="datetime" jdbcType="DATE" />
+    <result column="datetime" property="datetime" jdbcType="TIMESTAMP" />
     <result column="by_who" property="byWho" jdbcType="BIGINT" />
     <result column="deleted" property="deleted" jdbcType="BIT" />
   </resultMap>
@@ -112,7 +112,7 @@
       description, university_id, datetime, 
       by_who, deleted)
     values (#{deviceId,jdbcType=BIGINT}, #{routineMaintenanceId,jdbcType=BIGINT}, #{isFault,jdbcType=BIT}, 
-      #{description,jdbcType=VARCHAR}, #{universityId,jdbcType=BIGINT}, #{datetime,jdbcType=DATE}, 
+      #{description,jdbcType=VARCHAR}, #{universityId,jdbcType=BIGINT}, #{datetime,jdbcType=TIMESTAMP}, 
       #{byWho,jdbcType=BIGINT}, #{deleted,jdbcType=BIT})
   </insert>
   <insert id="insertSelective" parameterType="edu.uni.labManagement.bean.RoutineMaintenanceDetail" >
@@ -163,7 +163,7 @@
         #{universityId,jdbcType=BIGINT},
       </if>
       <if test="datetime != null" >
-        #{datetime,jdbcType=DATE},
+        #{datetime,jdbcType=TIMESTAMP},
       </if>
       <if test="byWho != null" >
         #{byWho,jdbcType=BIGINT},
@@ -201,7 +201,7 @@
         university_id = #{record.universityId,jdbcType=BIGINT},
       </if>
       <if test="record.datetime != null" >
-        datetime = #{record.datetime,jdbcType=DATE},
+        datetime = #{record.datetime,jdbcType=TIMESTAMP},
       </if>
       <if test="record.byWho != null" >
         by_who = #{record.byWho,jdbcType=BIGINT},
@@ -222,7 +222,7 @@
       is_fault = #{record.isFault,jdbcType=BIT},
       description = #{record.description,jdbcType=VARCHAR},
       university_id = #{record.universityId,jdbcType=BIGINT},
-      datetime = #{record.datetime,jdbcType=DATE},
+      datetime = #{record.datetime,jdbcType=TIMESTAMP},
       by_who = #{record.byWho,jdbcType=BIGINT},
       deleted = #{record.deleted,jdbcType=BIT}
     <if test="_parameter != null" >
@@ -248,7 +248,7 @@
         university_id = #{universityId,jdbcType=BIGINT},
       </if>
       <if test="datetime != null" >
-        datetime = #{datetime,jdbcType=DATE},
+        datetime = #{datetime,jdbcType=TIMESTAMP},
       </if>
       <if test="byWho != null" >
         by_who = #{byWho,jdbcType=BIGINT},
@@ -266,7 +266,7 @@
       is_fault = #{isFault,jdbcType=BIT},
       description = #{description,jdbcType=VARCHAR},
       university_id = #{universityId,jdbcType=BIGINT},
-      datetime = #{datetime,jdbcType=DATE},
+      datetime = #{datetime,jdbcType=TIMESTAMP},
       by_who = #{byWho,jdbcType=BIGINT},
       deleted = #{deleted,jdbcType=BIT}
     where id = #{id,jdbcType=BIGINT}

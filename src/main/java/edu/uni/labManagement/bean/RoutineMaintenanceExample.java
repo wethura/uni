@@ -1,7 +1,7 @@
 package edu.uni.labManagement.bean;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class RoutineMaintenanceExample {
@@ -235,52 +235,52 @@ public class RoutineMaintenanceExample {
             return (Criteria) this;
         }
 
-        public Criteria andStartTimeEqualTo(LocalDateTime value) {
+        public Criteria andStartTimeEqualTo(Date value) {
             addCriterion("start_time =", value, "startTime");
             return (Criteria) this;
         }
 
-        public Criteria andStartTimeNotEqualTo(LocalDateTime value) {
+        public Criteria andStartTimeNotEqualTo(Date value) {
             addCriterion("start_time <>", value, "startTime");
             return (Criteria) this;
         }
 
-        public Criteria andStartTimeGreaterThan(LocalDateTime value) {
+        public Criteria andStartTimeGreaterThan(Date value) {
             addCriterion("start_time >", value, "startTime");
             return (Criteria) this;
         }
 
-        public Criteria andStartTimeGreaterThanOrEqualTo(LocalDateTime value) {
+        public Criteria andStartTimeGreaterThanOrEqualTo(Date value) {
             addCriterion("start_time >=", value, "startTime");
             return (Criteria) this;
         }
 
-        public Criteria andStartTimeLessThan(LocalDateTime value) {
+        public Criteria andStartTimeLessThan(Date value) {
             addCriterion("start_time <", value, "startTime");
             return (Criteria) this;
         }
 
-        public Criteria andStartTimeLessThanOrEqualTo(LocalDateTime value) {
+        public Criteria andStartTimeLessThanOrEqualTo(Date value) {
             addCriterion("start_time <=", value, "startTime");
             return (Criteria) this;
         }
 
-        public Criteria andStartTimeIn(List<LocalDateTime> values) {
+        public Criteria andStartTimeIn(List<Date> values) {
             addCriterion("start_time in", values, "startTime");
             return (Criteria) this;
         }
 
-        public Criteria andStartTimeNotIn(List<LocalDateTime> values) {
+        public Criteria andStartTimeNotIn(List<Date> values) {
             addCriterion("start_time not in", values, "startTime");
             return (Criteria) this;
         }
 
-        public Criteria andStartTimeBetween(LocalDateTime value1, LocalDateTime value2) {
+        public Criteria andStartTimeBetween(Date value1, Date value2) {
             addCriterion("start_time between", value1, value2, "startTime");
             return (Criteria) this;
         }
 
-        public Criteria andStartTimeNotBetween(LocalDateTime value1, LocalDateTime value2) {
+        public Criteria andStartTimeNotBetween(Date value1, Date value2) {
             addCriterion("start_time not between", value1, value2, "startTime");
             return (Criteria) this;
         }
@@ -295,52 +295,52 @@ public class RoutineMaintenanceExample {
             return (Criteria) this;
         }
 
-        public Criteria andEndTimeEqualTo(LocalDateTime value) {
+        public Criteria andEndTimeEqualTo(Date value) {
             addCriterion("end_time =", value, "endTime");
             return (Criteria) this;
         }
 
-        public Criteria andEndTimeNotEqualTo(LocalDateTime value) {
+        public Criteria andEndTimeNotEqualTo(Date value) {
             addCriterion("end_time <>", value, "endTime");
             return (Criteria) this;
         }
 
-        public Criteria andEndTimeGreaterThan(LocalDateTime value) {
+        public Criteria andEndTimeGreaterThan(Date value) {
             addCriterion("end_time >", value, "endTime");
             return (Criteria) this;
         }
 
-        public Criteria andEndTimeGreaterThanOrEqualTo(LocalDateTime value) {
+        public Criteria andEndTimeGreaterThanOrEqualTo(Date value) {
             addCriterion("end_time >=", value, "endTime");
             return (Criteria) this;
         }
 
-        public Criteria andEndTimeLessThan(LocalDateTime value) {
+        public Criteria andEndTimeLessThan(Date value) {
             addCriterion("end_time <", value, "endTime");
             return (Criteria) this;
         }
 
-        public Criteria andEndTimeLessThanOrEqualTo(LocalDateTime value) {
+        public Criteria andEndTimeLessThanOrEqualTo(Date value) {
             addCriterion("end_time <=", value, "endTime");
             return (Criteria) this;
         }
 
-        public Criteria andEndTimeIn(List<LocalDateTime> values) {
+        public Criteria andEndTimeIn(List<Date> values) {
             addCriterion("end_time in", values, "endTime");
             return (Criteria) this;
         }
 
-        public Criteria andEndTimeNotIn(List<LocalDateTime> values) {
+        public Criteria andEndTimeNotIn(List<Date> values) {
             addCriterion("end_time not in", values, "endTime");
             return (Criteria) this;
         }
 
-        public Criteria andEndTimeBetween(LocalDateTime value1, LocalDateTime value2) {
+        public Criteria andEndTimeBetween(Date value1, Date value2) {
             addCriterion("end_time between", value1, value2, "endTime");
             return (Criteria) this;
         }
 
-        public Criteria andEndTimeNotBetween(LocalDateTime value1, LocalDateTime value2) {
+        public Criteria andEndTimeNotBetween(Date value1, Date value2) {
             addCriterion("end_time not between", value1, value2, "endTime");
             return (Criteria) this;
         }
@@ -485,52 +485,52 @@ public class RoutineMaintenanceExample {
             return (Criteria) this;
         }
 
-        public Criteria andDatetimeEqualTo(LocalDateTime value) {
+        public Criteria andDatetimeEqualTo(Date value) {
             addCriterion("datetime =", value, "datetime");
             return (Criteria) this;
         }
 
-        public Criteria andDatetimeNotEqualTo(LocalDateTime value) {
+        public Criteria andDatetimeNotEqualTo(Date value) {
             addCriterion("datetime <>", value, "datetime");
             return (Criteria) this;
         }
 
-        public Criteria andDatetimeGreaterThan(LocalDateTime value) {
+        public Criteria andDatetimeGreaterThan(Date value) {
             addCriterion("datetime >", value, "datetime");
             return (Criteria) this;
         }
 
-        public Criteria andDatetimeGreaterThanOrEqualTo(LocalDateTime value) {
+        public Criteria andDatetimeGreaterThanOrEqualTo(Date value) {
             addCriterion("datetime >=", value, "datetime");
             return (Criteria) this;
         }
 
-        public Criteria andDatetimeLessThan(LocalDateTime value) {
+        public Criteria andDatetimeLessThan(Date value) {
             addCriterion("datetime <", value, "datetime");
             return (Criteria) this;
         }
 
-        public Criteria andDatetimeLessThanOrEqualTo(LocalDateTime value) {
+        public Criteria andDatetimeLessThanOrEqualTo(Date value) {
             addCriterion("datetime <=", value, "datetime");
             return (Criteria) this;
         }
 
-        public Criteria andDatetimeIn(List<LocalDateTime> values) {
+        public Criteria andDatetimeIn(List<Date> values) {
             addCriterion("datetime in", values, "datetime");
             return (Criteria) this;
         }
 
-        public Criteria andDatetimeNotIn(List<LocalDateTime> values) {
+        public Criteria andDatetimeNotIn(List<Date> values) {
             addCriterion("datetime not in", values, "datetime");
             return (Criteria) this;
         }
 
-        public Criteria andDatetimeBetween(LocalDateTime value1, LocalDateTime value2) {
+        public Criteria andDatetimeBetween(Date value1, Date value2) {
             addCriterion("datetime between", value1, value2, "datetime");
             return (Criteria) this;
         }
 
-        public Criteria andDatetimeNotBetween(LocalDateTime value1, LocalDateTime value2) {
+        public Criteria andDatetimeNotBetween(Date value1, Date value2) {
             addCriterion("datetime not between", value1, value2, "datetime");
             return (Criteria) this;
         }

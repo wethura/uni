@@ -1,7 +1,7 @@
 package edu.uni.labManagement.bean;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class InStorageExample {
@@ -495,52 +495,52 @@ public class InStorageExample {
             return (Criteria) this;
         }
 
-        public Criteria andDatetimeEqualTo(LocalDateTime value) {
+        public Criteria andDatetimeEqualTo(Date value) {
             addCriterion("datetime =", value, "datetime");
             return (Criteria) this;
         }
 
-        public Criteria andDatetimeNotEqualTo(LocalDateTime value) {
+        public Criteria andDatetimeNotEqualTo(Date value) {
             addCriterion("datetime <>", value, "datetime");
             return (Criteria) this;
         }
 
-        public Criteria andDatetimeGreaterThan(LocalDateTime value) {
+        public Criteria andDatetimeGreaterThan(Date value) {
             addCriterion("datetime >", value, "datetime");
             return (Criteria) this;
         }
 
-        public Criteria andDatetimeGreaterThanOrEqualTo(LocalDateTime value) {
+        public Criteria andDatetimeGreaterThanOrEqualTo(Date value) {
             addCriterion("datetime >=", value, "datetime");
             return (Criteria) this;
         }
 
-        public Criteria andDatetimeLessThan(LocalDateTime value) {
+        public Criteria andDatetimeLessThan(Date value) {
             addCriterion("datetime <", value, "datetime");
             return (Criteria) this;
         }
 
-        public Criteria andDatetimeLessThanOrEqualTo(LocalDateTime value) {
+        public Criteria andDatetimeLessThanOrEqualTo(Date value) {
             addCriterion("datetime <=", value, "datetime");
             return (Criteria) this;
         }
 
-        public Criteria andDatetimeIn(List<LocalDateTime> values) {
+        public Criteria andDatetimeIn(List<Date> values) {
             addCriterion("datetime in", values, "datetime");
             return (Criteria) this;
         }
 
-        public Criteria andDatetimeNotIn(List<LocalDateTime> values) {
+        public Criteria andDatetimeNotIn(List<Date> values) {
             addCriterion("datetime not in", values, "datetime");
             return (Criteria) this;
         }
 
-        public Criteria andDatetimeBetween(LocalDateTime value1, LocalDateTime value2) {
+        public Criteria andDatetimeBetween(Date value1, Date value2) {
             addCriterion("datetime between", value1, value2, "datetime");
             return (Criteria) this;
         }
 
-        public Criteria andDatetimeNotBetween(LocalDateTime value1, LocalDateTime value2) {
+        public Criteria andDatetimeNotBetween(Date value1, Date value2) {
             addCriterion("datetime not between", value1, value2, "datetime");
             return (Criteria) this;
         }

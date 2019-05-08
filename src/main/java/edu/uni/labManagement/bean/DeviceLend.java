@@ -1,6 +1,6 @@
 package edu.uni.labManagement.bean;
 
-import java.time.LocalDateTime;
+import java.util.Date;
 
 public class DeviceLend {
     private Long id;
@@ -9,11 +9,11 @@ public class DeviceLend {
 
     private String reason;
 
-    private LocalDateTime returnTime;
+    private Date returnTime;
 
     private Long universityId;
 
-    private LocalDateTime datetime;
+    private Date datetime;
 
     private Long byWho;
 
@@ -43,11 +43,11 @@ public class DeviceLend {
         this.reason = reason == null ? null : reason.trim();
     }
 
-    public LocalDateTime getReturnTime() {
+    public Date getReturnTime() {
         return returnTime;
     }
 
-    public void setReturnTime(LocalDateTime returnTime) {
+    public void setReturnTime(Date returnTime) {
         this.returnTime = returnTime;
     }
 
@@ -59,11 +59,11 @@ public class DeviceLend {
         this.universityId = universityId;
     }
 
-    public LocalDateTime getDatetime() {
+    public Date getDatetime() {
         return datetime;
     }
 
-    public void setDatetime(LocalDateTime datetime) {
+    public void setDatetime(Date datetime) {
         this.datetime = datetime;
     }
 

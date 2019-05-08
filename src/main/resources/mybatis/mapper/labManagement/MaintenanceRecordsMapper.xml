@@ -6,12 +6,12 @@
     <result column="user_id" property="userId" jdbcType="BIGINT" />
     <result column="device_id" property="deviceId" jdbcType="BIGINT" />
     <result column="device_repair_apply_id" property="deviceRepairApplyId" jdbcType="BIGINT" />
-    <result column="start_time" property="startTime" jdbcType="DATE" />
-    <result column="end_time" property="endTime" jdbcType="DATE" />
+    <result column="start_time" property="startTime" jdbcType="TIMESTAMP" />
+    <result column="end_time" property="endTime" jdbcType="TIMESTAMP" />
     <result column="description" property="description" jdbcType="VARCHAR" />
     <result column="result" property="result" jdbcType="VARCHAR" />
     <result column="university_id" property="universityId" jdbcType="BIGINT" />
-    <result column="datetime" property="datetime" jdbcType="DATE" />
+    <result column="datetime" property="datetime" jdbcType="TIMESTAMP" />
     <result column="by_who" property="byWho" jdbcType="BIGINT" />
     <result column="deleted" property="deleted" jdbcType="BIT" />
   </resultMap>
@@ -116,8 +116,8 @@
       result, university_id, datetime, 
       by_who, deleted)
     values (#{userId,jdbcType=BIGINT}, #{deviceId,jdbcType=BIGINT}, #{deviceRepairApplyId,jdbcType=BIGINT}, 
-      #{startTime,jdbcType=DATE}, #{endTime,jdbcType=DATE}, #{description,jdbcType=VARCHAR}, 
-      #{result,jdbcType=VARCHAR}, #{universityId,jdbcType=BIGINT}, #{datetime,jdbcType=DATE}, 
+      #{startTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP}, #{description,jdbcType=VARCHAR}, 
+      #{result,jdbcType=VARCHAR}, #{universityId,jdbcType=BIGINT}, #{datetime,jdbcType=TIMESTAMP}, 
       #{byWho,jdbcType=BIGINT}, #{deleted,jdbcType=BIT})
   </insert>
   <insert id="insertSelective" parameterType="edu.uni.labManagement.bean.MaintenanceRecords" >
@@ -171,10 +171,10 @@
         #{deviceRepairApplyId,jdbcType=BIGINT},
       </if>
       <if test="startTime != null" >
-        #{startTime,jdbcType=DATE},
+        #{startTime,jdbcType=TIMESTAMP},
       </if>
       <if test="endTime != null" >
-        #{endTime,jdbcType=DATE},
+        #{endTime,jdbcType=TIMESTAMP},
       </if>
       <if test="description != null" >
         #{description,jdbcType=VARCHAR},
@@ -186,7 +186,7 @@
         #{universityId,jdbcType=BIGINT},
       </if>
       <if test="datetime != null" >
-        #{datetime,jdbcType=DATE},
+        #{datetime,jdbcType=TIMESTAMP},
       </if>
       <if test="byWho != null" >
         #{byWho,jdbcType=BIGINT},
@@ -218,10 +218,10 @@
         device_repair_apply_id = #{record.deviceRepairApplyId,jdbcType=BIGINT},
       </if>
       <if test="record.startTime != null" >
-        start_time = #{record.startTime,jdbcType=DATE},
+        start_time = #{record.startTime,jdbcType=TIMESTAMP},
       </if>
       <if test="record.endTime != null" >
-        end_time = #{record.endTime,jdbcType=DATE},
+        end_time = #{record.endTime,jdbcType=TIMESTAMP},
       </if>
       <if test="record.description != null" >
         description = #{record.description,jdbcType=VARCHAR},
@@ -233,7 +233,7 @@
         university_id = #{record.universityId,jdbcType=BIGINT},
       </if>
       <if test="record.datetime != null" >
-        datetime = #{record.datetime,jdbcType=DATE},
+        datetime = #{record.datetime,jdbcType=TIMESTAMP},
       </if>
       <if test="record.byWho != null" >
         by_who = #{record.byWho,jdbcType=BIGINT},
@@ -252,12 +252,12 @@
       user_id = #{record.userId,jdbcType=BIGINT},
       device_id = #{record.deviceId,jdbcType=BIGINT},
       device_repair_apply_id = #{record.deviceRepairApplyId,jdbcType=BIGINT},
-      start_time = #{record.startTime,jdbcType=DATE},
-      end_time = #{record.endTime,jdbcType=DATE},
+      start_time = #{record.startTime,jdbcType=TIMESTAMP},
+      end_time = #{record.endTime,jdbcType=TIMESTAMP},
       description = #{record.description,jdbcType=VARCHAR},
       result = #{record.result,jdbcType=VARCHAR},
       university_id = #{record.universityId,jdbcType=BIGINT},
-      datetime = #{record.datetime,jdbcType=DATE},
+      datetime = #{record.datetime,jdbcType=TIMESTAMP},
       by_who = #{record.byWho,jdbcType=BIGINT},
       deleted = #{record.deleted,jdbcType=BIT}
     <if test="_parameter != null" >
@@ -277,10 +277,10 @@
         device_repair_apply_id = #{deviceRepairApplyId,jdbcType=BIGINT},
       </if>
       <if test="startTime != null" >
-        start_time = #{startTime,jdbcType=DATE},
+        start_time = #{startTime,jdbcType=TIMESTAMP},
       </if>
       <if test="endTime != null" >
-        end_time = #{endTime,jdbcType=DATE},
+        end_time = #{endTime,jdbcType=TIMESTAMP},
       </if>
       <if test="description != null" >
         description = #{description,jdbcType=VARCHAR},
@@ -292,7 +292,7 @@
         university_id = #{universityId,jdbcType=BIGINT},
       </if>
       <if test="datetime != null" >
-        datetime = #{datetime,jdbcType=DATE},
+        datetime = #{datetime,jdbcType=TIMESTAMP},
       </if>
       <if test="byWho != null" >
         by_who = #{byWho,jdbcType=BIGINT},
@@ -308,12 +308,12 @@
     set user_id = #{userId,jdbcType=BIGINT},
       device_id = #{deviceId,jdbcType=BIGINT},
       device_repair_apply_id = #{deviceRepairApplyId,jdbcType=BIGINT},
-      start_time = #{startTime,jdbcType=DATE},
-      end_time = #{endTime,jdbcType=DATE},
+      start_time = #{startTime,jdbcType=TIMESTAMP},
+      end_time = #{endTime,jdbcType=TIMESTAMP},
       description = #{description,jdbcType=VARCHAR},
       result = #{result,jdbcType=VARCHAR},
       university_id = #{universityId,jdbcType=BIGINT},
-      datetime = #{datetime,jdbcType=DATE},
+      datetime = #{datetime,jdbcType=TIMESTAMP},
       by_who = #{byWho,jdbcType=BIGINT},
       deleted = #{deleted,jdbcType=BIT}
     where id = #{id,jdbcType=BIGINT}
