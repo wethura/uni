@@ -7,6 +7,7 @@ import edu.uni.labManagement.bean.DeviceModelSlaves;
 import edu.uni.labManagement.mapper.DeviceModelMapper;
 import edu.uni.labManagement.mapper.DeviceModelSlavesMapper;
 import edu.uni.labManagement.service.DeviceModelService;
+import org.apache.tomcat.jni.Local;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -56,12 +57,20 @@ public class DeviceModelServiceImpl implements DeviceModelService {
 
 	@Override
 	public boolean update(DeviceModel deviceModel) {
+		DeviceModel old_deviceModel = deviceModelMapper.selectByPrimaryKey(deviceModel.getId());
+		old_deviceModel.setId(null);
+		deviceModelMapper.insert(old_deviceModel);
+
+		deviceModel.setDatetime(LocalDateTime.now());
 		return deviceModelMapper.updateByPrimaryKey(deviceModel) > 0 ? true : false;
 	}
 
 	@Override
 	public boolean deleted(long id) {
-		return deviceModelMapper.deleteByPrimaryKey(id) > 0 ? true : false;
+		DeviceModel deviceModel = new DeviceModel();
+		deviceModel.setId(id);
+		deviceModel.setDeleted(true);
+		return deviceModelMapper.updateByPrimaryKeySelective(deviceModel) > 0 ? true : false;
 	}
 
 	@Override

@@ -28,4 +28,6 @@ public interface RoutineMaintenanceMapper {
     int updateByPrimaryKeySelective(RoutineMaintenance record);
 
     int updateByPrimaryKey(RoutineMaintenance record);
+
+    List<RoutineMaintenance> listByDeviceId(Long id);
 }

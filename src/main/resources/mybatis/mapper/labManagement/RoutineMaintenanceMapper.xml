@@ -271,4 +271,19 @@
       deleted = #{deleted,jdbcType=BIT}
     where id = #{id,jdbcType=BIGINT}
   </update>
+  <select id="listByDeviceId" parameterType="long" resultType="edu.uni.labManagement.bean.RoutineMaintenance">
+    select
+      id, lab_id as labId, start_time as startTime, end_time as endTime,
+      remain_option as remainOption, lm_routine_maintenance.university_id AS universityId,
+      lm_routine_maintenance.datetime, lm_routine_maintenance.by_who as byWho,
+      lm_routine_maintenance.deleted
+    from
+      lm_routine_maintenance, lm_routine_maintenance_detail
+    where
+      lm_routine_maintenance_detail.deviceId = #{id, jdbcType=BIGINT}
+      and lm_routine_maintenance_detail.routine_maintenance_id = lm_routine_maintenance.id
+      and lm_routine_maintenance_detail.deleted = 0
+      and lm_routine_maintenance.deleted = 0
+  </select>
+
 </mapper>

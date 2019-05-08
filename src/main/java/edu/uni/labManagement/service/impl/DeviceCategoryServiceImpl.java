@@ -32,12 +32,22 @@ public class DeviceCategoryServiceImpl implements DeviceCategoryService {
 
 	@Override
 	public boolean update(DeviceCategory deviceCategory) {
-		return deviceCategoryMapper.updateByPrimaryKey(deviceCategory) > 0 ? true :false;
+
+		DeviceCategory old_deviceCategory = deviceCategoryMapper.selectByPrimaryKey(deviceCategory.getId());
+		old_deviceCategory.setId(null);
+		old_deviceCategory.setDeleted(true);
+		deviceCategoryMapper.insert(old_deviceCategory);
+
+		deviceCategory.setDatetime(LocalDateTime.now());
+		return deviceCategoryMapper.updateByPrimaryKeySelective(deviceCategory) > 0 ? true :false;
 	}
 
 	@Override
 	public boolean deleted(long id) {
-		return deviceCategoryMapper.deleteByPrimaryKey(id) > 0 ? true : false;
+		DeviceCategory deviceCategory = new DeviceCategory();
+		deviceCategory.setId(id);
+		deviceCategory.setDeleted(true);
+		return deviceCategoryMapper.updateByPrimaryKeySelective(deviceCategory) > 0 ? true : false;
 	}
 
 	@Override

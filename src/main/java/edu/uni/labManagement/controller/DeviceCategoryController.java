@@ -1,5 +1,6 @@
 package edu.uni.labManagement.controller;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.github.pagehelper.PageInfo;
 import edu.uni.bean.Result;
 import edu.uni.bean.ResultType;
@@ -8,6 +9,7 @@ import edu.uni.example.controller.ProductController;
 import edu.uni.example.service.CategoryService;
 import edu.uni.labManagement.bean.DeviceCategory;
 import edu.uni.labManagement.service.DeviceCategoryService;
+import edu.uni.utils.JsonUtils;
 import edu.uni.utils.RedisCache;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -32,6 +34,7 @@ import java.util.List;
 public class DeviceCategoryController {
 
 	@Autowired
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	private DeviceCategoryService deviceCategoryService;
 
 	@Autowired
@@ -58,7 +61,10 @@ public class DeviceCategoryController {
 
 		if(json == null || json == ""){
 			List<DeviceCategory> deviceCategoryList = deviceCategoryService.listAll();
-			json = Result.build(ResultType.Success).appendData("res", deviceCategoryList).convertIntoJSON();
+//			json = Result.build(ResultType.Success).appendData("res", deviceCategoryList).convertIntoJSON();
+			json = JsonUtils.obj2String(deviceCategoryList);
+			System.out.println("------------->\n" + deviceCategoryList + "\n<-------------\n\n");
+			System.out.println("------------->\n" + json + "\n<-------------\n\n");
 			if(deviceCategoryList != null){
 				cache.set(cacheName, json);
 			}

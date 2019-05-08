@@ -8,6 +8,7 @@ import edu.uni.labManagement.service.DeviceModelSlavesService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -25,6 +26,7 @@ public class DeviceModelSlavesServiceImpl implements DeviceModelSlavesService {
 	@Override
 	public boolean insert(DeviceModelSlaves deviceModelSlaves) {
 		deviceModelSlaves.setDeleted(false);
+		deviceModelSlaves.setDatetime(LocalDateTime.now());
 		return deviceModelSlavesMapper.insert(deviceModelSlaves) > 0 ? true : false;
 	}
 
@@ -34,7 +36,15 @@ public class DeviceModelSlavesServiceImpl implements DeviceModelSlavesService {
 		DeviceModelSlavesExample.Criteria criteria = example.createCriteria();
 		criteria.andMaterIdEqualTo(deviceModelSlaves.getMaterId());
 		criteria.andSlaveIdEqualTo(deviceModelSlaves.getSlaveId());
-		return deviceModelSlavesMapper.updateByExample(deviceModelSlaves, example) > 0 ? true : false;
+		criteria.andDeletedEqualTo(false);
+		List<DeviceModelSlaves> modelSlaves = deviceModelSlavesMapper.selectByExample(example);
+		if(modelSlaves == null) {
+			return false;
+		}
+		modelSlaves.get(0).setDeleted(true);
+		deviceModelSlavesMapper.insert(modelSlaves.get(0));
+
+		return deviceModelSlavesMapper.updateByExampleSelective(deviceModelSlaves, example) > 0 ? true : false;
 	}
 
 	@Override

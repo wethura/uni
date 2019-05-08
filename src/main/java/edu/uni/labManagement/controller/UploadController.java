@@ -35,16 +35,26 @@ public class UploadController {
 	public void receive(
 			@ApiParam(value = "上传的文件", required = true)MultipartFile multipartFile,
 			HttpServletResponse response) throws IOException {
-//		if(){
-			System.out.println(multipartFile.getContentType());
+		response.setContentType("application/json;charset=utf-8");
+
+		if(multipartFile.getContentType().startsWith("image")){
 			if (multipartFile != null ){
-				String path = ResourceUtils.getURL("classpath:").getPath() + "/upload/picture";
+				String path = ResourceUtils.getURL("classpath:").getPath() + "/static/images";
+				File file = new File(path);
+				if( !file.exists() ){
+					System.out.println("\n\n\n\nhello?\n\n\n");
+					file.mkdirs();
+				}
+
+				System.out.println("------------------->" + path);
 				String originName = UUID.randomUUID() + multipartFile.getOriginalFilename();
 				multipartFile.transferTo(new File(path, originName));
-				response.getWriter().write(Result.build(ResultType.Success).appendData("path", path).appendData("fileName", originName).convertIntoJSON());
+				response.getWriter().write(Result.build(ResultType.Success).appendData("path", "images/" + originName).appendData("fileName", originName).convertIntoJSON());
 			}else{
-				response.getWriter().write(Result.build(ResultType.ParamError).convertIntoJSON());
+				response.getWriter().write(Result.build(ResultType.Failed).convertIntoJSON());
 			}
-//		}
+		}else{
+			response.getWriter().write(Result.build(ResultType.ParamError).convertIntoJSON());
+		}
 	}
 }
