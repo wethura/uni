@@ -1,0 +1,396 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="edu.uni.labManagement.mapper.DeviceMapper" >
+  <resultMap id="BaseResultMap" type="edu.uni.labManagement.bean.Device" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="device_category_id" property="deviceCategoryId" jdbcType="BIGINT" />
+    <result column="department_id" property="departmentId" jdbcType="BIGINT" />
+    <result column="batch" property="batch" jdbcType="INTEGER" />
+    <result column="number" property="number" jdbcType="VARCHAR" />
+    <result column="model" property="model" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="serial_number" property="serialNumber" jdbcType="VARCHAR" />
+    <result column="description" property="description" jdbcType="VARCHAR" />
+    <result column="product_date" property="productDate" jdbcType="TIMESTAMP" />
+    <result column="is_master" property="isMaster" jdbcType="BIT" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="university_id" property="universityId" jdbcType="BIGINT" />
+    <result column="datetime" property="datetime" jdbcType="TIMESTAMP" />
+    <result column="by_who" property="byWho" jdbcType="BIGINT" />
+    <result column="deleted" property="deleted" jdbcType="BIT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, device_category_id, department_id, batch, number, model, name, serial_number, 
+    description, product_date, is_master, status, university_id, datetime, by_who, deleted
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="edu.uni.labManagement.bean.DeviceExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from lm_device
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from lm_device
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from lm_device
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="edu.uni.labManagement.bean.DeviceExample" >
+    delete from lm_device
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="edu.uni.labManagement.bean.Device" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into lm_device (device_category_id, department_id, batch, 
+      number, model, name, 
+      serial_number, description, product_date, 
+      is_master, status, university_id, 
+      datetime, by_who, deleted
+      )
+    values (#{deviceCategoryId,jdbcType=BIGINT}, #{departmentId,jdbcType=BIGINT}, #{batch,jdbcType=INTEGER}, 
+      #{number,jdbcType=VARCHAR}, #{model,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{serialNumber,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, #{productDate,jdbcType=TIMESTAMP}, 
+      #{isMaster,jdbcType=BIT}, #{status,jdbcType=INTEGER}, #{universityId,jdbcType=BIGINT}, 
+      #{datetime,jdbcType=TIMESTAMP}, #{byWho,jdbcType=BIGINT}, #{deleted,jdbcType=BIT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="edu.uni.labManagement.bean.Device" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into lm_device
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="deviceCategoryId != null" >
+        device_category_id,
+      </if>
+      <if test="departmentId != null" >
+        department_id,
+      </if>
+      <if test="batch != null" >
+        batch,
+      </if>
+      <if test="number != null" >
+        number,
+      </if>
+      <if test="model != null" >
+        model,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="serialNumber != null" >
+        serial_number,
+      </if>
+      <if test="description != null" >
+        description,
+      </if>
+      <if test="productDate != null" >
+        product_date,
+      </if>
+      <if test="isMaster != null" >
+        is_master,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="universityId != null" >
+        university_id,
+      </if>
+      <if test="datetime != null" >
+        datetime,
+      </if>
+      <if test="byWho != null" >
+        by_who,
+      </if>
+      <if test="deleted != null" >
+        deleted,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="deviceCategoryId != null" >
+        #{deviceCategoryId,jdbcType=BIGINT},
+      </if>
+      <if test="departmentId != null" >
+        #{departmentId,jdbcType=BIGINT},
+      </if>
+      <if test="batch != null" >
+        #{batch,jdbcType=INTEGER},
+      </if>
+      <if test="number != null" >
+        #{number,jdbcType=VARCHAR},
+      </if>
+      <if test="model != null" >
+        #{model,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="serialNumber != null" >
+        #{serialNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="productDate != null" >
+        #{productDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isMaster != null" >
+        #{isMaster,jdbcType=BIT},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="universityId != null" >
+        #{universityId,jdbcType=BIGINT},
+      </if>
+      <if test="datetime != null" >
+        #{datetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="byWho != null" >
+        #{byWho,jdbcType=BIGINT},
+      </if>
+      <if test="deleted != null" >
+        #{deleted,jdbcType=BIT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="edu.uni.labManagement.bean.DeviceExample" resultType="java.lang.Integer" >
+    select count(*) from lm_device
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update lm_device
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.deviceCategoryId != null" >
+        device_category_id = #{record.deviceCategoryId,jdbcType=BIGINT},
+      </if>
+      <if test="record.departmentId != null" >
+        department_id = #{record.departmentId,jdbcType=BIGINT},
+      </if>
+      <if test="record.batch != null" >
+        batch = #{record.batch,jdbcType=INTEGER},
+      </if>
+      <if test="record.number != null" >
+        number = #{record.number,jdbcType=VARCHAR},
+      </if>
+      <if test="record.model != null" >
+        model = #{record.model,jdbcType=VARCHAR},
+      </if>
+      <if test="record.name != null" >
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.serialNumber != null" >
+        serial_number = #{record.serialNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.description != null" >
+        description = #{record.description,jdbcType=VARCHAR},
+      </if>
+      <if test="record.productDate != null" >
+        product_date = #{record.productDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.isMaster != null" >
+        is_master = #{record.isMaster,jdbcType=BIT},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=INTEGER},
+      </if>
+      <if test="record.universityId != null" >
+        university_id = #{record.universityId,jdbcType=BIGINT},
+      </if>
+      <if test="record.datetime != null" >
+        datetime = #{record.datetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.byWho != null" >
+        by_who = #{record.byWho,jdbcType=BIGINT},
+      </if>
+      <if test="record.deleted != null" >
+        deleted = #{record.deleted,jdbcType=BIT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update lm_device
+    set id = #{record.id,jdbcType=BIGINT},
+      device_category_id = #{record.deviceCategoryId,jdbcType=BIGINT},
+      department_id = #{record.departmentId,jdbcType=BIGINT},
+      batch = #{record.batch,jdbcType=INTEGER},
+      number = #{record.number,jdbcType=VARCHAR},
+      model = #{record.model,jdbcType=VARCHAR},
+      name = #{record.name,jdbcType=VARCHAR},
+      serial_number = #{record.serialNumber,jdbcType=VARCHAR},
+      description = #{record.description,jdbcType=VARCHAR},
+      product_date = #{record.productDate,jdbcType=TIMESTAMP},
+      is_master = #{record.isMaster,jdbcType=BIT},
+      status = #{record.status,jdbcType=INTEGER},
+      university_id = #{record.universityId,jdbcType=BIGINT},
+      datetime = #{record.datetime,jdbcType=TIMESTAMP},
+      by_who = #{record.byWho,jdbcType=BIGINT},
+      deleted = #{record.deleted,jdbcType=BIT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="edu.uni.labManagement.bean.Device" >
+    update lm_device
+    <set >
+      <if test="deviceCategoryId != null" >
+        device_category_id = #{deviceCategoryId,jdbcType=BIGINT},
+      </if>
+      <if test="departmentId != null" >
+        department_id = #{departmentId,jdbcType=BIGINT},
+      </if>
+      <if test="batch != null" >
+        batch = #{batch,jdbcType=INTEGER},
+      </if>
+      <if test="number != null" >
+        number = #{number,jdbcType=VARCHAR},
+      </if>
+      <if test="model != null" >
+        model = #{model,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="serialNumber != null" >
+        serial_number = #{serialNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="productDate != null" >
+        product_date = #{productDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isMaster != null" >
+        is_master = #{isMaster,jdbcType=BIT},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="universityId != null" >
+        university_id = #{universityId,jdbcType=BIGINT},
+      </if>
+      <if test="datetime != null" >
+        datetime = #{datetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="byWho != null" >
+        by_who = #{byWho,jdbcType=BIGINT},
+      </if>
+      <if test="deleted != null" >
+        deleted = #{deleted,jdbcType=BIT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="edu.uni.labManagement.bean.Device" >
+    update lm_device
+    set device_category_id = #{deviceCategoryId,jdbcType=BIGINT},
+      department_id = #{departmentId,jdbcType=BIGINT},
+      batch = #{batch,jdbcType=INTEGER},
+      number = #{number,jdbcType=VARCHAR},
+      model = #{model,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      serial_number = #{serialNumber,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR},
+      product_date = #{productDate,jdbcType=TIMESTAMP},
+      is_master = #{isMaster,jdbcType=BIT},
+      status = #{status,jdbcType=INTEGER},
+      university_id = #{universityId,jdbcType=BIGINT},
+      datetime = #{datetime,jdbcType=TIMESTAMP},
+      by_who = #{byWho,jdbcType=BIGINT},
+      deleted = #{deleted,jdbcType=BIT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="selectByLabId" parameterType="long" resultType="edu.uni.labManagement.bean.Device">
+    select
+        lm_device.id, device_category_id AS deviceCategoryId, department_id AS departmentId, batch,
+        number, model, name, serial_number AS serialNumber, description, product_date AS productDate,
+        is_master AS isMaster, status, lm_device.university_id AS universityId, lm_device.datetime,
+        lm_device.by_who AS byWho, lm_device.deleted
+    FROM lm_device, lm_lab_device
+    WHERE
+        lm_device.id = lm_lab_device.device_id AND lm_lab_device.lab_id = #{id, jdbcType=BIGINT}
+        AND lm_device.deleted = 0 AND lm_lab_device.deleted = 0
+  </select>
+</mapper>
