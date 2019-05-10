@@ -34,4 +34,6 @@ public interface DeviceModelService {
 	boolean deleted(long id);
 
 	List<DeviceModel> listByPid(long id);
+
+	List<DeviceModel> listByCategoryId(long id);
 }

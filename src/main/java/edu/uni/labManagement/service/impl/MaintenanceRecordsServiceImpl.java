@@ -57,4 +57,9 @@ public class MaintenanceRecordsServiceImpl implements MaintenanceRecordsService 
 		criteria.andDeletedEqualTo(false);
 		return maintenanceRecordsMapper.selectByExample(example);
 	}
+
+	@Override
+	public List<MaintenanceRecords> listByLabId(long labId) {
+		return maintenanceRecordsMapper.selectByLabId(labId);
+	}
 }

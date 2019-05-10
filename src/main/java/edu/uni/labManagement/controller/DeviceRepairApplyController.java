@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
@@ -88,7 +89,7 @@ public class DeviceRepairApplyController {
 	 * @param deviceRepairApply
 	 * @return
 	 */
-	@ApiOperation(value = "创建设备类型")
+	@ApiOperation(value = "创建维修申请")
 //	@ApiImplicitParam(name = "deviceRepairApply", value = "设备维修申请实体类", required = true, dataType = "deviceRepairApply")
 	@PostMapping
 	@ResponseBody

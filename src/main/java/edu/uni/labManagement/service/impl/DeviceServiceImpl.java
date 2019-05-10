@@ -1,9 +1,13 @@
 package edu.uni.labManagement.service.impl;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+import edu.uni.example.config.ExampleConfig;
 import edu.uni.labManagement.bean.Device;
 import edu.uni.labManagement.bean.DeviceExample;
 import edu.uni.labManagement.mapper.DeviceMapper;
 import edu.uni.labManagement.service.DeviceService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -20,14 +24,23 @@ public class DeviceServiceImpl implements DeviceService {
 
 	@Resource
 	private DeviceMapper deviceMapper;
+	@Autowired
+	private ExampleConfig golbalconfig;
 
 	@Override
-	public List<Device> listAll() {
+	public PageInfo<Device> listAll(int pageNum) {
+		PageHelper.startPage(pageNum, golbalconfig.getPageSize());
+
 		DeviceExample example = new DeviceExample();
 		DeviceExample.Criteria criteria = example.createCriteria();
 		criteria.andIsMasterEqualTo(true);
-		criteria.andDeletedEqualTo(true);
-		return deviceMapper.selectByExample(example);
+		criteria.andDeletedEqualTo(false);
+		List<Device> devices = deviceMapper.selectByExample(example);
+		if (devices != null) {
+			return new PageInfo<>(devices);
+		} else {
+			return null;
+		}
 	}
 
 	@Override

@@ -57,10 +57,11 @@ public class DeviceModelServiceImpl implements DeviceModelService {
 	public boolean update(DeviceModel deviceModel) {
 		DeviceModel old_deviceModel = deviceModelMapper.selectByPrimaryKey(deviceModel.getId());
 		old_deviceModel.setId(null);
+		old_deviceModel.setDeleted(true);
 		deviceModelMapper.insert(old_deviceModel);
 
 		deviceModel.setDatetime(new Date());
-		return deviceModelMapper.updateByPrimaryKey(deviceModel) > 0 ? true : false;
+		return deviceModelMapper.updateByPrimaryKeySelective(deviceModel) > 0 ? true : false;
 	}
 
 	@Override
@@ -73,6 +74,17 @@ public class DeviceModelServiceImpl implements DeviceModelService {
 
 	@Override
 	public List<DeviceModel> listByPid(long id) {
+//		自定义mapper
 		return deviceModelMapper.selectByPid(id);
+	}
+
+	@Override
+	public List<DeviceModel> listByCategoryId(long id) {
+		DeviceModelExample example = new DeviceModelExample();
+		DeviceModelExample.Criteria criteria = example.createCriteria();
+		criteria.andDeletedEqualTo(false);
+		criteria.andIsSlaveEqualTo(false);
+		criteria.andDeviceCategoryIdEqualTo(id);
+		return deviceModelMapper.selectByExample(example);
 	}
 }

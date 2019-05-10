@@ -29,5 +29,5 @@ public interface MaintenanceRecordsMapper {
 
     int updateByPrimaryKey(MaintenanceRecords record);
 
-//    MaintenanceRecords selectByRepairApplyId(Long id);
+    List<MaintenanceRecords> selectByLabId(Long labId);
 }

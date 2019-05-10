@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
+import java.util.List;
 
 /**
  * Create by Administrator
@@ -100,4 +101,14 @@ public class MaintenanceRecordsController {
 		}
 	}
 
+	@ApiOperation(value = "通过实验室id查询")
+	@GetMapping("/byLabid/{labId}")
+	@ResponseBody
+	public void receive2(HttpServletResponse response, @PathVariable long labId) throws Exception{
+		response.setContentType("application/json;charset=utf-8");
+		List<MaintenanceRecords> maintenanceRecordsList = maintenanceRecordsService.listByLabId(labId);
+		System.out.println(maintenanceRecordsList);
+		String json = Result.build(ResultType.Success).appendData("res", maintenanceRecordsList).convertIntoJSON();
+		response.getWriter().write(json);
+	}
 }

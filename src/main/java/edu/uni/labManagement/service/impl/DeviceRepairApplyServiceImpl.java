@@ -28,6 +28,7 @@ public class DeviceRepairApplyServiceImpl implements DeviceRepairApplyService {
 		deviceRepairApply.setDatetime(new Date());
 		deviceRepairApply.setApplyTime(new Date());
 		deviceRepairApply.setDeleted(false);
+		deviceRepairApply.setIsSuccess(0);
 		return deviceRepairApplyMapper.insert(deviceRepairApply) > 0 ? true : false;
 	}
 

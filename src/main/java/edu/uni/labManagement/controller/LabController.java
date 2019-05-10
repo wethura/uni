@@ -1,0 +1,72 @@
+package edu.uni.labManagement.controller;
+
+import com.github.pagehelper.PageInfo;
+import edu.uni.bean.Result;
+import edu.uni.bean.ResultType;
+import edu.uni.labManagement.bean.Lab;
+import edu.uni.labManagement.service.LabService;
+import edu.uni.utils.RedisCache;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import javax.servlet.http.HttpServletResponse;
+
+/**
+ * Create by Administrator
+ *
+ * @author sola
+ * @date 2019/05/09 23:49
+ */
+@Api(description = "实验室模块")
+@Controller
+@RequestMapping("json/labManagement/lab")
+public class LabController {
+	@Autowired
+	private RedisCache cache;
+	@Autowired
+	private LabService labService;
+
+	static class CacheNameHelper{
+//		lm_lab_listByPageNum_{pageNum}
+		private static final String listByPageNum = "lm_lab_listByPageNum_";
+	}
+
+	@ApiOperation(value = "分页查询实验室")
+	@GetMapping("list/{pageNum}")
+	@ResponseBody
+	public void receive(HttpServletResponse response, @PathVariable int pageNum) throws Exception{
+		response.setContentType("application/json;charset=utf-8");
+
+		String cacheName = CacheNameHelper.listByPageNum + pageNum;
+		String json = cache.get(cacheName);
+
+		if(json == null || json == "") {
+			PageInfo<Lab> pageInfo = labService.selectPage(pageNum);
+			json = Result.build(ResultType.Success).appendData("pageInfo", pageInfo).convertIntoJSON();
+			if (json != null) {
+				cache.set(cacheName, json);
+			}
+		}
+		response.getWriter().write(json);
+	}
+
+	@ApiOperation(value = "分页查询实验室")
+	@GetMapping("list/{labId}")
+	@ResponseBody
+	public void receive2(HttpServletResponse response, @PathVariable int labId) throws Exception{
+		response.setContentType("application/json;charset=utf-8");
+
+		Lab lab = labService.selectById(labId);
+		if(lab != null && lab.getDeleted() == false) {
+			response.getWriter().write(Result.build(ResultType.Success).appendData("res", lab).convertIntoJSON());
+		} else {
+			response.getWriter().write(Result.build(ResultType.Failed).convertIntoJSON());
+		}
+	}
+}

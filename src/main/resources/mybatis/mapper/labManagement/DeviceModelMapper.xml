@@ -306,7 +306,7 @@
 
   <select id="selectByPid" parameterType="long" resultType="edu.uni.labManagement.bean.DeviceModel">
     select
-        id, device_category_id AS deviceCategoryId, version, name, producter, description, is_slave AS isSlave, lm_device_model.university_id AS universityId, lm_device_model.datetime, lm_device_model.by_who AS byWho, lm_device_model.deleted
+        lm_device_model.id, device_category_id AS deviceCategoryId, version, name, producter, description, is_slave AS isSlave, lm_device_model.university_id AS universityId, lm_device_model.datetime, lm_device_model.by_who AS byWho, lm_device_model.deleted
     from
         lm_device_model, lm_device_model_slaves
     where

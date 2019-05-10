@@ -1,7 +1,6 @@
 package edu.uni.labManagement.service;
 
 import edu.uni.labManagement.bean.MaintenanceRecords;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 
@@ -47,4 +46,5 @@ public interface MaintenanceRecordsService {
 	 */
 	List<MaintenanceRecords> listByDeviceId(long id);
 
+	List<MaintenanceRecords> listByLabId(long labId);
 }

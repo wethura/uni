@@ -33,7 +33,8 @@ public class DeviceModelController {
 
 	static class CacheNameHelper{
 //		lm_deviceModel_{设备父模型id}
-		private static final String listByPid = "lm_deviceModel_";
+		private static final String listByPid = "lm_deviceModel_byPid_";
+		private static final String listByCategoryId = "lm_deviceModel_byCategoryId_";
 	}
 
 	@Autowired
@@ -43,7 +44,7 @@ public class DeviceModelController {
 	@Autowired
 	private RedisCache cache;
 
-	@ApiOperation(value = "创建父设备模型")
+	@ApiOperation(value = "创建父设备模型", notes = "已测试")
 //	@ApiImplicitParam(name="deviceModel", value = "设备模型实体类", required = true, dataType = "deviceModel")
 	@PostMapping
 	@ResponseBody
@@ -60,7 +61,7 @@ public class DeviceModelController {
 		return Result.build(ResultType.ParamError);
 	}
 
-	@ApiOperation(value = "创建子设备模型")
+	@ApiOperation(value = "创建子设备模型", notes = "已测试")
 	@PostMapping("{pid}/{amount}")
 	@ResponseBody
 	public Result createSon(@RequestBody(required = false) DeviceModel deviceModel, @PathVariable long pid, @PathVariable Integer amount){
@@ -76,22 +77,25 @@ public class DeviceModelController {
 		return Result.build(ResultType.ParamError);
 	}
 
-	@ApiOperation(value = "删除设备模型")
+	@ApiOperation(value = "删除设备模型", notes = "已测试")
 //	@ApiImplicitParam(name="id", value = "设备模型实体类", required = true, dataType = "long", paramType = "path")
 	@DeleteMapping("/{id}")
 	@ResponseBody
 	public Result destroy(@PathVariable Integer id){
 		boolean success = deviceModelService.deleted(id);
 		if(success) {
-			long pid = deviceModelSlavesService.listBySid(id).get(0).getMaterId();
-			cache.deleteByPaterm(CacheNameHelper.listByPid + pid);
+			try {
+				long pid = deviceModelSlavesService.listBySid(id).get(0).getMaterId();
+				System.out.println(pid);
+				cache.deleteByPaterm(CacheNameHelper.listByPid + pid);
+			}catch (Exception e){}
 			return Result.build(ResultType.Success);
 		} else {
 			return Result.build(ResultType.Failed);
 		}
 	}
 
-	@ApiOperation(value = "更新设备模型")
+	@ApiOperation(value = "更新设备模型", notes = "已测试")
 //	@ApiImplicitParam(name="deviceModel", value = "设备模型实体类", required = true, dataType = "deviceModel")
 	@PutMapping
 	@ResponseBody
@@ -113,18 +117,16 @@ public class DeviceModelController {
 		}
 	}
 
-	@ApiOperation(value = "通过父id查询子设备")
+	@ApiOperation(value = "通过父id查询子设备", notes = "已测试")
 //	@ApiImplicitParam(name="pid", value = "父设备ID", required = true, dataType = "long", paramType = "path")
-	@GetMapping("{pid}")
+	@GetMapping("/byPid/{pid}")
 	@ResponseBody
-	void receive(HttpServletResponse response, @PathVariable Integer pid) throws IOException {
+	void receive1(HttpServletResponse response, @PathVariable Integer pid) throws IOException {
 		response.setContentType("application/json;charset=utf-8");
 		String cacheName = CacheNameHelper.listByPid + pid;
-//		cache.deleteByPaterm(cacheName);
 		String json = cache.get(cacheName);
-		if(json == null || json == ""){
+		if(json == null || json == "") {
 			List<DeviceModel> deviceModelList = deviceModelService.listByPid(pid);
-//			System.out.println(deviceModelList);
 			json = Result.build(ResultType.Success).appendData("res", deviceModelList).convertIntoJSON();
 			if(deviceModelList != null){
 				cache.set(cacheName, json);
@@ -133,4 +135,20 @@ public class DeviceModelController {
 		response.getWriter().write(json);
 	}
 
+	@ApiOperation(value = "通过分类id查询父设备", notes = "已测试")
+	@GetMapping("/byCategoryId/{categoryId}")
+	@ResponseBody
+	void receive2(HttpServletResponse response, @PathVariable Integer categoryId) throws IOException {
+		response.setContentType("application/json;charset=utf-8");
+		String cacheName = CacheNameHelper.listByCategoryId + categoryId;
+		String json = cache.get(cacheName);
+		if(json == null || json == "") {
+			List<DeviceModel> deviceModelList = deviceModelService.listByCategoryId(categoryId);
+			json = Result.build(ResultType.Success).appendData("res", deviceModelList).convertIntoJSON();
+			if(deviceModelList!=null) {
+				cache.set(cacheName, json);
+			}
+		}
+		response.getWriter().write(json);
+	}
 }
