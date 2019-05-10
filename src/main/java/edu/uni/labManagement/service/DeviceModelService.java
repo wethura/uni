@@ -29,11 +29,31 @@ public interface DeviceModelService {
 	 */
 	boolean insertSonDeviceModel(DeviceModel deviceModel, long pid, Integer amount);
 
+	/**
+	 * 改
+	 * @param deviceModel
+	 * @return
+	 */
 	boolean update(DeviceModel deviceModel);
 
+	/**
+	 * 删
+	 * @param id
+	 * @return
+	 */
 	boolean deleted(long id);
 
+	/**
+	 * 通过父设备ID查询其子设备
+	 * @param id
+	 * @return
+	 */
 	List<DeviceModel> listByPid(long id);
 
+	/**
+	 * 通过设备分类查询所有顶级设备
+	 * @param id
+	 * @return
+	 */
 	List<DeviceModel> listByCategoryId(long id);
 }
