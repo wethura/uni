@@ -4,6 +4,7 @@ import com.github.pagehelper.PageInfo;
 import edu.uni.bean.Result;
 import edu.uni.bean.ResultType;
 import edu.uni.labManagement.bean.Lab;
+import edu.uni.labManagement.pojo.LabPojo;
 import edu.uni.labManagement.service.LabService;
 import edu.uni.utils.RedisCache;
 import io.swagger.annotations.Api;
@@ -44,7 +45,7 @@ public class LabController {
 		String json = cache.get(cacheName);
 
 		if(json == null || json == "") {
-			PageInfo<Lab> pageInfo = labService.selectPage(pageNum);
+			PageInfo<LabPojo> pageInfo = labService.selectPage(pageNum);
 			json = Result.build(ResultType.Success).appendData("pageInfo", pageInfo).convertIntoJSON();
 			if (json != null) {
 				cache.set(cacheName, json);

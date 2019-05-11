@@ -127,4 +127,22 @@ public class MaintenanceRecords {
     public void setDeleted(Boolean deleted) {
         this.deleted = deleted;
     }
+
+    @Override
+    public String toString() {
+        return "MaintenanceRecords{" +
+                "id=" + id +
+                ", userId=" + userId +
+                ", deviceId=" + deviceId +
+                ", deviceRepairApplyId=" + deviceRepairApplyId +
+                ", startTime=" + startTime +
+                ", endTime=" + endTime +
+                ", description='" + description + '\'' +
+                ", result='" + result + '\'' +
+                ", universityId=" + universityId +
+                ", datetime=" + datetime +
+                ", byWho=" + byWho +
+                ", deleted=" + deleted +
+                '}';
+    }
 }

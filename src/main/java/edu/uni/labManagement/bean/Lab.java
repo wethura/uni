@@ -105,4 +105,20 @@ public class Lab {
     public void setDeleted(Boolean deleted) {
         this.deleted = deleted;
     }
+
+    @Override
+    public String toString() {
+        return "Lab{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", ename='" + ename + '\'' +
+                ", departmentId=" + departmentId +
+                ", fieldId=" + fieldId +
+                ", description='" + description + '\'' +
+                ", universityId=" + universityId +
+                ", datetime=" + datetime +
+                ", byWho=" + byWho +
+                ", deleted=" + deleted +
+                '}';
+    }
 }

@@ -6,11 +6,14 @@ import edu.uni.example.config.ExampleConfig;
 import edu.uni.labManagement.bean.Lab;
 import edu.uni.labManagement.bean.LabExample;
 import edu.uni.labManagement.mapper.LabMapper;
+import edu.uni.labManagement.pojo.LabPojo;
 import edu.uni.labManagement.service.LabService;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -54,14 +57,27 @@ public class LabServiceImpl implements LabService {
 	}
 
 	@Override
-	public PageInfo<Lab> selectPage(int pageNum) {
+	public PageInfo<LabPojo> selectPage(int pageNum) {
 		PageHelper.startPage(pageNum, globalConfig.getPageSize());
 		LabExample example = new LabExample();
 		LabExample.Criteria criteria = example.createCriteria();
 		criteria.andDeletedEqualTo(false);
 		List<Lab> labs = labMapper.selectByExample(example);
+		List<LabPojo> labPojos = new ArrayList<>();
+		/**
+		 * 此位置暂时没有数据接口
+		 */
+		for (int i= 0; i < labs.size(); i ++) {
+			LabPojo labPojo = new LabPojo();
+			BeanUtils.copyProperties(labs.get(i), labPojo);
+			labPojos.add(labPojo);
+			String addr = selectAddressByFieldID(labPojo.getFieldId());
+			labPojos.get(i).setAddress(addr);
+		}
+//		System.out.println("\n============" + labs + "\n" + labPojos + "\n================\n");
+
 		if (labs != null) {
-			return new PageInfo<>(labs);
+			return new PageInfo<>(labPojos);
 		} else {
 			return null;
 		}
@@ -70,5 +86,9 @@ public class LabServiceImpl implements LabService {
 	@Override
 	public Lab selectById(long id) {
 		return labMapper.selectByPrimaryKey(id);
+	}
+
+	protected String selectAddressByFieldID(long id) {
+		return labMapper.selectAddressByFieldID(id);
 	}
 }

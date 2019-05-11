@@ -2,6 +2,7 @@ package edu.uni.labManagement.service;
 
 import com.github.pagehelper.PageInfo;
 import edu.uni.labManagement.bean.Lab;
+import edu.uni.labManagement.pojo.LabPojo;
 
 import java.util.List;
 
@@ -38,7 +39,7 @@ public interface LabService {
 	 * @param pageNum
 	 * @return
 	 */
-	PageInfo<Lab> selectPage(int pageNum);
+	PageInfo<LabPojo> selectPage(int pageNum);
 
 	/**
 	 * 通过实验室ID查询实验室详情

@@ -3,10 +3,13 @@ package edu.uni.labManagement.service.impl;
 import edu.uni.labManagement.bean.MaintenanceRecords;
 import edu.uni.labManagement.bean.MaintenanceRecordsExample;
 import edu.uni.labManagement.mapper.MaintenanceRecordsMapper;
+import edu.uni.labManagement.pojo.MaintenanceRecordsPojo;
 import edu.uni.labManagement.service.MaintenanceRecordsService;
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -36,7 +39,10 @@ public class MaintenanceRecordsServiceImpl implements MaintenanceRecordsService 
 
 	@Override
 	public boolean delete(long id) {
-		return maintenanceRecordsMapper.deleteByPrimaryKey(id) > 0 ? true : false;
+		MaintenanceRecords records = new MaintenanceRecords();
+		records.setDeleted(true);
+		records.setId(id);
+		return maintenanceRecordsMapper.updateByPrimaryKeySelective(records) > 0 ? true : false;
 	}
 
 	@Override
@@ -59,7 +65,21 @@ public class MaintenanceRecordsServiceImpl implements MaintenanceRecordsService 
 	}
 
 	@Override
-	public List<MaintenanceRecords> listByLabId(long labId) {
-		return maintenanceRecordsMapper.selectByLabId(labId);
+	public List<MaintenanceRecordsPojo> listByLabId(long labId) {
+		List<MaintenanceRecords>records = maintenanceRecordsMapper.selectByLabId(labId);
+		List<MaintenanceRecordsPojo> recordsPojos = new ArrayList<>();
+		for (int i = 0; i < records.size(); i ++) {
+			MaintenanceRecordsPojo maintenanceRecordsPojo = new MaintenanceRecordsPojo();
+			BeanUtils.copyProperties(records.get(i), maintenanceRecordsPojo);
+			System.out.println(records.get(i) + "\n" + maintenanceRecordsPojo.getByWho());
+			String user = selectUserById(maintenanceRecordsPojo.getByWho());
+			maintenanceRecordsPojo.setUser(user);
+			recordsPojos.add(maintenanceRecordsPojo);
+		}
+		return recordsPojos;
+	}
+
+	public String selectUserById(long id) {
+		return maintenanceRecordsMapper.selectUserById(id);
 	}
 }

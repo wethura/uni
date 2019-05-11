@@ -3,6 +3,7 @@ package edu.uni.labManagement.controller;
 import edu.uni.bean.Result;
 import edu.uni.bean.ResultType;
 import edu.uni.labManagement.bean.MaintenanceRecords;
+import edu.uni.labManagement.pojo.MaintenanceRecordsPojo;
 import edu.uni.labManagement.service.MaintenanceRecordsService;
 import edu.uni.utils.RedisCache;
 import io.swagger.annotations.Api;
@@ -106,9 +107,9 @@ public class MaintenanceRecordsController {
 	@ResponseBody
 	public void receive2(HttpServletResponse response, @PathVariable long labId) throws Exception{
 		response.setContentType("application/json;charset=utf-8");
-		List<MaintenanceRecords> maintenanceRecordsList = maintenanceRecordsService.listByLabId(labId);
-		System.out.println(maintenanceRecordsList);
-		String json = Result.build(ResultType.Success).appendData("res", maintenanceRecordsList).convertIntoJSON();
+		List<MaintenanceRecordsPojo> records = maintenanceRecordsService.listByLabId(labId);
+		System.out.println(records);
+		String json = Result.build(ResultType.Success).appendData("res", records).convertIntoJSON();
 		response.getWriter().write(json);
 	}
 }

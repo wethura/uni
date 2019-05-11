@@ -28,4 +28,6 @@ public interface LabMapper {
     int updateByPrimaryKeySelective(Lab record);
 
     int updateByPrimaryKey(Lab record);
+
+	String selectAddressByFieldID(long id);
 }

@@ -322,11 +322,16 @@
     select lm_maintenance_records.id, lm_maintenance_records.user_id, lm_maintenance_records.device_id,
             lm_maintenance_records.device_repair_apply_id, lm_maintenance_records.start_time, lm_maintenance_records.end_time,
             description, result, lm_maintenance_records.university_id, lm_maintenance_records.datetime,
-            lm_maintenance_records.by_who, lm_maintenance_records.deleted
+            lm_maintenance_records.by_who as byWho, lm_maintenance_records.deleted
     from lm_maintenance_records, lm_lab_device
     where lm_maintenance_records.device_id = lm_lab_device.device_id
         and lm_lab_device.lab_id = #{labId, jdbcType=BIGINT}
         and lm_lab_device.deleted = false
         and lm_maintenance_records.deleted = false
+  </select>
+  <select id="selectUserById" parameterType="long" resultType="string">
+    select user_name
+    from user
+    where id = #{id, jdbcType=BIGINT}
   </select>
 </mapper>

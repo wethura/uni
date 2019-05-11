@@ -30,4 +30,6 @@ public interface MaintenanceRecordsMapper {
     int updateByPrimaryKey(MaintenanceRecords record);
 
     List<MaintenanceRecords> selectByLabId(Long labId);
+
+    String selectUserById(long id);
 }
