@@ -10,10 +10,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -68,5 +65,31 @@ public class LabController {
 		} else {
 			response.getWriter().write(Result.build(ResultType.Failed).convertIntoJSON());
 		}
+	}
+
+	@ApiOperation(value = "添加实验室", notes = "待测试")
+	@PostMapping
+	@ResponseBody
+	public Result create(Lab lab){
+		if(lab != null && (lab.getName() != null && lab.getName() != "" )) {
+			if (labService.insert(lab) == true) {
+				cache.deleteByPaterm(CacheNameHelper.listByPageNum + "*");
+				return Result.build(ResultType.Success);
+			} else {
+				return Result.build(ResultType.Failed);
+			}
+		}
+		return Result.build(ResultType.ParamError);
+	}
+
+	@ApiOperation(value = "根据实验室ID删除实验室", notes = "待测试")
+	@DeleteMapping("/{labId}")
+	@ResponseBody
+	public Result destory(@PathVariable long labId) {
+		if (labService.deleted(labId)) {
+			cache.deleteByPaterm(CacheNameHelper.listByPageNum + "*");
+			return Result.build(ResultType.Success);
+		}
+		return Result.build(ResultType.Failed);
 	}
 }
