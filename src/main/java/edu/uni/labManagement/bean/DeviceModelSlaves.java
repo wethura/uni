@@ -85,4 +85,18 @@ public class DeviceModelSlaves {
     public void setDeleted(Boolean deleted) {
         this.deleted = deleted;
     }
+
+    @Override
+    public String toString() {
+        return "DeviceModelSlaves{" +
+                "id=" + id +
+                ", materId=" + materId +
+                ", slaveId=" + slaveId +
+                ", amount=" + amount +
+                ", universityId=" + universityId +
+                ", datetime=" + datetime +
+                ", byWho=" + byWho +
+                ", deleted=" + deleted +
+                '}';
+    }
 }

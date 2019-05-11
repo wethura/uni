@@ -115,4 +115,21 @@ public class DeviceModel {
     public void setDeleted(Boolean deleted) {
         this.deleted = deleted;
     }
+
+    @Override
+    public String toString() {
+        return "DeviceModel{" +
+                "id=" + id +
+                ", deviceCategoryId=" + deviceCategoryId +
+                ", version='" + version + '\'' +
+                ", name='" + name + '\'' +
+                ", producter='" + producter + '\'' +
+                ", description='" + description + '\'' +
+                ", isSlave=" + isSlave +
+                ", universityId=" + universityId +
+                ", datetime=" + datetime +
+                ", byWho=" + byWho +
+                ", deleted=" + deleted +
+                '}';
+    }
 }

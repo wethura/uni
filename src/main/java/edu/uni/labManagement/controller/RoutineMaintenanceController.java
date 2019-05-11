@@ -65,11 +65,13 @@ public class RoutineMaintenanceController {
 	public void receive2(HttpServletResponse response, @PathVariable long labId) throws Exception{
 		response.setContentType("application/json;charset=utf-8");
 		String cacheName = CacheNameHelper.listByLabId + labId;
+		cache.deleteByPaterm(cacheName);
 		String json = cache.get(cacheName);
 
 		if (json == null || json == "") {
 			List<RoutineMaintenance> maintenanceRecords = routineMaintenanceService.listByLabId(labId);
 			json = Result.build(ResultType.Success).appendData("res", maintenanceRecords).convertIntoJSON();
+			System.out.println("------------>" + maintenanceRecords);
 			if (maintenanceRecords != null) {
 				cache.set(cacheName, json);
 			}

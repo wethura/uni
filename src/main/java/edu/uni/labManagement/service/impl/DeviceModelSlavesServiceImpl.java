@@ -27,6 +27,7 @@ public class DeviceModelSlavesServiceImpl implements DeviceModelSlavesService {
 	public boolean insert(DeviceModelSlaves deviceModelSlaves) {
 		deviceModelSlaves.setDeleted(false);
 		deviceModelSlaves.setDatetime(new Date());
+		System.out.println(deviceModelSlaves);
 		return deviceModelSlavesMapper.insert(deviceModelSlaves) > 0 ? true : false;
 	}
 

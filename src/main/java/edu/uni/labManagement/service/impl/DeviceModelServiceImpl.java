@@ -43,12 +43,12 @@ public class DeviceModelServiceImpl implements DeviceModelService {
 		deviceModel.setDatetime(new Date());
 		deviceModel.setDeleted(false);
 		long slaveId = deviceModelMapper.insert(deviceModel);
-
+System.out.println("------------------>" + deviceModel);
 		DeviceModelSlaves deviceModelSlaves = new DeviceModelSlaves();
 		deviceModelSlaves.setAmount(amount);
 		deviceModelSlaves.setDatetime(new Date());
 		deviceModelSlaves.setMaterId(pid);
-		deviceModelSlaves.setSlaveId(slaveId);
+		deviceModelSlaves.setSlaveId(deviceModel.getId());
 
 		return deviceModelSlavesMapper.insert(deviceModelSlaves) > 0 ? true : false;
 	}

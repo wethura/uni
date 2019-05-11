@@ -35,7 +35,7 @@ public class LabController {
 	}
 
 	@ApiOperation(value = "分页查询实验室")
-	@GetMapping("list/{pageNum}")
+	@GetMapping("listByPage/{pageNum}")
 	@ResponseBody
 	public void receive(HttpServletResponse response, @PathVariable int pageNum) throws Exception{
 		response.setContentType("application/json;charset=utf-8");
@@ -54,7 +54,7 @@ public class LabController {
 	}
 
 	@ApiOperation(value = "分页查询实验室")
-	@GetMapping("list/{labId}")
+	@GetMapping("listByLabId/{labId}")
 	@ResponseBody
 	public void receive2(HttpServletResponse response, @PathVariable int labId) throws Exception{
 		response.setContentType("application/json;charset=utf-8");
