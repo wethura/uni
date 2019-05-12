@@ -405,4 +405,11 @@
         AND lm_device_slave.master_id = #{id, jdbcType=BIGINT}
         AND lm_device.deleted = 0 AND lm_device_slave.deleted = 0
   </select>
+  <select id="selectDistinctDeviceName" resultType="string" parameterType="long">
+    SELECT distinct `name`
+    FROM lm_device, lm_lab_device
+    WHERE lm_lab_device.device_id = lm_device.id
+        AND lm_lab_device.lab_id = #{labId, jdbcType=BIGINT}
+        AND lm_lab_device.deleted = 0 AND lm_device.deleted = 0
+  </select>
 </mapper>

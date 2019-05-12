@@ -60,7 +60,7 @@ public class DeviceController {
 		response.getWriter().write(json);
 	}
 
-	@ApiOperation(value = "查询所有的设备")
+	@ApiOperation(value = "查询实验室的所有的设备")
 	@GetMapping("listByLab/{labId}")
 	@ResponseBody
 	public void receive2(HttpServletResponse response, @PathVariable int labId) throws Exception{
@@ -86,6 +86,34 @@ public class DeviceController {
 		response.setContentType("application/json;charset=utf-8");
 
 		List<Device> list = deviceService.selectByParentId(id);
+		if (list != null) {
+			response.getWriter().write(Result.build(ResultType.Success).appendData("res", list).convertIntoJSON());
+		} else {
+			response.getWriter().write(Result.build(ResultType.Failed).convertIntoJSON());
+		}
+	}
+
+	@ApiOperation(value = "查询不同样的设备名称", notes = "待测试")
+	@GetMapping("listName/{labId}")
+	@ResponseBody
+	public void receive4(HttpServletResponse response, @PathVariable long labId) throws Exception{
+		response.setContentType("application/json;charset=utf-8");
+
+		List<String> list = deviceService.selectDistinctDeviceName(labId);
+		if (list != null) {
+			response.getWriter().write(Result.build(ResultType.Success).appendData("res", list).convertIntoJSON());
+		} else {
+			response.getWriter().write(Result.build(ResultType.Failed).convertIntoJSON());
+		}
+	}
+
+	@ApiOperation(value = "通过对应实验室设备名称查询所有相关设备", notes = "待测试")
+	@GetMapping("listByName/{labId}/{name}")
+	@ResponseBody
+	public void receive5(HttpServletResponse response,@PathVariable long labId, @PathVariable String name) throws Exception{
+		response.setContentType("application/json;charset=utf-8");
+
+		List<Device> list = deviceService.listByNameAndLab(name, labId);
 		if (list != null) {
 			response.getWriter().write(Result.build(ResultType.Success).appendData("res", list).convertIntoJSON());
 		} else {

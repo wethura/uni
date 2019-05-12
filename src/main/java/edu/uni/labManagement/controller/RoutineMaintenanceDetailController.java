@@ -58,12 +58,13 @@ public class RoutineMaintenanceDetailController {
 		response.getWriter().write(json);
 	}
 
-	@ApiOperation(value = "通过设备ID查询设备维护详情", notes = "待测试")
+	@ApiOperation(value = "通过维护详情ID查询设备维护详情", notes = "待测试")
 	@GetMapping("/listByRoutineMaintenanceId/{routineMaintenanceId}")
 	@ResponseBody
 	public void receive2(HttpServletResponse response, @PathVariable long routineMaintenanceId) throws Exception{
 		response.setContentType("application/json;charset=utf-8");
 		String cacheName = CacheNameHelper.LIST_BY_MAINTENANCE_ID + routineMaintenanceId;
+		cache.deleteByPaterm(cacheName);
 		String json = cache.get(cacheName);
 
 		if (json == null || json == "") {

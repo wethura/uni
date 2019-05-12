@@ -27,4 +27,8 @@ public interface DeviceService {
 	List<Device> listAllByLabId(long labId);
 
 	List<Device> selectByParentId(long id);
+
+	List<String> selectDistinctDeviceName(long labId);
+
+	List<Device> listByNameAndLab(String name, long labId);
 }

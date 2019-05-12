@@ -1,6 +1,7 @@
 package edu.uni.labManagement.service;
 
 import edu.uni.labManagement.bean.RoutineMaintenance;
+import edu.uni.labManagement.bean.RoutineMaintenanceDetail;
 import edu.uni.labManagement.pojo.RoutineMaintenancePojo;
 
 import java.util.List;
@@ -47,4 +48,6 @@ public interface RoutineMaintenanceService {
 	 * @return
 	 */
 	List<RoutineMaintenancePojo> listByLabId(long labId);
+
+	boolean createMaintenance(RoutineMaintenance maintenance, List<RoutineMaintenanceDetail> details);
 }

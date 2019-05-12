@@ -1,8 +1,10 @@
 package edu.uni.labManagement.service.impl;
 
 import edu.uni.labManagement.bean.RoutineMaintenance;
+import edu.uni.labManagement.bean.RoutineMaintenanceDetail;
 import edu.uni.labManagement.bean.RoutineMaintenanceExample;
 import edu.uni.labManagement.mapper.MaintenanceRecordsMapper;
+import edu.uni.labManagement.mapper.RoutineMaintenanceDetailMapper;
 import edu.uni.labManagement.mapper.RoutineMaintenanceMapper;
 import edu.uni.labManagement.pojo.RoutineMaintenancePojo;
 import edu.uni.labManagement.service.RoutineMaintenanceService;
@@ -26,7 +28,9 @@ public class RoutineMaintenanceServiceImpl implements RoutineMaintenanceService 
 	@Resource
 	private RoutineMaintenanceMapper routineMaintenanceMapper;
 	@Resource
-	private MaintenanceRecordsMapper recordsMapper;
+	private MaintenanceRecordsMapper maintenanceRecordsMapper;
+	@Resource
+	private RoutineMaintenanceDetailMapper routineMaintenanceDetailMapper;
 
 	@Override
 	public boolean insert(RoutineMaintenance routineMaintenance) {
@@ -66,11 +70,31 @@ public class RoutineMaintenanceServiceImpl implements RoutineMaintenanceService 
 			RoutineMaintenancePojo pojo = new RoutineMaintenancePojo();
 			BeanUtils.copyProperties(routineMaintenance, pojo);
 			if(pojo.getByWho() != null) {
-				pojo.setUser(recordsMapper.selectUserById(pojo.getByWho()));
+				pojo.setUser(maintenanceRecordsMapper.selectUserById(pojo.getByWho()));
 			}
 			rmpojo.add(pojo);
 		}
 		return rmpojo;
 	}
 
+	@Override
+	public boolean createMaintenance(RoutineMaintenance maintenance, List<RoutineMaintenanceDetail> details) {
+
+		boolean success = true;
+
+		maintenance.setDeleted(false);
+		maintenance.setDatetime(new Date());
+		success = success && (routineMaintenanceMapper.insert(maintenance) > 0 ? true : false);
+
+		for (RoutineMaintenanceDetail detail : details) {
+			detail.setDeleted(false);
+			detail.setDatetime(new Date());
+			detail.setRoutineMaintenanceId(maintenance.getId());
+			if (detail.getDescription() == "" || detail.getDescription() == null) {
+				detail.setDescription("本次维护正常进行...<本记录为系统默认值>");
+			}
+			success = success && (routineMaintenanceDetailMapper.insert(detail) > 0 ? true : false);
+		}
+		return success;
+	}
 }

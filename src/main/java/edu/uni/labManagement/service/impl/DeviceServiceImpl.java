@@ -52,4 +52,20 @@ public class DeviceServiceImpl implements DeviceService {
 	public List<Device> selectByParentId(long id) {
 		return deviceMapper.selectByParentId(id);
 	}
+
+	@Override
+	public List<String> selectDistinctDeviceName(long labId) {
+		return deviceMapper.selectDistinctDeviceName(labId);
+	}
+
+	@Override
+	public List<Device> listByNameAndLab(String name, long labId) {
+		List<Device> list = deviceMapper.selectByLabId(labId);
+		for (int i = list.size() - 1; i >= 0; i --) {
+			if (!name.equals(list.get(i).getName())) {
+				list.remove(i);
+			}
+		}
+		return list;
+	}
 }

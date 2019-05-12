@@ -4,6 +4,7 @@ import edu.uni.bean.Result;
 import edu.uni.bean.ResultType;
 import edu.uni.labManagement.bean.MaintenanceRecords;
 import edu.uni.labManagement.bean.RoutineMaintenance;
+import edu.uni.labManagement.bean.RoutineMaintenanceDetail;
 import edu.uni.labManagement.pojo.RoutineMaintenancePojo;
 import edu.uni.labManagement.service.MaintenanceRecordsService;
 import edu.uni.labManagement.service.RoutineMaintenanceService;
@@ -12,10 +13,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
@@ -80,4 +78,12 @@ public class RoutineMaintenanceController {
 		response.getWriter().write(json);
 	}
 
+	@PostMapping
+	@ApiOperation(value = "创建设备维护", notes = "待测试")
+	@ResponseBody
+	public Result create(@RequestBody RoutineMaintenance maintenance, @RequestBody List<RoutineMaintenanceDetail> details) {
+		boolean success = routineMaintenanceService.createMaintenance(maintenance, details);
+
+		return Result.build(ResultType.Failed);
+	}
 }

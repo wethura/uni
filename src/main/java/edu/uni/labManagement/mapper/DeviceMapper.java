@@ -32,4 +32,6 @@ public interface DeviceMapper {
     List<Device> selectByLabId(Long id);
 
     List<Device> selectByParentId(long id);
+
+    List<String> selectDistinctDeviceName(long labId);
 }
