@@ -97,4 +97,19 @@ public class RoutineMaintenance {
     public void setDeleted(Boolean deleted) {
         this.deleted = deleted;
     }
+
+    @Override
+    public String toString() {
+        return "RoutineMaintenance{" +
+                "id=" + id +
+                ", labId=" + labId +
+                ", startTime=" + startTime +
+                ", endTime=" + endTime +
+                ", remainOption='" + remainOption + '\'' +
+                ", universityId=" + universityId +
+                ", datetime=" + datetime +
+                ", byWho=" + byWho +
+                ", deleted=" + deleted +
+                '}';
+    }
 }

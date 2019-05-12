@@ -5,6 +5,7 @@ import edu.uni.bean.ResultType;
 import edu.uni.labManagement.bean.MaintenanceRecords;
 import edu.uni.labManagement.bean.RoutineMaintenance;
 import edu.uni.labManagement.bean.RoutineMaintenanceDetail;
+import edu.uni.labManagement.pojo.RoutineMaintenanceDetailPojo;
 import edu.uni.labManagement.pojo.RoutineMaintenancePojo;
 import edu.uni.labManagement.service.MaintenanceRecordsService;
 import edu.uni.labManagement.service.RoutineMaintenanceService;
@@ -81,9 +82,12 @@ public class RoutineMaintenanceController {
 	@PostMapping
 	@ApiOperation(value = "创建设备维护", notes = "待测试")
 	@ResponseBody
-	public Result create(@RequestBody RoutineMaintenance maintenance, @RequestBody List<RoutineMaintenanceDetail> details) {
-		boolean success = routineMaintenanceService.createMaintenance(maintenance, details);
+	public Result create(@RequestBody RoutineMaintenanceDetailPojo pojo) {
 
+		boolean success = routineMaintenanceService.createMaintenance(pojo.getMaintenance(), pojo.getDetails());
+		if (success) {
+			return Result.build(ResultType.Success);
+		}
 		return Result.build(ResultType.Failed);
 	}
 }
