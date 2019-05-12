@@ -30,4 +30,6 @@ public interface DeviceMapper {
     int updateByPrimaryKey(Device record);
 
     List<Device> selectByLabId(Long id);
+
+    List<Device> selectByParentId(long id);
 }

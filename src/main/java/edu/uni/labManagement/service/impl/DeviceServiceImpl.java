@@ -47,4 +47,9 @@ public class DeviceServiceImpl implements DeviceService {
 	public List<Device> listAllByLabId(long labId) {
 		return deviceMapper.selectByLabId(labId);
 	}
+
+	@Override
+	public List<Device> selectByParentId(long id) {
+		return deviceMapper.selectByParentId(id);
+	}
 }

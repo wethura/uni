@@ -46,5 +46,5 @@ public interface LabService {
 	 * @param id
 	 * @return
 	 */
-	Lab selectById(long id);
+	LabPojo selectById(long id);
 }

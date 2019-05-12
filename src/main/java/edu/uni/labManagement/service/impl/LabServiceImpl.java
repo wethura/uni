@@ -84,8 +84,14 @@ public class LabServiceImpl implements LabService {
 	}
 
 	@Override
-	public Lab selectById(long id) {
-		return labMapper.selectByPrimaryKey(id);
+	public LabPojo selectById(long id) {
+		Lab lab = labMapper.selectByPrimaryKey(id);
+		LabPojo pojo = new LabPojo();
+		BeanUtils.copyProperties(lab, pojo);
+		if (pojo.getFieldId() != null) {
+			pojo.setAddress(selectAddressByFieldID(pojo.getFieldId()));
+		}
+		return pojo;
 	}
 
 	protected String selectAddressByFieldID(long id) {

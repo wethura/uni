@@ -45,7 +45,7 @@ public interface MaintenanceRecordsService {
 	 * @param id
 	 * @return
 	 */
-	List<MaintenanceRecords> listByDeviceId(long id);
+	List<MaintenanceRecordsPojo> listByDeviceId(long id);
 
 	/**
 	 * 通过实验室ID查询维修记录

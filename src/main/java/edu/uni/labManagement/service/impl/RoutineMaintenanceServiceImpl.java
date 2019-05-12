@@ -2,11 +2,15 @@ package edu.uni.labManagement.service.impl;
 
 import edu.uni.labManagement.bean.RoutineMaintenance;
 import edu.uni.labManagement.bean.RoutineMaintenanceExample;
+import edu.uni.labManagement.mapper.MaintenanceRecordsMapper;
 import edu.uni.labManagement.mapper.RoutineMaintenanceMapper;
+import edu.uni.labManagement.pojo.RoutineMaintenancePojo;
 import edu.uni.labManagement.service.RoutineMaintenanceService;
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -21,6 +25,8 @@ public class RoutineMaintenanceServiceImpl implements RoutineMaintenanceService 
 
 	@Resource
 	private RoutineMaintenanceMapper routineMaintenanceMapper;
+	@Resource
+	private MaintenanceRecordsMapper recordsMapper;
 
 	@Override
 	public boolean insert(RoutineMaintenance routineMaintenance) {
@@ -36,7 +42,6 @@ public class RoutineMaintenanceServiceImpl implements RoutineMaintenanceService 
 
 	@Override
 	public boolean deleted(long id) {
-//	使用deleted注释删除数据
 		RoutineMaintenance routineMaintenance = new RoutineMaintenance();
 		routineMaintenance.setId(id);
 		routineMaintenance.setDeleted(true);
@@ -50,11 +55,22 @@ public class RoutineMaintenanceServiceImpl implements RoutineMaintenanceService 
 	}
 
 	@Override
-	public List<RoutineMaintenance> listByLabId(long labId) {
+	public List<RoutineMaintenancePojo> listByLabId(long labId) {
 		RoutineMaintenanceExample example = new RoutineMaintenanceExample();
 		RoutineMaintenanceExample.Criteria criteria = example.createCriteria();
 		criteria.andLabIdEqualTo(labId);
 		criteria.andDeletedEqualTo(false);
-		return routineMaintenanceMapper.selectByExample(example);
+		List<RoutineMaintenance>list = routineMaintenanceMapper.selectByExample(example);
+		List<RoutineMaintenancePojo> rmpojo = new ArrayList<>();
+		for (RoutineMaintenance routineMaintenance : list) {
+			RoutineMaintenancePojo pojo = new RoutineMaintenancePojo();
+			BeanUtils.copyProperties(routineMaintenance, pojo);
+			if(pojo.getByWho() != null) {
+				pojo.setUser(recordsMapper.selectUserById(pojo.getByWho()));
+			}
+			rmpojo.add(pojo);
+		}
+		return rmpojo;
 	}
+
 }

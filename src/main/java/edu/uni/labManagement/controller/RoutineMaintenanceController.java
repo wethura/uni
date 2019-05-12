@@ -4,6 +4,7 @@ import edu.uni.bean.Result;
 import edu.uni.bean.ResultType;
 import edu.uni.labManagement.bean.MaintenanceRecords;
 import edu.uni.labManagement.bean.RoutineMaintenance;
+import edu.uni.labManagement.pojo.RoutineMaintenancePojo;
 import edu.uni.labManagement.service.MaintenanceRecordsService;
 import edu.uni.labManagement.service.RoutineMaintenanceService;
 import edu.uni.utils.RedisCache;
@@ -69,10 +70,10 @@ public class RoutineMaintenanceController {
 		String json = cache.get(cacheName);
 
 		if (json == null || json == "") {
-			List<RoutineMaintenance> maintenanceRecords = routineMaintenanceService.listByLabId(labId);
-			json = Result.build(ResultType.Success).appendData("res", maintenanceRecords).convertIntoJSON();
-			System.out.println("------------>" + maintenanceRecords);
-			if (maintenanceRecords != null) {
+			List<RoutineMaintenancePojo> pojos = routineMaintenanceService.listByLabId(labId);
+			json = Result.build(ResultType.Success).appendData("res", pojos).convertIntoJSON();
+			System.out.println("------------>" + pojos);
+			if (pojos != null) {
 				cache.set(cacheName, json);
 			}
 		}

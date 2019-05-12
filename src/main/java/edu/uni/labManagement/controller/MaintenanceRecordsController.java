@@ -112,4 +112,17 @@ public class MaintenanceRecordsController {
 		String json = Result.build(ResultType.Success).appendData("res", records).convertIntoJSON();
 		response.getWriter().write(json);
 	}
+
+	@ApiOperation(value = "通过设备的ID查询维修记录", notes = "待测试")
+	@GetMapping("/byDeviceId/{deviceId}")
+	@ResponseBody
+	public void receive3(HttpServletResponse response, @PathVariable long deviceId) throws Exception{
+		response.setContentType("application/json;charset=utf-8");
+		List<MaintenanceRecordsPojo> pojos = maintenanceRecordsService.listByDeviceId(deviceId);
+		if (pojos != null) {
+			response.getWriter().write(Result.build(ResultType.Success).appendData("res", pojos).convertIntoJSON());
+		} else {
+			response.getWriter().write(Result.build(ResultType.Failed).convertIntoJSON());
+		}
+	}
 }

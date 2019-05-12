@@ -54,15 +54,15 @@ public class LabController {
 		response.getWriter().write(json);
 	}
 
-	@ApiOperation(value = "分页查询实验室")
+	@ApiOperation(value = "通过实验室ID查询实验室")
 	@GetMapping("listByLabId/{labId}")
 	@ResponseBody
 	public void receive2(HttpServletResponse response, @PathVariable int labId) throws Exception{
 		response.setContentType("application/json;charset=utf-8");
 
-		Lab lab = labService.selectById(labId);
-		if(lab != null && lab.getDeleted() == false) {
-			response.getWriter().write(Result.build(ResultType.Success).appendData("res", lab).convertIntoJSON());
+		LabPojo labPojo = labService.selectById(labId);
+		if(labPojo != null && labPojo.getDeleted() == false) {
+			response.getWriter().write(Result.build(ResultType.Success).appendData("res", labPojo).convertIntoJSON());
 		} else {
 			response.getWriter().write(Result.build(ResultType.Failed).convertIntoJSON());
 		}

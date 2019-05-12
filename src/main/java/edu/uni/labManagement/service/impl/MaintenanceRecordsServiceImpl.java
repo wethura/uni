@@ -56,12 +56,23 @@ public class MaintenanceRecordsServiceImpl implements MaintenanceRecordsService 
 	}
 
 	@Override
-	public List<MaintenanceRecords> listByDeviceId(long id) {
+	public List<MaintenanceRecordsPojo> listByDeviceId(long id) {
 		MaintenanceRecordsExample example = new MaintenanceRecordsExample();
 		MaintenanceRecordsExample.Criteria criteria = example.createCriteria();
 		criteria.andDeviceIdEqualTo(id);
 		criteria.andDeletedEqualTo(false);
-		return maintenanceRecordsMapper.selectByExample(example);
+		List<MaintenanceRecords>records =  maintenanceRecordsMapper.selectByExample(example);
+
+		List<MaintenanceRecordsPojo> pojos = new ArrayList<>();
+		for (MaintenanceRecords record : records) {
+			MaintenanceRecordsPojo pojo = new MaintenanceRecordsPojo();
+			BeanUtils.copyProperties(record, pojo);
+			if (pojo.getByWho() != null) {
+				pojo.setUser(selectUserById(pojo.getByWho()));
+			}
+			pojos.add(pojo);
+		}
+		return pojos;
 	}
 
 	@Override

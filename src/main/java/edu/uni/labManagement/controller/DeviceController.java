@@ -78,4 +78,18 @@ public class DeviceController {
 		}
 		response.getWriter().write(json);
 	}
+
+	@ApiOperation(value = "通过父设备的ID查询子设备")
+	@GetMapping("listByParentID/{id}")
+	@ResponseBody
+	public void receive3(HttpServletResponse response, @PathVariable long id) throws Exception{
+		response.setContentType("application/json;charset=utf-8");
+
+		List<Device> list = deviceService.selectByParentId(id);
+		if (list != null) {
+			response.getWriter().write(Result.build(ResultType.Success).appendData("res", list).convertIntoJSON());
+		} else {
+			response.getWriter().write(Result.build(ResultType.Failed).convertIntoJSON());
+		}
+	}
 }

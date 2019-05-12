@@ -25,4 +25,6 @@ public interface DeviceService {
 	 * @return
 	 */
 	List<Device> listAllByLabId(long labId);
+
+	List<Device> selectByParentId(long id);
 }

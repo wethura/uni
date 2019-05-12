@@ -23,6 +23,6 @@ public class LabPojo extends Lab {
 	public String toString() {
 		return "LabPojo{" +
 				"address='" + address + '\'' +
-				'}';
+				"} " + super.toString();
 	}
 }
