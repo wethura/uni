@@ -1,6 +1,8 @@
 package edu.uni.labManagement.service;
 
+import com.github.pagehelper.PageInfo;
 import edu.uni.labManagement.bean.DeviceRepairApply;
+import edu.uni.labManagement.pojo.DeviceRepairApplyPojo;
 
 import java.util.List;
 
@@ -36,9 +38,10 @@ public interface DeviceRepairApplyService {
 	/**
 	 * 通过设备维修申请状态查询设备维修申请
 	 * @param states
+	 * @param pageNum
 	 * @return
 	 */
-	List<DeviceRepairApply> listByStates(int states);
+	PageInfo<DeviceRepairApplyPojo> listByStates(int states, int pageNum);
 
 	/**
 	 * 通过设备ID查询维修申请

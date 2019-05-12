@@ -1,13 +1,23 @@
 package edu.uni.labManagement.service.impl;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+import edu.uni.example.config.ExampleConfig;
 import edu.uni.labManagement.bean.DeviceRepairApply;
 import edu.uni.labManagement.bean.DeviceRepairApplyExample;
+import edu.uni.labManagement.bean.MaintenanceRecords;
+import edu.uni.labManagement.mapper.DeviceMapper;
 import edu.uni.labManagement.mapper.DeviceRepairApplyMapper;
+import edu.uni.labManagement.mapper.MaintenanceRecordsMapper;
+import edu.uni.labManagement.pojo.DeviceRepairApplyPojo;
 import edu.uni.labManagement.service.DeviceRepairApplyService;
+import edu.uni.labManagement.service.MaintenanceRecordsService;
+import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -22,6 +32,12 @@ public class DeviceRepairApplyServiceImpl implements DeviceRepairApplyService {
 
 	@Resource
 	private DeviceRepairApplyMapper deviceRepairApplyMapper;
+	@Autowired
+	private ExampleConfig golbalConfig;
+	@Resource
+	private DeviceMapper deviceMapper;
+	@Resource
+	private MaintenanceRecordsMapper maintenanceRecordsMapper;
 
 	@Override
 	public boolean insert(DeviceRepairApply deviceRepairApply) {
@@ -40,16 +56,46 @@ public class DeviceRepairApplyServiceImpl implements DeviceRepairApplyService {
 
 	@Override
 	public boolean deleted(long id) {
-		return deviceRepairApplyMapper.deleteByPrimaryKey(id) > 0 ? true : false;
+		DeviceRepairApply apply = new DeviceRepairApply();
+		apply.setId(id);
+		apply.setDeleted(true);
+		return deviceRepairApplyMapper.updateByPrimaryKeySelective(apply) > 0 ? true : false;
 	}
 
 	@Override
-	public List<DeviceRepairApply> listByStates(int states) {
+	public PageInfo<DeviceRepairApplyPojo> listByStates(int states, int pageNum) {
+		PageHelper.startPage(pageNum, golbalConfig.getPageSize());
+
 		DeviceRepairApplyExample example = new DeviceRepairApplyExample();
 		DeviceRepairApplyExample.Criteria criteria = example.createCriteria();
-		criteria.andIsSuccessEqualTo(states);
-		criteria.andDeletedEqualTo(false);
-		return deviceRepairApplyMapper.selectByExample(example);
+		criteria.andIsSuccessEqualTo(states)
+				.andDeletedEqualTo(false);
+		List<DeviceRepairApply> list = deviceRepairApplyMapper.selectByExample(example);
+
+		List<DeviceRepairApplyPojo> lists = new ArrayList<>();
+		for (DeviceRepairApply apply : list) {
+			DeviceRepairApplyPojo pojo = new DeviceRepairApplyPojo();
+			BeanUtils.copyProperties(apply, pojo);
+			String deviceName = null, applyUser = null, reviewUser = null;
+
+			if (pojo.getDeviceId() != null && pojo.getDeviceId() > 0) {
+				pojo.setDeviceName(deviceMapper.selectByPrimaryKey(pojo.getId()).getName());
+			}
+			if (pojo.getUserId() != null && pojo.getUserId() > 0) {
+				pojo.setApplyUser(maintenanceRecordsMapper.selectUserById(pojo.getUserId()));
+				System.out.println(maintenanceRecordsMapper.selectUserById(pojo.getUserId()));
+			}
+			if (pojo.getAssersorId() != null && pojo.getAssersorId() > 0) {
+				pojo.setReviewUser(maintenanceRecordsMapper.selectUserById(pojo.getAssersorId()));
+				System.out.println(maintenanceRecordsMapper.selectUserById(pojo.getAssersorId()));
+			}
+			lists.add(pojo);
+		}
+		if (lists != null) {
+			return new PageInfo<>(lists);
+		} else {
+			return null;
+		}
 	}
 
 	@Override
