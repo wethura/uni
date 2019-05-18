@@ -16,6 +16,7 @@ import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Create by Administrator
@@ -96,5 +97,14 @@ public class LabServiceImpl implements LabService {
 
 	protected String selectAddressByFieldID(long id) {
 		return labMapper.selectAddressByFieldID(id);
+	}
+
+	/**
+	 * 查询所有实验室的id和name
+	 * @return List<Map<String,Object>>
+	 */
+	@Override
+	public List<Map<String,Object>> selectByTwo(){
+		return labMapper.selectByTwo();
 	}
 }

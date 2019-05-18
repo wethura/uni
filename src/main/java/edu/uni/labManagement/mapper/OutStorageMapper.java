@@ -28,4 +28,6 @@ public interface OutStorageMapper {
     int updateByPrimaryKeySelective(OutStorage record);
 
     int updateByPrimaryKey(OutStorage record);
+
+    Integer selectMaxBatch();
 }

@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Create by Administrator
@@ -86,5 +87,14 @@ System.out.println("------------------>" + deviceModel);
 		criteria.andIsSlaveEqualTo(false);
 		criteria.andDeviceCategoryIdEqualTo(id);
 		return deviceModelMapper.selectByExample(example);
+	}
+
+	/**
+	 * 查询所有设备型号的id和name
+	 * @return List<Map<String,Object>>
+	 */
+	@Override
+	public List<Map<String,Object>> selectByTwo(){
+		return deviceModelMapper.selectByTwo();
 	}
 }

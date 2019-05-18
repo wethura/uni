@@ -5,6 +5,7 @@ import edu.uni.labManagement.bean.Lab;
 import edu.uni.labManagement.pojo.LabPojo;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * Create by Administrator
@@ -47,4 +48,11 @@ public interface LabService {
 	 * @return
 	 */
 	LabPojo selectById(long id);
+
+	/**
+	 * 查询所有实验室的id和name
+	 * @return List<Map<String,Object>>
+	 */
+	public List<Map<String,Object>> selectByTwo();
+	
 }

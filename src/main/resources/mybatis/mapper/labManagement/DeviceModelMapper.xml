@@ -312,4 +312,8 @@
     where
         lm_device_model_slaves.mater_id = #{pid,jdbcType=BIGINT} and lm_device_model_slaves.slave_id = lm_device_model.id
   </select>
+
+  <select id="selectByTwo" resultType="java.util.Map">
+    select `id`, `name` from lm_device_model where `deleted` = '0'
+  </select>
 </mapper>

@@ -19,6 +19,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Create by Administrator
@@ -35,6 +36,12 @@ public class DeviceModelController {
 //		lm_deviceModel_{设备父模型id}
 		private static final String listByPid = "lm_deviceModel_byPid_";
 		private static final String listByCategoryId = "lm_deviceModel_byCategoryId_";
+		// lm_deviceModel_{设备型号id}
+		private static final String Receive_CacheNamePrefix = "lm_deviceModel_";
+		// lm_deviceModels_list_{页码}
+		private static final String List_CacheNamePrefix = "lm_deviceModels_list_";
+		// lm_deviceModels_listByTwo
+		private static final String ListByTwo_CacheName = "lm_deviceModels_listByTwo";
 	}
 
 	@Autowired
@@ -150,5 +157,37 @@ public class DeviceModelController {
 			}
 		}
 		response.getWriter().write(json);
+	}
+	/**
+	 * 查询所有设备型号的id和name
+	 * @param response
+	 * @throws IOException
+	 */
+	@ApiOperation(value = "查询所有设备型号的id和name", notes = "")
+	@GetMapping("deviceModels/listByTwo")
+	public void listByTwo(HttpServletResponse response) throws IOException {
+		response.setContentType("application/json;charset=utf-8");
+		String cacheName = CacheNameHelper.ListByTwo_CacheName;
+		String json = cache.get(cacheName);
+		if(json == null){
+			List<Map<String,Object>> list = deviceModelService.selectByTwo();
+			json = Result.build(ResultType.Success).appendData("list", list).convertIntoJSON();
+			if(list != null){
+				cache.set(cacheName, json);
+			}
+		}
+		response.getWriter().write(json);
+	}
+
+	/**
+	 * 删除设备型号listByTwo的缓存
+	 * @return Result
+	 */
+	@ApiOperation(value = "删除设备型号listByTwo的缓存", notes = "")
+	@DeleteMapping("deviceModels/listByTwo")
+	@ResponseBody
+	public Result destroyByTwo(){
+		cache.delete(CacheNameHelper.ListByTwo_CacheName);
+		return Result.build(ResultType.Success);
 	}
 }

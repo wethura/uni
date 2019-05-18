@@ -5,6 +5,7 @@ import edu.uni.labManagement.bean.DeviceExample;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
+import java.util.Map;
 
 public interface DeviceMapper {
     int countByExample(DeviceExample example);
@@ -34,4 +35,6 @@ public interface DeviceMapper {
     List<Device> selectByParentId(long id);
 
     List<String> selectDistinctDeviceName(long labId);
+
+    List<Map<String,Object>> selectByTwo();
 }

@@ -270,4 +270,7 @@
       deleted = #{deleted,jdbcType=BIT}
     where id = #{id,jdbcType=BIGINT}
   </update>
+  <select id="selectMaxBatch" resultType="java.lang.Integer">
+    select max(batch) from lm_in_storage
+  </select>
 </mapper>

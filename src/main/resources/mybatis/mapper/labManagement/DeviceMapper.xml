@@ -412,4 +412,7 @@
         AND lm_lab_device.lab_id = #{labId, jdbcType=BIGINT}
         AND lm_lab_device.deleted = 0 AND lm_device.deleted = 0
   </select>
+  <select id="selectByTwo" resultType="java.util.Map">
+    select `id`, `name` from lm_device where `deleted` = '0'
+  </select>
 </mapper>

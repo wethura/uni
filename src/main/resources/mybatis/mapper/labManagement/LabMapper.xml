@@ -296,5 +296,7 @@
     where
         id = #{id, jdbcType=BIGINT}
   </select>
-
+  <select id="selectByTwo" resultType="java.util.Map">
+    select `id`, `name` from lm_lab where `deleted` = '0'
+  </select>
 </mapper>

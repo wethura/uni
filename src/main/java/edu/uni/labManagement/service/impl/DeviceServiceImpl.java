@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Create by Administrator
@@ -67,5 +68,14 @@ public class DeviceServiceImpl implements DeviceService {
 			}
 		}
 		return list;
+	}
+
+	/**
+	 * 查询所有设备的id和name
+	 * @return List<Map<String,Object>>
+	 */
+	@Override
+	public List<Map<String,Object>> selectByTwo(){
+		return deviceMapper.selectByTwo();
 	}
 }

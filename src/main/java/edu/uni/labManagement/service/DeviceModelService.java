@@ -4,6 +4,7 @@ import edu.uni.labManagement.bean.DeviceModel;
 import edu.uni.labManagement.bean.DeviceModelSlaves;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * Create by Administrator
@@ -56,4 +57,10 @@ public interface DeviceModelService {
 	 * @return
 	 */
 	List<DeviceModel> listByCategoryId(long id);
+
+	/**
+	 * 查询所有设备型号的id和name
+	 * @return List<Map<String,Object>>
+	 */
+	public List<Map<String,Object>> selectByTwo();
 }

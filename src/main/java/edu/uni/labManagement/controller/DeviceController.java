@@ -10,13 +10,12 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Create by Administrator
@@ -33,6 +32,12 @@ public class DeviceController {
 		private static final String list_all = "lm_device_listAll_";
 //		查看实验室中的设备  lm_device_listByLab_{labId}
 		private static final String listByLab = "lm_device_listByLab_";
+		// lm_device_{设备id}
+		private static final String Receive_CacheNamePrefix = "lm_device_";
+		// lm_devices_list_{页码}
+		private static final String List_CacheNamePrefix = "lm_devices_list_";
+		// lm_devices_listByTwo
+		private static final String ListByTwo_CacheName = "lm_devices_listByTwo";
 	}
 
 	@Autowired
@@ -119,5 +124,38 @@ public class DeviceController {
 		} else {
 			response.getWriter().write(Result.build(ResultType.Failed).convertIntoJSON());
 		}
+	}
+
+	/**
+	 * 查询所有设备的id和name
+	 * @param response
+	 * @throws IOException
+	 */
+	@ApiOperation(value = "查询所有设备的id和name", notes = "")
+	@GetMapping("devices/listByTwo")
+	public void listByTwo(HttpServletResponse response) throws IOException {
+		response.setContentType("application/json;charset=utf-8");
+		String cacheName = CacheNameHelper.ListByTwo_CacheName;
+		String json = cache.get(cacheName);
+		if(json == null){
+			List<Map<String,Object>> list = deviceService.selectByTwo();
+			json = Result.build(ResultType.Success).appendData("list", list).convertIntoJSON();
+			if(list != null){
+				cache.set(cacheName, json);
+			}
+		}
+		response.getWriter().write(json);
+	}
+
+	/**
+	 * 删除设备listByTwo的缓存
+	 * @return Result
+	 */
+	@ApiOperation(value = "删除设备listByTwo的缓存", notes = "")
+	@DeleteMapping("devices/listByTwo")
+	@ResponseBody
+	public Result destroyByTwo(){
+		cache.delete(CacheNameHelper.ListByTwo_CacheName);
+		return Result.build(ResultType.Success);
 	}
 }

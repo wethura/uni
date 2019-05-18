@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>测试页</title>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+
+<body>
+<script type="text/javascript">
+    var data0 = {
+        "arr": [
+            {
+                "gfd" : "dafdf",
+                "jk" : "dfdf"
+            },
+            {
+                "gfd" : 56,
+                "jk" : "mggf"
+            }
+        ],
+        "byWho": 1,
+        "departmentId": 1,
+        "description": "string",
+        "source": "string",
+        "universityId": 1
+    };
+    axios({
+        method: 'post',
+        url: '/test/test',
+        data: data0
+    }).then(function (response) {
+        console.log(response);
+    }).catch(function (error) {
+        console.log(error);
+    });
+</script>
+</body>
+</html>

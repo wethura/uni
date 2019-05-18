@@ -5,6 +5,7 @@ import edu.uni.labManagement.bean.DeviceModelExample;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
+import java.util.Map;
 
 public interface DeviceModelMapper {
     int countByExample(DeviceModelExample example);
@@ -30,4 +31,6 @@ public interface DeviceModelMapper {
     int updateByPrimaryKey(DeviceModel record);
 
     List<DeviceModel> selectByPid(Long pid);
+
+    List<Map<String,Object>> selectByTwo();
 }

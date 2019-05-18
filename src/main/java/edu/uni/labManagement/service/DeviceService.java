@@ -4,6 +4,7 @@ import com.github.pagehelper.PageInfo;
 import edu.uni.labManagement.bean.Device;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * Create by Administrator
@@ -31,4 +32,10 @@ public interface DeviceService {
 	List<String> selectDistinctDeviceName(long labId);
 
 	List<Device> listByNameAndLab(String name, long labId);
+
+	/**
+	 * 查询所有设备的id和name
+	 * @return List<Map<String,Object>>
+	 */
+	public List<Map<String,Object>> selectByTwo();
 }
