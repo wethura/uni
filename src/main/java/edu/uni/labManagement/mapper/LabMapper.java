@@ -2,10 +2,10 @@ package edu.uni.labManagement.mapper;
 
 import edu.uni.labManagement.bean.Lab;
 import edu.uni.labManagement.bean.LabExample;
-import org.apache.ibatis.annotations.Param;
-
 import java.util.List;
 import java.util.Map;
+
+import org.apache.ibatis.annotations.Param;
 
 public interface LabMapper {
     int countByExample(LabExample example);
@@ -33,4 +33,5 @@ public interface LabMapper {
 	String selectAddressByFieldID(long id);
 
     List<Map<String,Object>> selectByTwo();
+
 }

@@ -84,6 +84,8 @@ public class DeviceController {
 		response.getWriter().write(json);
 	}
 
+
+
 	@ApiOperation(value = "通过父设备的ID查询子设备")
 	@GetMapping("listByParentID/{id}")
 	@ResponseBody
@@ -126,6 +128,23 @@ public class DeviceController {
 		}
 	}
 
+
+	@ApiOperation(value = "根据设备id查询设备详情")
+	@GetMapping("listByDeviceId/{deviceId}")
+	@ResponseBody
+	public void receive6(HttpServletResponse response, @PathVariable long deviceId) throws Exception{
+
+		response.setContentType("application/json;charset=utf-8");
+
+		Device device = deviceService.selectById(deviceId);
+		if (device == null || device.getId() == null){
+			response.getWriter().write(Result.build(ResultType.Failed).convertIntoJSON());
+		} else {
+			response.getWriter().write(Result.build(ResultType.Success).appendData("res", device).convertIntoJSON());
+		}
+	}
+
+
 	/**
 	 * 查询所有设备的id和name
 	 * @param response
@@ -158,4 +177,6 @@ public class DeviceController {
 		cache.delete(CacheNameHelper.ListByTwo_CacheName);
 		return Result.build(ResultType.Success);
 	}
+
+
 }

@@ -44,7 +44,7 @@ public class DeviceRepairApplyController {
 	 * @param response
 	 * @throws Exception
 	 */
-	@ApiOperation(value = "通过设备维修申请状态查询<is_success>")
+	@ApiOperation(value = "通过设备维修申请状态查询")
 	@GetMapping("{states}/{pageNum}")
 	@ResponseBody
 	public void receive(HttpServletResponse response, @PathVariable Integer states, @PathVariable int pageNum) throws Exception{
@@ -120,6 +120,18 @@ public class DeviceRepairApplyController {
 			cache.deleteByPaterm(CacheNameHelper.list_Status + "*");
 			return Result.build(ResultType.Success);
 		}else{
+			return Result.build(ResultType.Failed);
+		}
+	}
+
+	@ApiOperation(value = "删除缓存")
+	@DeleteMapping
+	@ResponseBody
+	public Result delete(){
+		try {
+			cache.delete(CacheNameHelper.list_Status);
+			return Result.build(ResultType.Success);
+		}catch (Exception e){
 			return Result.build(ResultType.Failed);
 		}
 	}

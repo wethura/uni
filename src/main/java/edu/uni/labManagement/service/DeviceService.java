@@ -33,6 +33,8 @@ public interface DeviceService {
 
 	List<Device> listByNameAndLab(String name, long labId);
 
+	Device selectById(Long deviceId);
+
 	/**
 	 * 查询所有设备的id和name
 	 * @return List<Map<String,Object>>

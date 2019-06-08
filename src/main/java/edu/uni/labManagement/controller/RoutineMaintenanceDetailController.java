@@ -23,7 +23,7 @@ import java.util.List;
  * @author sola
  * @date 2019/05/11 2:19
  */
-@Api(description = "设备维护详情模块")
+@Api(value = "设备维护详情模块")
 @Controller
 @RequestMapping("json/labManagement/routineMaintenanceDetail")
 public class RoutineMaintenanceDetailController {

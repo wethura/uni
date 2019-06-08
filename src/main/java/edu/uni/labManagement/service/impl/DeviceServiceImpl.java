@@ -60,6 +60,11 @@ public class DeviceServiceImpl implements DeviceService {
 	}
 
 	@Override
+	public Device selectById(Long deviceId) {
+		return deviceMapper.selectByPrimaryKey(deviceId);
+	}
+
+	@Override
 	public List<Device> listByNameAndLab(String name, long labId) {
 		List<Device> list = deviceMapper.selectByLabId(labId);
 		for (int i = list.size() - 1; i >= 0; i --) {

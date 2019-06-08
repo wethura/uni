@@ -9,6 +9,8 @@ public class Lab {
 
     private String name;
 
+    private String phone;
+
     private String ename;
 
     private Long departmentId;
@@ -40,6 +42,14 @@ public class Lab {
 
     public void setName(String name) {
         this.name = name == null ? null : name.trim();
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone == null ? null : phone.trim();
     }
 
     public String getEname() {
@@ -111,6 +121,7 @@ public class Lab {
         return "Lab{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
+                ", phone='" + phone + '\'' +
                 ", ename='" + ename + '\'' +
                 ", departmentId=" + departmentId +
                 ", fieldId=" + fieldId +

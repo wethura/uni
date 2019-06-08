@@ -187,7 +187,8 @@ public class DeviceModelController {
 	@DeleteMapping("deviceModels/listByTwo")
 	@ResponseBody
 	public Result destroyByTwo(){
-		cache.delete(CacheNameHelper.ListByTwo_CacheName);
+//		cache.delete(CacheNameHelper.ListByTwo_CacheName);
+		cache.delete("lm_deviceModel");
 		return Result.build(ResultType.Success);
 	}
 }

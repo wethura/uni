@@ -6,6 +6,7 @@ import edu.uni.bean.ResultType;
 import edu.uni.labManagement.bean.Lab;
 import edu.uni.labManagement.pojo.LabPojo;
 import edu.uni.labManagement.service.LabService;
+import edu.uni.labManagement.service.SelfDefineService;
 import edu.uni.utils.RedisCache;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -32,6 +33,8 @@ public class LabController {
 	private RedisCache cache;
 	@Autowired
 	private LabService labService;
+	@Autowired
+	private SelfDefineService selfDefineService;
 
 	static class CacheNameHelper{
 //		lm_lab_listByPageNum_{pageNum}
@@ -51,6 +54,7 @@ public class LabController {
 		response.setContentType("application/json;charset=utf-8");
 
 		String cacheName = CacheNameHelper.listByPageNum + pageNum;
+		cache.delete(cacheName);
 		String json = cache.get(cacheName);
 
 		if(json == null || json == "") {
@@ -80,9 +84,14 @@ public class LabController {
 	@ApiOperation(value = "添加实验室", notes = "待测试")
 	@PostMapping
 	@ResponseBody
-	public Result create(Lab lab){
+	public Result create(Lab lab, String[] admins){
+
+		System.out.println(admins.length);
+
 		if(lab != null && (lab.getName() != null && lab.getName() != "" )) {
-			if (labService.insert(lab) == true) {
+			boolean success = labService.insert(lab);
+			success = success && selfDefineService.insertAdmins(admins, lab.getId());
+ 			if (success) {
 				cache.deleteByPaterm(CacheNameHelper.listByPageNum + "*");
 				return Result.build(ResultType.Success);
 			} else {
@@ -133,6 +142,27 @@ public class LabController {
 	@ResponseBody
 	public Result destroyByTwo(){
 		cache.delete(CacheNameHelper.ListByTwo_CacheName);
+		cache.delete(CacheNameHelper.listByPageNum + "*");
 		return Result.build(ResultType.Success);
+	}
+
+	@ApiOperation(value = "修改实验室", notes = "")
+	@PutMapping("/update")
+	@ResponseBody
+	public void update(HttpServletResponse response, Lab lab)throws Exception{
+		response.setContentType("application/josn;charset=utf-8;");
+		if (lab.getId() == null){
+			response.getWriter().write(Result.build(ResultType.ParamError).convertIntoJSON());
+			return;
+		}
+		boolean success = labService.update(lab);
+		if (success) {
+			cache.delete(CacheNameHelper.listByPageNum + "*");
+			response.getWriter().write(Result.build(ResultType.Success).convertIntoJSON());
+			return;
+		} else {
+			response.getWriter().write(Result.build(ResultType.Failed).convertIntoJSON());
+			return;
+		}
 	}
 }

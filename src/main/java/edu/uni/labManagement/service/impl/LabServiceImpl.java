@@ -5,6 +5,7 @@ import com.github.pagehelper.PageInfo;
 import edu.uni.example.config.ExampleConfig;
 import edu.uni.labManagement.bean.Lab;
 import edu.uni.labManagement.bean.LabExample;
+import edu.uni.labManagement.mapper.LabAdminMapper;
 import edu.uni.labManagement.mapper.LabMapper;
 import edu.uni.labManagement.pojo.LabPojo;
 import edu.uni.labManagement.service.LabService;
@@ -29,6 +30,8 @@ public class LabServiceImpl implements LabService {
 
 	@Resource
 	private LabMapper labMapper;
+	@Resource
+	private LabAdminMapper labAdminMapper;
 	@Autowired
 	private ExampleConfig globalConfig;
 
@@ -45,6 +48,7 @@ public class LabServiceImpl implements LabService {
 		Lab lab1 = labMapper.selectByPrimaryKey(lab.getId());
 		lab1.setId(null);
 		insert(lab1);
+		System.out.println(lab1);
 		lab.setDatetime(new Date());
 		return labMapper.updateByPrimaryKeySelective(lab) > 0 ? true : false;
 	}
@@ -70,6 +74,7 @@ public class LabServiceImpl implements LabService {
 		 */
 		for (int i= 0; i < labs.size(); i ++) {
 			LabPojo labPojo = new LabPojo();
+			labPojo.setPhone(labs.get(i).getPhone());
 			BeanUtils.copyProperties(labs.get(i), labPojo);
 			labPojos.add(labPojo);
 			String addr = selectAddressByFieldID(labPojo.getFieldId());
@@ -92,6 +97,7 @@ public class LabServiceImpl implements LabService {
 		if (pojo.getFieldId() != null) {
 			pojo.setAddress(selectAddressByFieldID(pojo.getFieldId()));
 		}
+		pojo.setAdminName(labAdminMapper.selectByLabId(pojo.getId()));
 		return pojo;
 	}
 

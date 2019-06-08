@@ -130,4 +130,16 @@ public class DeviceCategoryController {
 			return Result.build(ResultType.Failed);
 		}
 	}
-}
+
+	@ApiOperation(value = "删除缓存")
+	@DeleteMapping
+	@ResponseBody
+	public Result delete(){
+		try {
+			cache.delete(CacheNameHelper.list_all);
+			return Result.build(ResultType.Success);
+		}catch (Exception e){
+			return Result.build(ResultType.Failed);
+		}
+	}
+ }
