@@ -6,7 +6,11 @@ import edu.uni.example.config.ExampleConfig;
 import edu.uni.labManagement.bean.Device;
 import edu.uni.labManagement.bean.DeviceExample;
 import edu.uni.labManagement.mapper.DeviceMapper;
+import edu.uni.labManagement.mapper.SelfDefineMapper;
+import edu.uni.labManagement.pojo.ExcelDevicePojo;
 import edu.uni.labManagement.service.DeviceService;
+import edu.uni.labManagement.service.ExcelDataIO;
+import edu.uni.labManagement.service.SelfDefineService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,6 +31,10 @@ public class DeviceServiceImpl implements DeviceService {
 	private DeviceMapper deviceMapper;
 	@Autowired
 	private ExampleConfig golbalconfig;
+	@Autowired
+	private ExcelDataIO excelDataIO;
+	@Autowired
+	private SelfDefineMapper selfDefineMapper;
 
 	@Override
 	public PageInfo<Device> listAll(int pageNum) {
@@ -62,6 +70,25 @@ public class DeviceServiceImpl implements DeviceService {
 	@Override
 	public Device selectById(Long deviceId) {
 		return deviceMapper.selectByPrimaryKey(deviceId);
+	}
+
+	@Override
+	public ExcelDevicePojo selectPojoById(Long deviceId) {
+
+		Device device = deviceMapper.selectByPrimaryKey(deviceId);
+		ExcelDevicePojo pojo = new ExcelDevicePojo();
+		pojo.setId(String.valueOf(device.getId()));
+		pojo.setSerial(device.getSerialNumber());
+		pojo.setModel(device.getModel());
+		pojo.setProductDate(device.getProductDate().toString());
+		pojo.setCategory(String.join("、", excelDataIO.findCategoryFull(device.getDeviceCategoryId())));
+		pojo.setDescription(device.getDescription());
+		pojo.setDepartment(selfDefineMapper.selectDepartmentNameById(device.getDepartmentId()));
+		pojo.setLabName(selfDefineMapper.selectLabNameByDeviceId(device.getId()));
+		pojo.setNumber(device.getNumber());
+		pojo.setBatch(String.valueOf(device.getBatch()));
+
+		return pojo;
 	}
 
 	@Override

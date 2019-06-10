@@ -12,6 +12,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
@@ -28,6 +29,7 @@ import java.util.Map;
 @Api(description = "实验室模块")
 @Controller
 @RequestMapping("json/labManagement/lab")
+@Transactional(rollbackFor = {Exception.class})
 public class LabController {
 	@Autowired
 	private RedisCache cache;
@@ -81,7 +83,7 @@ public class LabController {
 		}
 	}
 
-	@ApiOperation(value = "添加实验室", notes = "待测试")
+	@ApiOperation(value = "添加实验室", notes = "已测试")
 	@PostMapping
 	@ResponseBody
 	public Result create(Lab lab, String[] admins){

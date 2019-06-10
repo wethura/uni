@@ -20,4 +20,6 @@ public interface ExcelDataIO {
 	List<ExcelLabPojo> ExcelLabPojoExport() throws Exception;
 
 	List<ExcelDevicePojo> ExcelDevicePojoExport(Long labId) throws Exception;
+
+	List<String> findCategoryFull(Long id);
 }

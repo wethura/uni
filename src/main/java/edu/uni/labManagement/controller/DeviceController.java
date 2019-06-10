@@ -4,6 +4,7 @@ import com.github.pagehelper.PageInfo;
 import edu.uni.bean.Result;
 import edu.uni.bean.ResultType;
 import edu.uni.labManagement.bean.Device;
+import edu.uni.labManagement.pojo.ExcelDevicePojo;
 import edu.uni.labManagement.service.DeviceService;
 import edu.uni.utils.RedisCache;
 import io.swagger.annotations.Api;
@@ -141,6 +142,21 @@ public class DeviceController {
 			response.getWriter().write(Result.build(ResultType.Failed).convertIntoJSON());
 		} else {
 			response.getWriter().write(Result.build(ResultType.Success).appendData("res", device).convertIntoJSON());
+		}
+	}
+
+	@ApiOperation(value = "根据设备id查询封装设备详情")
+	@GetMapping("listPojoByDeviceId/{deviceId}")
+	@ResponseBody
+	public void receive7(HttpServletResponse response, @PathVariable long deviceId) throws Exception{
+
+		response.setContentType("application/json;charset=utf-8");
+
+		ExcelDevicePojo pojo = deviceService.selectPojoById(deviceId);
+		if (pojo == null || pojo.getId() == null){
+			response.getWriter().write(Result.build(ResultType.Failed).convertIntoJSON());
+		} else {
+			response.getWriter().write(Result.build(ResultType.Success).appendData("res", pojo).convertIntoJSON());
 		}
 	}
 

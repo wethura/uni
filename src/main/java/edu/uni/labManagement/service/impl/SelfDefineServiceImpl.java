@@ -6,6 +6,7 @@ import edu.uni.labManagement.mapper.LabMapper;
 import edu.uni.labManagement.mapper.SelfDefineMapper;
 import edu.uni.labManagement.service.SelfDefineService;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.Date;
@@ -35,12 +36,13 @@ public class SelfDefineServiceImpl implements SelfDefineService {
 	public boolean insertAdmins(String[] admins, long labId) {
 		try {
 			for (String admin : admins){
-				Long amdinId = selfDefineMapper.selectUserIdByAccount(admin);
+				Long adminId = selfDefineMapper.selectUserIdByAccount(admin);
 
 				LabAdmin labAdmin = new LabAdmin();
 				labAdmin.setDeleted(false);
 				labAdmin.setDatetime(new Date());
 				labAdmin.setLabId(labId);
+				labAdmin.setAdminId(adminId);
 
 				labAdminMapper.insert(labAdmin);
 			}

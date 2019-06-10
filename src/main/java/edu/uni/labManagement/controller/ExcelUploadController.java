@@ -144,7 +144,6 @@ public class ExcelUploadController {
 //			写进去Excel
 			OutputStream out = new FileOutputStream(file);
 			List<ExcelDevicePojo> list = excelDataIO.ExcelDevicePojoExport(labId);
-			System.out.println("------------------" + list + "--------------------");
 
 			ExcelWriter writer = new ExcelWriter(out, ExcelTypeEnum.XLS, true);
 			Sheet sheet = new Sheet(1, 0, ExcelDevicePojo.class, "设备", null);
@@ -153,7 +152,6 @@ public class ExcelUploadController {
 			writer.write(list, sheet);
 			writer.finish();
 			out.close();
-
 
 			fis = new FileInputStream(file);
 			response.setHeader("Content-Disposition", "attachment; filename="+file.getName());

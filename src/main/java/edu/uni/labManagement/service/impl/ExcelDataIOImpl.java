@@ -265,7 +265,8 @@ public class ExcelDataIOImpl implements ExcelDataIO {
 		return id;
 	}
 
-	List<String> findCategoryFull(Long id){
+	@Override
+	public List<String> findCategoryFull(Long id){
 		List<String> ret = new ArrayList<String>();
 		DeviceCategory category = deviceCategoryMapper.selectByPrimaryKey(id);
 		if (category == null || category.getPid() == null){

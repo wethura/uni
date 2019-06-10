@@ -2,6 +2,7 @@ package edu.uni.labManagement.service;
 
 import com.github.pagehelper.PageInfo;
 import edu.uni.labManagement.bean.Device;
+import edu.uni.labManagement.pojo.ExcelDevicePojo;
 
 import java.util.List;
 import java.util.Map;
@@ -34,6 +35,8 @@ public interface DeviceService {
 	List<Device> listByNameAndLab(String name, long labId);
 
 	Device selectById(Long deviceId);
+
+	ExcelDevicePojo selectPojoById(Long deviceId);
 
 	/**
 	 * 查询所有设备的id和name
