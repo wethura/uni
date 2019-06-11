@@ -35,7 +35,12 @@ public class ExcelDataIOImpl implements ExcelDataIO {
 	@Resource
 	private DeviceCategoryMapper deviceCategoryMapper;
 
-
+	/**
+	 * Excel 导入实验室
+	 * @param os
+	 * @return
+	 * @throws Exception
+	 */
 	@Override
 	public String ExcelLabPojoImport(List<Object> os) throws Exception {
 		ExcelLabPojo pojo = null;
@@ -191,8 +196,13 @@ public class ExcelDataIOImpl implements ExcelDataIO {
 	}
 
 
+	/**
+	 * Excel 导出实验室 service
+	 * @return
+	 * @throws Exception
+	 */
 	@Override
-	public List<ExcelLabPojo> ExcelLabPojoExport() throws Exception {
+	public	List<ExcelLabPojo> ExcelLabPojoExport() throws Exception {
 
 		LabExample example = new LabExample();
 		LabExample.Criteria criteria = example.createCriteria();
@@ -221,7 +231,12 @@ public class ExcelDataIOImpl implements ExcelDataIO {
 		return ret;
 	}
 
-
+	/**
+	 * Excel 导出设备 service
+	 * @param labId
+	 * @return
+	 * @throws Exception
+	 */
 	@Override
 	public List<ExcelDevicePojo> ExcelDevicePojoExport(Long labId) throws Exception {
 		List<Device> list = deviceMapper.selectByLabId(labId);

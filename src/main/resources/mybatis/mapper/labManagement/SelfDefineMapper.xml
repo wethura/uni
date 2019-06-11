@@ -36,21 +36,23 @@
   <select id="selectFieldNameById" parameterType="long" resultType="string">
     select name
     from p_field
-    where id = #{id}
+    where id = #{id} and deleted = false
   </select>
 
   <select id="selectDepartmentNameById" parameterType="long" resultType="string">
     select name
     from department
-    where id = #{id}
+    where id = #{id} and deleted = false
   </select>
 
   <select id="selectLabNameByDeviceId" parameterType="long" resultType="string">
-    select lm_device.name
-    from lm_device, lm_lab_device
-    where lm_lab_device.device_id = lm_device.id
-        and lm_lab_device.deleted = false
-        and lm_device.id = #{deviceId}
+    select lm_lab.name
+    from lm_lab_device, lm_lab
+    where
+				lm_lab_device.lab_id = lm_lab.id
+        and lm_lab.deleted = false
+				and lm_lab_device.deleted = false
+				and lm_lab_device.device_id = #{deviceId}
   </select>
 
 <!--  <select id="selectCategoryBtSonId" resultType="edu.uni.labManagement.bean.DeviceCategory" parameterType="long">-->
