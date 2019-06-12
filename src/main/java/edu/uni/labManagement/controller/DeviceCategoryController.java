@@ -20,7 +20,9 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Create by Administrator
@@ -40,6 +42,8 @@ public class DeviceCategoryController {
 	private RedisCache cache;
 
 	static class CacheNameHelper{
+//		基础地址,用户删除使用
+		private static final String base = "lm_deviceCategory_*";
 //		查看目录的所有数据
 		private static final String list_all = "lm_deviceCategory_listAll";
 	}
@@ -55,7 +59,7 @@ public class DeviceCategoryController {
 	public void receive(HttpServletResponse response) throws Exception{
 
 		response.setContentType("application/json;charset=utf-8");
-		String cacheName = DeviceCategoryController.CacheNameHelper.list_all;
+		String cacheName = CacheNameHelper.list_all;
 		String json = cache.get(cacheName);
 
 		if(json == null || json == ""){
@@ -81,7 +85,7 @@ public class DeviceCategoryController {
 		if(deviceCategory != null && deviceCategory.getId() != null){
 			boolean success = deviceCategoryService.update(deviceCategory);
 			if(success){
-				cache.deleteByPaterm(CacheNameHelper.list_all);
+				cache.deleteByPaterm(CacheNameHelper.base);
 				return Result.build(ResultType.Success);
 			}else{
 				return Result.build(ResultType.Failed);
@@ -103,7 +107,7 @@ public class DeviceCategoryController {
 		if(deviceCategory != null){
 			boolean success = deviceCategoryService.insert(deviceCategory);
 			if(success) {
-				cache.deleteByPaterm(CacheNameHelper.list_all);
+				cache.deleteByPaterm(CacheNameHelper.base);
 				return Result.build(ResultType.Success);
 			} else {
 				return Result.build(ResultType.Failed);
@@ -124,22 +128,23 @@ public class DeviceCategoryController {
 	public Result destroy(@PathVariable Integer id){
 		boolean success = deviceCategoryService.deleted(id);
 		if(success) {
-			cache.deleteByPaterm(CacheNameHelper.list_all);
+			cache.deleteByPaterm(CacheNameHelper.base);
 			return Result.build(ResultType.Success);
 		}else{
 			return Result.build(ResultType.Failed);
 		}
 	}
 
-	@ApiOperation(value = "删除缓存")
-	@DeleteMapping
-	@ResponseBody
-	public Result delete(){
-		try {
-			cache.delete(CacheNameHelper.list_all);
-			return Result.build(ResultType.Success);
-		}catch (Exception e){
-			return Result.build(ResultType.Failed);
-		}
+	/**
+	 * 获取所有设备类别ID的子列表
+	 * @author 招黄轩
+	 */
+	@ApiOperation(value = "获取所有设备类别ID的子列表", notes = "")
+	@GetMapping("categoryIdsSonList")
+	public void categoryIdsSonList(HttpServletResponse response) throws Exception {
+		response.setContentType("application/json;charset=utf-8");
+		List<Map<String,Object>> list = deviceCategoryService.categoryIdsSonList(null);
+		String json = Result.build(ResultType.Success).appendData("list", list).convertIntoJSON();
+		response.getWriter().write(json);
 	}
- }
+}

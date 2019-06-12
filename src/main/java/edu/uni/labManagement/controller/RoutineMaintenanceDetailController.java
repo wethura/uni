@@ -29,6 +29,7 @@ import java.util.List;
 public class RoutineMaintenanceDetailController {
 
 	static class CacheNameHelper{
+		private static final String base = "lm_routineMaintenanceDetail_*";
 		//		lm_routineMaintenanceDetail_DeviceId_{deviceId}
 		private static final String LIST_BY_DEVICEID = "lm_routineMaintenanceDetail_DeviceId_";
 		//		lm_routineMaintenanceDetail_LabId_{labId}

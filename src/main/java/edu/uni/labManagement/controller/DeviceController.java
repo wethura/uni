@@ -29,6 +29,8 @@ import java.util.Map;
 @RequestMapping("json/labManagement/device")
 public class DeviceController {
 	static class CacheNameHelper{
+//		基础地址，用于删除使用
+		private static final String base = "lm_device_*";
 //		查看所有的设备  lm_device_listAll_{pageNum}
 		private static final String list_all = "lm_device_listAll_";
 //		查看实验室中的设备  lm_device_listByLab_{labId}
@@ -190,9 +192,7 @@ public class DeviceController {
 	@DeleteMapping("devices/listByTwo")
 	@ResponseBody
 	public Result destroyByTwo(){
-		cache.delete(CacheNameHelper.ListByTwo_CacheName);
+		cache.deleteByPaterm(CacheNameHelper.ListByTwo_CacheName);
 		return Result.build(ResultType.Success);
 	}
-
-
 }

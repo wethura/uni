@@ -35,6 +35,7 @@ public class DeviceRepairApplyController {
 	private DeviceRepairApplyService deviceRepairApplyService;
 
 	static class CacheNameHelper{
+		private static final String base = "lm_deviceRepairApply_*";
 		//lm_deviceRepairApply_listByStates_{is_success}
 		private static final String list_Status = "lm_deviceRepairApply_listByStates_";
 	}
@@ -75,7 +76,7 @@ public class DeviceRepairApplyController {
 		if(deviceRepairApply != null && deviceRepairApply.getId() != null){
 			boolean success = deviceRepairApplyService.update(deviceRepairApply);
 			if(success){
-				cache.deleteByPaterm(CacheNameHelper.list_Status + deviceRepairApply.getIsSuccess());
+				cache.deleteByPaterm(CacheNameHelper.base);
 				return Result.build(ResultType.Success);
 			}else{
 				return Result.build(ResultType.Failed);
@@ -96,7 +97,7 @@ public class DeviceRepairApplyController {
 		if(deviceRepairApply != null){
 			boolean success = deviceRepairApplyService.insert(deviceRepairApply);
 			if(success) {
-				cache.deleteByPaterm(CacheNameHelper.list_Status + deviceRepairApply.getIsSuccess());
+				cache.deleteByPaterm(CacheNameHelper.base);
 				return Result.build(ResultType.Success);
 			} else {
 				return Result.build(ResultType.Failed);
@@ -117,7 +118,7 @@ public class DeviceRepairApplyController {
 
 		boolean success = deviceRepairApplyService.deleted(id);
 		if(success) {
-			cache.deleteByPaterm(CacheNameHelper.list_Status + "*");
+			cache.deleteByPaterm(CacheNameHelper.base);
 			return Result.build(ResultType.Success);
 		}else{
 			return Result.build(ResultType.Failed);
@@ -129,7 +130,7 @@ public class DeviceRepairApplyController {
 	@ResponseBody
 	public Result delete(){
 		try {
-			cache.delete(CacheNameHelper.list_Status);
+			cache.deleteByPaterm(CacheNameHelper.base);
 			return Result.build(ResultType.Success);
 		}catch (Exception e){
 			return Result.build(ResultType.Failed);

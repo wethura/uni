@@ -30,10 +30,11 @@ public class DeviceLendController {
      * 内部类，专门用来管理每个方法所对应缓存的名称。
      */
     private static class CacheNameHelper{
+        private static final String base = "lm_deviceLend_*";
         // lm_deviceLend_{设备借出记录id}
         private static final String Receive_CacheNamePrefix = "lm_deviceLend_";
         // lm_deviceLends_list_{页码}
-        private static final String List_CacheNamePrefix = "lm_deviceLends_list_";
+        private static final String List_CacheNamePrefix = "lm_deviceLend_list_";
     }
 
     /**
@@ -49,7 +50,7 @@ public class DeviceLendController {
         if(json != null){
             boolean success = deviceLendService.insert(json);
             if(success){
-                cache.deleteByPaterm(CacheNameHelper.List_CacheNamePrefix + "*");
+                cache.deleteByPaterm(CacheNameHelper.base);
                 return Result.build(ResultType.Success);
             }else{
                 return Result.build(ResultType.Failed);
@@ -70,8 +71,7 @@ public class DeviceLendController {
     public Result destroy(@PathVariable Long id){
         boolean success = deviceLendService.delete(id);
         if(success){
-            cache.delete(CacheNameHelper.Receive_CacheNamePrefix + id);
-            cache.deleteByPaterm(CacheNameHelper.List_CacheNamePrefix + "*");
+            cache.deleteByPaterm(CacheNameHelper.base);
             return Result.build(ResultType.Success);
         }else{
             return Result.build(ResultType.Failed);
@@ -91,8 +91,7 @@ public class DeviceLendController {
         if(json != null && json.get("id") != null){
             boolean success = deviceLendService.update(json);
             if(success){
-                cache.delete(CacheNameHelper.Receive_CacheNamePrefix + json.get("id"));
-                cache.deleteByPaterm(CacheNameHelper.List_CacheNamePrefix + "*");
+                cache.deleteByPaterm(CacheNameHelper.base);
                 return Result.build(ResultType.Success);
             }else{
                 return Result.build(ResultType.Failed);
@@ -158,8 +157,7 @@ public class DeviceLendController {
     @DeleteMapping("deviceLends/cache")
     @ResponseBody
     public Result destroyCache(){
-        cache.deleteByPaterm(CacheNameHelper.Receive_CacheNamePrefix + "*");
-        cache.deleteByPaterm(CacheNameHelper.List_CacheNamePrefix + "*");
+        cache.deleteByPaterm(CacheNameHelper.base);
         return Result.build(ResultType.Success);
     }
 }

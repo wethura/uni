@@ -9,6 +9,7 @@ import edu.uni.bean.ResultType;
 import edu.uni.labManagement.pojo.ExcelDevicePojo;
 import edu.uni.labManagement.pojo.ExcelLabPojo;
 import edu.uni.labManagement.service.ExcelDataIO;
+import edu.uni.utils.RedisCache;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -31,7 +32,7 @@ import java.util.List;
  * @date 2019/06/02 17:56
  */
 //@Api(value = "用于搞定Excel的上传以及数据的导入导出", tags = {"Excel 导入导出"})
-@Api(description = "excel上传")
+@Api(description = "excel上传、下载")
 @Controller
 @RequestMapping("json/labManagement")
 public class ExcelUploadController {
@@ -46,7 +47,8 @@ public class ExcelUploadController {
 	 */
 	@Autowired
 	private ExcelDataIO excelDataIO;
-
+	@Autowired
+	private RedisCache cache;
 
 	@ApiOperation(value = "实验室导入", notes = "已测试")
 	@PostMapping("/excel/lab")
@@ -60,6 +62,8 @@ public class ExcelUploadController {
 			inputStream = multipartFile.getInputStream();
 			List<Object> list = EasyExcelFactory.read(inputStream, new Sheet(1, 0, ExcelLabPojo.class));
 			message = excelDataIO.ExcelLabPojoImport(list);
+//			删除实验室相关缓存
+			cache.deleteByPaterm("lm_lab_*");
 		} catch (Exception e) {
 			response.getWriter().write(Result.build(ResultType.Failed).appendData("res", e.getMessage()).convertIntoJSON());
 			return;
@@ -81,6 +85,8 @@ public class ExcelUploadController {
 			inputStream = multipartFile.getInputStream();
 			List<Object> list = EasyExcelFactory.read(inputStream, new Sheet(1, 0, ExcelDevicePojo.class));
 			message = excelDataIO.ExcelDevicePojoImport(list);
+//			删除相关设备缓存
+			cache.deleteByPaterm("lm_device_*");
 		} catch (Exception e) {
 			response.getWriter().write(Result.build(ResultType.Failed).appendData("res", e.getMessage()).convertIntoJSON());
 			return;
@@ -102,7 +108,6 @@ public class ExcelUploadController {
 //			写进去Excel
 			OutputStream out = new FileOutputStream(file);
 			List<ExcelLabPojo> list = excelDataIO.ExcelLabPojoExport();
-			System.out.println("------------------" + list + "--------------------");
 
 			ExcelWriter writer = new ExcelWriter(out, ExcelTypeEnum.XLS, true);
 			Sheet sheet = new Sheet(1, 0, ExcelLabPojo.class, "实验室", null);
@@ -170,6 +175,4 @@ public class ExcelUploadController {
 			}
 		}
 	}
-
-
 }

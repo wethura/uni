@@ -31,10 +31,11 @@ public class OutStorageController {
      * 内部类，专门用来管理每个方法所对应缓存的名称。
      */
     private static class CacheNameHelper{
+        private static final String base = "lm_outStorage_*";
         // lm_outStorage_{设备出库记录id}
         private static final String Receive_CacheNamePrefix = "lm_outStorage_";
         // lm_outStorages_list_{页码}
-        private static final String List_CacheNamePrefix = "lm_outStorages_list_";
+        private static final String List_CacheNamePrefix = "lm_outStorage_list_";
     }
 
     /**
@@ -50,7 +51,7 @@ public class OutStorageController {
         if(json != null){
             boolean success = outStorageService.insert(json);
             if(success){
-                cache.deleteByPaterm(CacheNameHelper.List_CacheNamePrefix + "*");
+                cache.deleteByPaterm(CacheNameHelper.base);
                 return Result.build(ResultType.Success);
             }else{
                 return Result.build(ResultType.Failed);
@@ -71,8 +72,7 @@ public class OutStorageController {
     public Result destroy(@PathVariable Long id){
         boolean success = outStorageService.delete(id);
         if(success){
-            cache.delete(CacheNameHelper.Receive_CacheNamePrefix + id);
-            cache.deleteByPaterm(CacheNameHelper.List_CacheNamePrefix + "*");
+            cache.deleteByPaterm(CacheNameHelper.base);
             return Result.build(ResultType.Success);
         }else{
             return Result.build(ResultType.Failed);
@@ -92,8 +92,7 @@ public class OutStorageController {
         if(json != null && json.get("id") != null){
             boolean success = outStorageService.update(json);
             if(success){
-                cache.delete(CacheNameHelper.Receive_CacheNamePrefix + json.get("id"));
-                cache.deleteByPaterm(CacheNameHelper.List_CacheNamePrefix + "*");
+                cache.deleteByPaterm(CacheNameHelper.base);
                 return Result.build(ResultType.Success);
             }else{
                 return Result.build(ResultType.Failed);
@@ -159,8 +158,7 @@ public class OutStorageController {
     @DeleteMapping("outStorages/cache")
     @ResponseBody
     public Result destroyCache(){
-        cache.deleteByPaterm(CacheNameHelper.Receive_CacheNamePrefix + "*");
-        cache.deleteByPaterm(CacheNameHelper.List_CacheNamePrefix + "*");
+        cache.deleteByPaterm(CacheNameHelper.base);
         return Result.build(ResultType.Success);
     }
 }

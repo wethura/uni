@@ -9,6 +9,8 @@ import edu.uni.labManagement.service.LabService;
 import edu.uni.labManagement.service.SelfDefineService;
 import edu.uni.utils.RedisCache;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -42,11 +44,11 @@ public class LabController {
 //		lm_lab_listByPageNum_{pageNum}
 		private static final String listByPageNum = "lm_lab_listByPageNum_";
 		// lm_lab_{实验室id}
-		private static final String Receive_CacheNamePrefix = "lm_lab_";
+		private static final String base = "lm_lab_*";
 		// lm_labs_list_{页码}
-		private static final String List_CacheNamePrefix = "lm_labs_list_";
+		private static final String List_CacheNamePrefix = "lm_lab_list_";
 		// lm_labs_listByTwo
-		private static final String ListByTwo_CacheName = "lm_labs_listByTwo";
+		private static final String ListByTwo_CacheName = "lm_lab_listByTwo";
 	}
 
 	@ApiOperation(value = "分页查询实验室")
@@ -88,13 +90,11 @@ public class LabController {
 	@ResponseBody
 	public Result create(Lab lab, String[] admins){
 
-		System.out.println(admins.length);
-
 		if(lab != null && (lab.getName() != null && lab.getName() != "" )) {
 			boolean success = labService.insert(lab);
 			success = success && selfDefineService.insertAdmins(admins, lab.getId());
  			if (success) {
-				cache.deleteByPaterm(CacheNameHelper.listByPageNum + "*");
+				cache.deleteByPaterm(CacheNameHelper.base);
 				return Result.build(ResultType.Success);
 			} else {
 				return Result.build(ResultType.Failed);
@@ -108,7 +108,7 @@ public class LabController {
 	@ResponseBody
 	public Result destory(@PathVariable long labId) {
 		if (labService.deleted(labId)) {
-			cache.deleteByPaterm(CacheNameHelper.listByPageNum + "*");
+			cache.deleteByPaterm(CacheNameHelper.base);
 			return Result.build(ResultType.Success);
 		}
 		return Result.build(ResultType.Failed);
@@ -116,8 +116,7 @@ public class LabController {
 
 	/**
 	 * 查询所有实验室的id和name
-	 * @param response
-	 * @throws IOException
+	 * @author 招黄轩
 	 */
 	@ApiOperation(value = "查询所有实验室的id和name", notes = "")
 	@GetMapping("labs/listByTwo")
@@ -138,13 +137,13 @@ public class LabController {
 	/**
 	 * 删除实验室listByTwo的缓存
 	 * @return Result
+	 * @author 招黄轩
 	 */
 	@ApiOperation(value = "删除实验室listByTwo的缓存", notes = "")
 	@DeleteMapping("labs/listByTwo")
 	@ResponseBody
 	public Result destroyByTwo(){
-		cache.delete(CacheNameHelper.ListByTwo_CacheName);
-		cache.delete(CacheNameHelper.listByPageNum + "*");
+		cache.deleteByPaterm(CacheNameHelper.base);
 		return Result.build(ResultType.Success);
 	}
 
@@ -159,12 +158,73 @@ public class LabController {
 		}
 		boolean success = labService.update(lab);
 		if (success) {
-			cache.delete(CacheNameHelper.listByPageNum + "*");
+			cache.delete(CacheNameHelper.base);
 			response.getWriter().write(Result.build(ResultType.Success).convertIntoJSON());
 			return;
 		} else {
 			response.getWriter().write(Result.build(ResultType.Failed).convertIntoJSON());
 			return;
 		}
+	}
+
+	/**
+	 * 指定实验室管理员
+	 * @param json 请求参数
+	 * @return Result
+	 * @author 招黄轩
+	 */
+	@ApiOperation(value="指定实验室管理员")
+	@ApiImplicitParam(name="json", value = "请求参数", required = true, dataType = "Map")
+	@PutMapping("assignAdmin")
+	@ResponseBody
+	public Result assignAdmin(@RequestBody(required = false) Map<String,Object> json){
+		if(json != null){
+			boolean success = labService.assignAdmin(json);
+			if(success){
+				cache.deleteByPaterm(CacheNameHelper.base);
+				return Result.build(ResultType.Success);
+			}else{
+				return Result.build(ResultType.Failed);
+			}
+		}
+		return Result.build(ResultType.ParamError);
+	}
+
+	/**
+	 * 分页查询所有实验室
+	 * @param pageNum 页码
+	 * @param pageSize 每页显示条数
+	 * @author 招黄轩
+	 */
+	@ApiOperation(value = "分页查询所有实验室", notes = "")
+	@ApiImplicitParams({
+			@ApiImplicitParam(name="pageNum", value = "页码", required = true, dataType = "Integer", paramType = "path"),
+			@ApiImplicitParam(name="pageSize", value = "每页显示条数", required = true, dataType = "Integer", paramType = "path")
+	})
+	@GetMapping(value = "labs/list/{pageNum}/{pageSize}")
+	public void selectPage(
+			@PathVariable Integer pageNum ,
+			@PathVariable Integer pageSize,
+			HttpServletResponse response) throws IOException {
+		response.setContentType("application/json;charset=utf-8");
+		PageInfo<Map<String,Object>> pageInfo = labService.selectPage(pageNum, pageSize);
+		String json = Result.build(ResultType.Success).appendData("pageInfo", pageInfo).convertIntoJSON();
+		response.getWriter().write(json);
+	}
+
+	/**
+	 * 分页高级筛选所有实验室
+	 * @param json 请求参数
+	 * @author 招黄轩
+	 */
+	@ApiOperation(value = "分页高级筛选所有实验室", notes = "")
+	@ApiImplicitParam(name= "json", value = "请求参数", required = true, dataType = "Map")
+	@PostMapping("labs/filter/all")
+	public void filterAll(@RequestBody(required = false) Map<String,Object> json,
+							   HttpServletResponse response) throws IOException {
+		response.setContentType("application/json;charset=utf-8");
+		PageInfo<Map<String,Object>> pageInfo = labService.filterAll(json);
+		String res = Result.build(ResultType.Success).appendData("pageInfo", pageInfo).convertIntoJSON();
+		response.getWriter().write(res);
 	}
 }

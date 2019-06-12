@@ -33,6 +33,7 @@ import java.util.Map;
 public class DeviceModelController {
 
 	static class CacheNameHelper{
+		private static String base = "lm_deviceModel_*";
 //		lm_deviceModel_{设备父模型id}
 		private static final String listByPid = "lm_deviceModel_byPid_";
 		private static final String listByCategoryId = "lm_deviceModel_byCategoryId_";
@@ -59,7 +60,7 @@ public class DeviceModelController {
 		if(deviceModel != null){
 			boolean success = deviceModelService.insertParentDeviceModel(deviceModel);
 			if(success){
-				cache.deleteByPaterm(CacheNameHelper.listByPid);
+				cache.deleteByPaterm(CacheNameHelper.base);
 				return Result.build(ResultType.Success);
 			} else {
 				return Result.build(ResultType.Failed);
@@ -75,7 +76,7 @@ public class DeviceModelController {
 		if(deviceModel != null){
 			boolean success = deviceModelService.insertSonDeviceModel(deviceModel, pid, amount);
 			if(success){
-				cache.deleteByPaterm(CacheNameHelper.listByPid);
+				cache.deleteByPaterm(CacheNameHelper.base);
 				return Result.build(ResultType.Success);
 			} else {
 				return Result.build(ResultType.Failed);
@@ -91,11 +92,7 @@ public class DeviceModelController {
 	public Result destroy(@PathVariable Integer id){
 		boolean success = deviceModelService.deleted(id);
 		if(success) {
-			try {
-				long pid = deviceModelSlavesService.listBySid(id).get(0).getMaterId();
-				System.out.println(pid);
-				cache.deleteByPaterm(CacheNameHelper.listByPid + pid);
-			}catch (Exception e){}
+			cache.deleteByPaterm(CacheNameHelper.base);
 			return Result.build(ResultType.Success);
 		} else {
 			return Result.build(ResultType.Failed);
@@ -110,11 +107,7 @@ public class DeviceModelController {
 		if (deviceModel != null && deviceModel.getId() != null){
 			boolean success = deviceModelService.update(deviceModel);
 			if(success) {
-				long pid = 1;
-				try {
-					pid = deviceModelSlavesService.listBySid(deviceModel.getId()).get(0).getMaterId();
-				} catch (Exception e) {}
-				cache.deleteByPaterm(CacheNameHelper.listByPid + pid);
+				cache.deleteByPaterm(CacheNameHelper.base);
 				return Result.build(ResultType.Success);
 			} else {
 				return Result.build(ResultType.Failed);
@@ -187,8 +180,7 @@ public class DeviceModelController {
 	@DeleteMapping("deviceModels/listByTwo")
 	@ResponseBody
 	public Result destroyByTwo(){
-//		cache.delete(CacheNameHelper.ListByTwo_CacheName);
-		cache.delete("lm_deviceModel");
+		cache.deleteByPaterm(CacheNameHelper.base);
 		return Result.build(ResultType.Success);
 	}
 }

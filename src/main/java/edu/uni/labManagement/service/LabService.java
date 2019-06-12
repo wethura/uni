@@ -52,8 +52,40 @@ public interface LabService {
 	/**
 	 * 查询所有实验室的id和name
 	 * @return List<Map<String,Object>>
+	 * @author 招黄轩
 	 */
-	public List<Map<String,Object>> selectByTwo();
+	List<Map<String,Object>> selectByTwo();
 
+	/**
+	 * 指定实验室管理员
+	 * @param json 请求参数
+	 * @return boolean
+	 * @author 招黄轩
+	 */
+	boolean assignAdmin(Map<String, Object> json);
 
+	/**
+	 * 查询单个实验室
+	 * @param id 主键
+	 * @return Map<String,Object>
+	 * @author 招黄轩
+	 */
+	Map<String,Object> select(Long id);
+
+	/**
+	 * 分页查询所有实验室
+	 * @param pageNum 页码
+	 * @param pageSize 每页显示条数
+	 * @return PageInfo<Map<String,Object>>
+	 * @author 招黄轩
+	 */
+	PageInfo<Map<String,Object>> selectPage(int pageNum, int pageSize);
+
+	/**
+	 * 分页高级筛选所有实验室
+	 * @param json 请求参数
+	 * @return PageInfo<Map<String,Object>>
+	 * @author 招黄轩
+	 */
+	PageInfo<Map<String,Object>> filterAll(Map<String, Object> json);
 }

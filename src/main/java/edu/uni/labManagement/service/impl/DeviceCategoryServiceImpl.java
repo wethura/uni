@@ -7,8 +7,7 @@ import edu.uni.labManagement.service.DeviceCategoryService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 /**
  * Create by Administrator
@@ -60,4 +59,23 @@ public class DeviceCategoryServiceImpl implements DeviceCategoryService {
 		return deviceCategoryList;
 	}
 
+	@Override
+	public List<Map<String,Object>> categoryIdsSonList(Long pid) {
+		DeviceCategoryExample example = new DeviceCategoryExample();
+		DeviceCategoryExample.Criteria criteria = example.createCriteria();
+		criteria.andDeletedEqualTo(false);
+		if(pid == null) criteria.andPidIsNull();
+		else criteria.andPidEqualTo(pid);
+		List<DeviceCategory> list = deviceCategoryMapper.selectByExample(example);
+
+		List<Map<String,Object>> res = new LinkedList<>();
+		for(DeviceCategory deviceCategory : list) {
+			Map<String,Object> prop = new HashMap<>();
+			prop.put("value", deviceCategory.getId());
+			prop.put("label", deviceCategory.getName());
+			prop.put("children", categoryIdsSonList(deviceCategory.getId()));
+			res.add(prop);
+		}
+		return res;
+	}
 }

@@ -30,10 +30,11 @@ public class DeviceReturnController {
      * 内部类，专门用来管理每个方法所对应缓存的名称。
      */
     private static class CacheNameHelper{
+        private static final String base = "lm_deviceReturn_*";
         // lm_deviceReturn_{设备归还记录id}
         private static final String Receive_CacheNamePrefix = "lm_deviceReturn_";
         // lm_deviceReturns_list_{页码}
-        private static final String List_CacheNamePrefix = "lm_deviceReturns_list_";
+        private static final String List_CacheNamePrefix = "lm_deviceReturn_list_";
     }
 
     /**
@@ -49,7 +50,7 @@ public class DeviceReturnController {
         if(json != null){
             boolean success = deviceReturnService.insert(json);
             if(success){
-                cache.deleteByPaterm(CacheNameHelper.List_CacheNamePrefix + "*");
+                cache.deleteByPaterm(CacheNameHelper.base);
                 return Result.build(ResultType.Success);
             }else{
                 return Result.build(ResultType.Failed);
@@ -70,8 +71,7 @@ public class DeviceReturnController {
     public Result destroy(@PathVariable Long id){
         boolean success = deviceReturnService.delete(id);
         if(success){
-            cache.delete(CacheNameHelper.Receive_CacheNamePrefix + id);
-            cache.deleteByPaterm(CacheNameHelper.List_CacheNamePrefix + "*");
+            cache.deleteByPaterm(CacheNameHelper.base);
             return Result.build(ResultType.Success);
         }else{
             return Result.build(ResultType.Failed);
@@ -91,8 +91,7 @@ public class DeviceReturnController {
         if(json != null && json.get("id") != null){
             boolean success = deviceReturnService.update(json);
             if(success){
-                cache.delete(CacheNameHelper.Receive_CacheNamePrefix + json.get("id"));
-                cache.deleteByPaterm(CacheNameHelper.List_CacheNamePrefix + "*");
+                cache.deleteByPaterm(CacheNameHelper.base);
                 return Result.build(ResultType.Success);
             }else{
                 return Result.build(ResultType.Failed);
@@ -158,8 +157,7 @@ public class DeviceReturnController {
     @DeleteMapping("deviceReturns/cache")
     @ResponseBody
     public Result destroyCache(){
-        cache.deleteByPaterm(CacheNameHelper.Receive_CacheNamePrefix + "*");
-        cache.deleteByPaterm(CacheNameHelper.List_CacheNamePrefix + "*");
+        cache.deleteByPaterm(CacheNameHelper.base);
         return Result.build(ResultType.Success);
     }
 }

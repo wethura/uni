@@ -22,7 +22,6 @@ import java.util.Map;
 public class DeviceMoveInController {
     @Resource
     private DeviceMoveInService deviceMoveInService;
-
     @Resource
     private RedisCache cache;
 
@@ -30,10 +29,11 @@ public class DeviceMoveInController {
      * 内部类，专门用来管理每个方法所对应缓存的名称。
      */
     private static class CacheNameHelper{
+        private static final String base = "lm_deviceMoveIn_*";
         // lm_deviceMoveIn_{设备移入记录id}
         private static final String Receive_CacheNamePrefix = "lm_deviceMoveIn_";
         // lm_deviceMoveIns_list_{页码}
-        private static final String List_CacheNamePrefix = "lm_deviceMoveIns_list_";
+        private static final String List_CacheNamePrefix = "lm_deviceMoveIn_list_";
     }
 
     /**
@@ -49,7 +49,7 @@ public class DeviceMoveInController {
         if(json != null){
             boolean success = deviceMoveInService.insert(json);
             if(success){
-                cache.deleteByPaterm(CacheNameHelper.List_CacheNamePrefix + "*");
+                cache.deleteByPaterm(CacheNameHelper.base);
                 return Result.build(ResultType.Success);
             }else{
                 return Result.build(ResultType.Failed);
@@ -70,8 +70,7 @@ public class DeviceMoveInController {
     public Result destroy(@PathVariable Long id){
         boolean success = deviceMoveInService.delete(id);
         if(success){
-            cache.delete(CacheNameHelper.Receive_CacheNamePrefix + id);
-            cache.deleteByPaterm(CacheNameHelper.List_CacheNamePrefix + "*");
+            cache.deleteByPaterm(CacheNameHelper.base);
             return Result.build(ResultType.Success);
         }else{
             return Result.build(ResultType.Failed);
@@ -91,8 +90,7 @@ public class DeviceMoveInController {
         if(json != null && json.get("id") != null){
             boolean success = deviceMoveInService.update(json);
             if(success){
-                cache.delete(CacheNameHelper.Receive_CacheNamePrefix + json.get("id"));
-                cache.deleteByPaterm(CacheNameHelper.List_CacheNamePrefix + "*");
+                cache.deleteByPaterm(CacheNameHelper.base);
                 return Result.build(ResultType.Success);
             }else{
                 return Result.build(ResultType.Failed);
@@ -158,8 +156,7 @@ public class DeviceMoveInController {
     @DeleteMapping("deviceMoveIns/cache")
     @ResponseBody
     public Result destroyCache(){
-        cache.deleteByPaterm(CacheNameHelper.Receive_CacheNamePrefix + "*");
-        cache.deleteByPaterm(CacheNameHelper.List_CacheNamePrefix + "*");
+        cache.deleteByPaterm(CacheNameHelper.base);
         return Result.build(ResultType.Success);
     }
 }

@@ -30,6 +30,7 @@ import java.util.List;
 @RequestMapping("json/labManagement/routineMaintenance")
 public class RoutineMaintenanceController {
 	static class CacheNameHelper{
+		private static final String base = "lm_routineMaintenance_*";
 //		lm_routineMaintenance_DeviceId_{deviceId}
 		private static final String listByDeviceId = "lm_routineMaintenance_DeviceId_";
 //		lm_routineMaintenance_LabId_{labId}
@@ -86,6 +87,7 @@ public class RoutineMaintenanceController {
 
 		boolean success = routineMaintenanceService.createMaintenance(pojo.getMaintenance(), pojo.getDetails());
 		if (success) {
+			cache.deleteByPaterm(CacheNameHelper.base);
 			return Result.build(ResultType.Success);
 		}
 		return Result.build(ResultType.Failed);

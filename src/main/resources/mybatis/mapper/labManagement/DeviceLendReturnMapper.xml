@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="edu.uni.labManagement.mapper.DeviceLendReturnMapper" >
+  <resultMap id="BaseResultMap" type="edu.uni.labManagement.bean.DeviceLendReturn" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="user_id" property="userId" jdbcType="BIGINT" />
+    <result column="field_id" property="fieldId" jdbcType="BIGINT" />
+    <result column="plan_lend_time" property="planLendTime" jdbcType="TIMESTAMP" />
+    <result column="plan_return_time" property="planReturnTime" jdbcType="TIMESTAMP" />
+    <result column="approval" property="approval" jdbcType="INTEGER" />
+    <result column="returned" property="returned" jdbcType="BIT" />
+    <result column="university_id" property="universityId" jdbcType="BIGINT" />
+    <result column="datetime" property="datetime" jdbcType="TIMESTAMP" />
+    <result column="by_who" property="byWho" jdbcType="BIGINT" />
+    <result column="deleted" property="deleted" jdbcType="BIT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, user_id, field_id, plan_lend_time, plan_return_time, approval, returned, university_id, 
+    datetime, by_who, deleted
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="edu.uni.labManagement.bean.DeviceLendReturnExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from lm_device_lend_return
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from lm_device_lend_return
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from lm_device_lend_return
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="edu.uni.labManagement.bean.DeviceLendReturnExample" >
+    delete from lm_device_lend_return
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="edu.uni.labManagement.bean.DeviceLendReturn" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into lm_device_lend_return (user_id, field_id, plan_lend_time, 
+      plan_return_time, approval, returned, 
+      university_id, datetime, by_who, 
+      deleted)
+    values (#{userId,jdbcType=BIGINT}, #{fieldId,jdbcType=BIGINT}, #{planLendTime,jdbcType=TIMESTAMP}, 
+      #{planReturnTime,jdbcType=TIMESTAMP}, #{approval,jdbcType=INTEGER}, #{returned,jdbcType=BIT}, 
+      #{universityId,jdbcType=BIGINT}, #{datetime,jdbcType=TIMESTAMP}, #{byWho,jdbcType=BIGINT}, 
+      #{deleted,jdbcType=BIT})
+  </insert>
+  <insert id="insertSelective" parameterType="edu.uni.labManagement.bean.DeviceLendReturn" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into lm_device_lend_return
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="fieldId != null" >
+        field_id,
+      </if>
+      <if test="planLendTime != null" >
+        plan_lend_time,
+      </if>
+      <if test="planReturnTime != null" >
+        plan_return_time,
+      </if>
+      <if test="approval != null" >
+        approval,
+      </if>
+      <if test="returned != null" >
+        returned,
+      </if>
+      <if test="universityId != null" >
+        university_id,
+      </if>
+      <if test="datetime != null" >
+        datetime,
+      </if>
+      <if test="byWho != null" >
+        by_who,
+      </if>
+      <if test="deleted != null" >
+        deleted,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="userId != null" >
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="fieldId != null" >
+        #{fieldId,jdbcType=BIGINT},
+      </if>
+      <if test="planLendTime != null" >
+        #{planLendTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="planReturnTime != null" >
+        #{planReturnTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="approval != null" >
+        #{approval,jdbcType=INTEGER},
+      </if>
+      <if test="returned != null" >
+        #{returned,jdbcType=BIT},
+      </if>
+      <if test="universityId != null" >
+        #{universityId,jdbcType=BIGINT},
+      </if>
+      <if test="datetime != null" >
+        #{datetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="byWho != null" >
+        #{byWho,jdbcType=BIGINT},
+      </if>
+      <if test="deleted != null" >
+        #{deleted,jdbcType=BIT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="edu.uni.labManagement.bean.DeviceLendReturnExample" resultType="java.lang.Integer" >
+    select count(*) from lm_device_lend_return
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update lm_device_lend_return
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.userId != null" >
+        user_id = #{record.userId,jdbcType=BIGINT},
+      </if>
+      <if test="record.fieldId != null" >
+        field_id = #{record.fieldId,jdbcType=BIGINT},
+      </if>
+      <if test="record.planLendTime != null" >
+        plan_lend_time = #{record.planLendTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.planReturnTime != null" >
+        plan_return_time = #{record.planReturnTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.approval != null" >
+        approval = #{record.approval,jdbcType=INTEGER},
+      </if>
+      <if test="record.returned != null" >
+        returned = #{record.returned,jdbcType=BIT},
+      </if>
+      <if test="record.universityId != null" >
+        university_id = #{record.universityId,jdbcType=BIGINT},
+      </if>
+      <if test="record.datetime != null" >
+        datetime = #{record.datetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.byWho != null" >
+        by_who = #{record.byWho,jdbcType=BIGINT},
+      </if>
+      <if test="record.deleted != null" >
+        deleted = #{record.deleted,jdbcType=BIT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update lm_device_lend_return
+    set id = #{record.id,jdbcType=BIGINT},
+      user_id = #{record.userId,jdbcType=BIGINT},
+      field_id = #{record.fieldId,jdbcType=BIGINT},
+      plan_lend_time = #{record.planLendTime,jdbcType=TIMESTAMP},
+      plan_return_time = #{record.planReturnTime,jdbcType=TIMESTAMP},
+      approval = #{record.approval,jdbcType=INTEGER},
+      returned = #{record.returned,jdbcType=BIT},
+      university_id = #{record.universityId,jdbcType=BIGINT},
+      datetime = #{record.datetime,jdbcType=TIMESTAMP},
+      by_who = #{record.byWho,jdbcType=BIGINT},
+      deleted = #{record.deleted,jdbcType=BIT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="edu.uni.labManagement.bean.DeviceLendReturn" >
+    update lm_device_lend_return
+    <set >
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="fieldId != null" >
+        field_id = #{fieldId,jdbcType=BIGINT},
+      </if>
+      <if test="planLendTime != null" >
+        plan_lend_time = #{planLendTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="planReturnTime != null" >
+        plan_return_time = #{planReturnTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="approval != null" >
+        approval = #{approval,jdbcType=INTEGER},
+      </if>
+      <if test="returned != null" >
+        returned = #{returned,jdbcType=BIT},
+      </if>
+      <if test="universityId != null" >
+        university_id = #{universityId,jdbcType=BIGINT},
+      </if>
+      <if test="datetime != null" >
+        datetime = #{datetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="byWho != null" >
+        by_who = #{byWho,jdbcType=BIGINT},
+      </if>
+      <if test="deleted != null" >
+        deleted = #{deleted,jdbcType=BIT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="edu.uni.labManagement.bean.DeviceLendReturn" >
+    update lm_device_lend_return
+    set user_id = #{userId,jdbcType=BIGINT},
+      field_id = #{fieldId,jdbcType=BIGINT},
+      plan_lend_time = #{planLendTime,jdbcType=TIMESTAMP},
+      plan_return_time = #{planReturnTime,jdbcType=TIMESTAMP},
+      approval = #{approval,jdbcType=INTEGER},
+      returned = #{returned,jdbcType=BIT},
+      university_id = #{universityId,jdbcType=BIGINT},
+      datetime = #{datetime,jdbcType=TIMESTAMP},
+      by_who = #{byWho,jdbcType=BIGINT},
+      deleted = #{deleted,jdbcType=BIT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>
