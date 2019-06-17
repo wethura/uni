@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="edu.uni.labManagement.mapper.SelfDefineMapper">
+  <select id="selectDepartmentIdByName" resultType="long">
+    select id
+    from department
+    where (department.name = #{name} and deleted = false) and university_id = #{universityId}
+    limit 1
+  </select>
+
+  <select id="selectFieldIdByName" resultType="long">
+    select id
+    from p_field
+    where (p_field.name = #{name} and deleted = false and area_id = #{area_id})
+    limit 1
+  </select>
+
+  <select id="selectUserIdByAccount" resultType="long" parameterType="string">
+    select id
+    from user
+    where (user.name = #{account} and status = 0)
+    limit 1
+  </select>
+
+  <select id="selectCategoryIdByName" resultType="long">
+    select id
+    from lm_device_category
+    where
+      lm_device_category.name = #{name}
+      and deleted = false
+      <if test="pid != null">
+        and lm_device_category.pid = #{pid}
+      </if>
+  </select>
+
+  <select id="selectFieldNameById" parameterType="long" resultType="string">
+    select name
+    from p_field
+    where id = #{id} and deleted = false
+  </select>
+
+  <select id="selectDepartmentNameById" parameterType="long" resultType="string">
+    select name
+    from department
+    where id = #{id} and deleted = false
+  </select>
+
+  <select id="selectLabNameByDeviceId" parameterType="long" resultType="string">
+    select lm_lab.name
+    from lm_lab_device, lm_lab
+    where
+				lm_lab_device.lab_id = lm_lab.id
+        and lm_lab.deleted = false
+				and lm_lab_device.deleted = false
+				and lm_lab_device.device_id = #{deviceId}
+  </select>
+
+<!--  <select id="selectCategoryBtSonId" resultType="edu.uni.labManagement.bean.DeviceCategory" parameterType="long">-->
+<!--    SELECT id,pid,name,university_id,datetime,by_who,deleted-->
+<!--        from lm_device_category-->
+<!--        where id in-->
+<!--        (SELECT pid-->
+<!--            from lm_device_category-->
+<!--            where id = #{sonId})-->
+
+<!--  </select>-->
+  <select id="listallDepartment" resultType="map">
+    SELECT *
+        from department
+        where deleted = FALSE and university_id = #{universityId}
+  </select>
+
+  <select id="selectSchoolIdByName" resultType="long">
+    select id
+    from p_school
+    where university_id = #{universityId} and name = #{school} and deleted = false
+  </select>
+
+  <select id="selectSchoolAreaIdByName" resultType="long">
+    select id
+    from p_school_area
+    where deleted = false and school_id =  #{schoolId} and p_school_area.name =  #{name}
+  </select>
+</mapper>

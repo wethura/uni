@@ -1,0 +1,72 @@
+package edu.uni.labManagement.service;
+
+import edu.uni.labManagement.bean.DeviceModel;
+import edu.uni.labManagement.pojo.ExcelDevicePojo;
+
+import java.util.List;
+import java.util.Map;
+
+/**
+ * Create by Administrator
+ *
+ * @author sola
+ * @date 2019/04/30 1:50
+ */
+public interface DeviceModelService {
+
+	/**
+	 * 说明：仅用于创建父模板
+	 * @param deviceModel
+	 * @return
+	 */
+	boolean insertParentDeviceModel(DeviceModel deviceModel);
+
+
+	/**
+	 * 说明：用于创建子模板
+	 * @param deviceModel
+	 * @param pid
+	 * @return
+	 */
+	boolean insertSonDeviceModel(DeviceModel deviceModel, long pid, Integer amount);
+
+	/**
+	 * 改
+	 * @param deviceModel
+	 * @return
+	 */
+	boolean update(DeviceModel deviceModel);
+
+	/**
+	 * 删
+	 * @param id
+	 * @return
+	 */
+	boolean deleted(long id);
+
+	/**
+	 * 通过父设备ID查询其子设备
+	 * @param id
+	 * @return
+	 */
+	List<DeviceModel> listByPid(long id);
+
+	/**
+	 * 通过设备分类查询所有顶级设备
+	 * @param id
+	 * @return
+	 */
+	List<DeviceModel> listByCategoryId(long id);
+
+	/**
+	 * 查询所有设备型号的id和name
+	 * @return List<Map<String,Object>>
+	 */
+	public List<Map<String,Object>> selectByTwo();
+
+	ExcelDevicePojo selectDevicePojoByKey(Long modelId, Long labId);
+
+	Map<String, Object> getFromDeviceModelId(Long deviceModelId);
+
+	List<Map<String, Object>> getAll();
+}
