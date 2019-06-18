@@ -7,6 +7,7 @@ import edu.uni.labManagement.bean.LabAdminExample;
 import edu.uni.labManagement.mapper.LabAdminMapper;
 import edu.uni.labManagement.mapper.LabMapper;
 import edu.uni.labManagement.mapper.SelfDefineMapper;
+import edu.uni.labManagement.mapper.UserMapper;
 import edu.uni.labManagement.service.SelfDefineService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -30,6 +31,8 @@ public class SelfDefineServiceImpl implements SelfDefineService {
 	private SelfDefineMapper selfDefineMapper;
 	@Resource
 	private LabAdminMapper labAdminMapper;
+	@Resource
+	private UserMapper userMapper;
 	@Autowired
 	private AuthService authService;
 
@@ -67,11 +70,20 @@ public class SelfDefineServiceImpl implements SelfDefineService {
 		criteria.andLabIdEqualTo(labId)
 				.andDeletedEqualTo(false)
 				.andUniversityIdEqualTo(user.getUniversityId());
-		List<LabAdmin> labAdmins = labAdminMapper.selectByExample(example);
+		LabAdmin labAdminNew = new LabAdmin();
+		labAdminNew.setDeleted(true);
+		labAdminMapper.updateByExampleSelective(labAdminNew, example);
 
-		for (LabAdmin labAdmin: labAdmins){
-			labAdmin.setDeleted(true);
-			labAdminMapper.updateByPrimaryKey(labAdmin);
+		LabAdmin labAdmin = new LabAdmin();
+		for (String admin: admins){
+			labAdmin.setUniversityId(authService.getUser().getUniversityId());
+			labAdmin.setDatetime(new Date());
+			Long userId = selfDefineMapper.selectUserIdByAccount(admin);
+			labAdmin.setAdminId(userId);
+			labAdmin.setDeleted(false);
+			labAdmin.setByWho(authService.getUser().getId());
+
+			labAdminMapper.insert(labAdmin);
 		}
 
 		return insertAdmins(admins, labId);
