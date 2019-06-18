@@ -77,31 +77,42 @@ public class LabServiceImpl implements LabService {
 	}
 
 	@Override
-	public PageInfo<LabPojo> selectPage(int pageNum) {
-		PageHelper.startPage(pageNum, globalConfig.getPageSize());
+	public Map<String, Object> selectPage(int pageNum) {
+
 		LabExample example = new LabExample();
 		LabExample.Criteria criteria = example.createCriteria();
-		criteria.andDeletedEqualTo(false);
+		criteria.andDeletedEqualTo(false)
+				.andUniversityIdEqualTo(authService.getUser().getUniversityId());
+
 		List<Lab> labs = labMapper.selectByExample(example);
-		List<LabPojo> labPojos = new ArrayList<>();
+		Map<String, Object> res = new HashMap<String, Object>();
+		List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
+
 		/**
 		 * 此位置暂时没有数据接口
 		 */
-		for (int i= 0; i < labs.size(); i ++) {
-			LabPojo labPojo = new LabPojo();
-			labPojo.setPhone(labs.get(i).getPhone());
-			BeanUtils.copyProperties(labs.get(i), labPojo);
-			labPojos.add(labPojo);
-			String addr = selectAddressByFieldID(labPojo.getFieldId());
-			labPojos.get(i).setAddress(addr);
-		}
-//		System.out.println("\n============" + labs + "\n" + labPojos + "\n================\n");
+		for (int i = (pageNum - 1) * globalConfig.getPageSize(); i < pageNum * globalConfig.getPageSize() && i < labs.size(); i ++) {
 
-		if (labs != null) {
-			return new PageInfo<>(labPojos);
-		} else {
-			return null;
+			Lab lab = labs.get(i);
+
+			Map<String, Object> mp = new HashMap<String, Object>();
+			mp.put("name", lab.getName());
+			mp.put("eName", lab.getEname());
+			mp.put("id", lab.getId());
+			mp.put("departmentId", lab.getDepartmentId());
+			mp.put("fieldId", lab.getFieldId());
+			mp.put("phone", lab.getPhone());
+			String addr = selectAddressByFieldID(lab.getFieldId());
+			mp.put("address", addr);
+			mp.put("datetime", lab.getDatetime());
+			mp.put("department", departmentMapper.selectByPrimaryKey(lab.getDepartmentId()).getName());
+			list.add(mp);
 		}
+		res.put("list", list);
+		res.put("total", labs.size());
+		res.put("pageSize", globalConfig.getPageSize());
+
+		return res;
 	}
 
 	@Override

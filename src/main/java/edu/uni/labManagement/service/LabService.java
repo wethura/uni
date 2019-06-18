@@ -40,7 +40,7 @@ public interface LabService {
 	 * @param pageNum
 	 * @return
 	 */
-	PageInfo<LabPojo> selectPage(int pageNum);
+	Map<String, Object> selectPage(int pageNum);
 
 	/**
 	 * 通过实验室ID查询实验室详情

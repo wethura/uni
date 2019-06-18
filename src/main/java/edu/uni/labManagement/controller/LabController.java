@@ -61,21 +61,14 @@ public class LabController {
 	@ApiOperation(value = "分页查询实验室")
 	@GetMapping("listByPage/{pageNum}")
 	@ResponseBody
-	public void receive(HttpServletResponse response, @PathVariable int pageNum) throws Exception{
-		response.setContentType("application/json;charset=utf-8");
+	public Result receive(@PathVariable int pageNum) throws Exception{
 
-		String cacheName = CacheNameHelper.listByPageNum + pageNum;
-		cache.delete(cacheName);
-		String json = cache.get(cacheName);
-
-		if(json == null || json == "") {
-			PageInfo<LabPojo> pageInfo = labService.selectPage(pageNum);
-			json = Result.build(ResultType.Success).appendData("pageInfo", pageInfo).convertIntoJSON();
-			if (json != null) {
-				cache.set(cacheName, json);
-			}
+		Map<String, Object> res = labService.selectPage(pageNum);
+		if (res == null){
+			return Result.build(ResultType.Failed);
+		}else {
+			return Result.build(ResultType.Success).appendData("res", res);
 		}
-		response.getWriter().write(json);
 	}
 
 	@ApiOperation(value = "通过实验室ID查询实验室")
