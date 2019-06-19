@@ -21,6 +21,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -85,22 +86,17 @@ public class DeviceServiceImpl implements DeviceService {
 	@Override
 	public ExcelDevicePojo selectPojoById(Long deviceId) {
 
-		System.out.println("---------666---------");
 		Device device = deviceMapper.selectByPrimaryKey(deviceId);
 		ExcelDevicePojo pojo = new ExcelDevicePojo();
-//		pojo.setId(String.valueOf(device.getId()));
+
 		pojo.setSerial(device.getSerialNumber());
 		pojo.setModel(device.getModel());
 		pojo.setProductDate(device.getProductDate().toString());
-		System.out.println("---------666---------");
 		pojo.setCategory(String.join("、", excelDataIO.findCategoryFull(device.getDeviceCategoryId())));
 		pojo.setDescription(device.getDescription());
 
-		System.out.println("---------666---------");
 		pojo.setDepartment(selfDefineMapper.selectDepartmentNameById(device.getDepartmentId()));
-		System.out.println("---------666---------");
 		pojo.setLabName(selfDefineMapper.selectLabNameByDeviceId(device.getId()));
-		System.out.println("---------666---------");
 		pojo.setNumber(device.getNumber());
 		pojo.setName(device.getName());
 		pojo.setBatch(String.valueOf(device.getBatch()));

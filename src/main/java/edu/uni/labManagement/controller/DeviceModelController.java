@@ -40,9 +40,9 @@ public class DeviceModelController {
 		// lm_deviceModel_{设备型号id}
 		private static final String Receive_CacheNamePrefix = "lm_deviceModel_";
 		// lm_deviceModels_list_{页码}
-		private static final String List_CacheNamePrefix = "lm_deviceModels_list_";
+		private static final String List_CacheNamePrefix = "lm_deviceModel_list_";
 		// lm_deviceModels_listByTwo
-		private static final String ListByTwo_CacheName = "lm_deviceModels_listByTwo";
+		private static final String ListByTwo_CacheName = "lm_deviceModel_listByTwo";
 	}
 
 	@Autowired
@@ -151,6 +151,7 @@ public class DeviceModelController {
 		}
 		response.getWriter().write(json);
 	}
+
 	/**
 	 * 查询所有设备型号的id和name
 	 * @param response

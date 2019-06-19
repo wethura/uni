@@ -82,6 +82,7 @@ public class SelfDefineServiceImpl implements SelfDefineService {
 			labAdmin.setAdminId(userId);
 			labAdmin.setDeleted(false);
 			labAdmin.setByWho(authService.getUser().getId());
+			labAdmin.setLabId(labId);
 
 			labAdminMapper.insert(labAdmin);
 		}

@@ -178,8 +178,13 @@ public class LabController {
 			return;
 		}
 		boolean success = labService.update(lab);
+		try{
 		List<String> admins = Arrays.asList(adminsStr.split("、"));
-		success = success & selfDefineService.updateAdmins(admins, lab.getId());
+			success = success & selfDefineService.updateAdmins(admins, lab.getId());
+		}catch (Exception e){
+			response.getWriter().write(Result.build(ResultType.ParamError).appendData("msg", "指定管理员用户不存在").convertIntoJSON());
+			return;
+		}
 		if (success) {
 			cache.deleteByPaterm(CacheNameHelper.base);
 			response.getWriter().write(Result.build(ResultType.Success).convertIntoJSON());
@@ -191,7 +196,7 @@ public class LabController {
 	}
 
 	/**
-	 * 指定实验室管理员，指定单个管理员by sola
+	 * 指定实验室管理员，指定单个管理员
 	 * @param json 请求参数
 	 * @return Result
 	 * @author 招黄轩

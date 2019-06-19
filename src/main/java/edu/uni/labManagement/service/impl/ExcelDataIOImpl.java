@@ -189,10 +189,11 @@ public class ExcelDataIOImpl implements ExcelDataIO {
 //		一边数据检查一边插入数据，失败就抛出异常进行事务回滚
 		for (int i = 1; i < os.size(); i ++) {
 			pojo = (ExcelDevicePojo) os.get(i);
-			System.out.println(pojo);
 
-			if (pojo.getSerial() == null && pojo.getNumber()==null && pojo.getProductDate()==null && pojo.getLabName() == null && pojo.getName() == null
-			&& pojo.getDepartment() == null && pojo.getBatch() == null){continue;}
+			if (pojo.getSerial() == null || pojo.getNumber()==null || pojo.getProductDate()==null || pojo.getLabName() == null || pojo.getName() == null
+			|| pojo.getDepartment() == null || pojo.getBatch() == null || pojo.getSerial() == "" || pojo.getNumber()=="" || pojo.getProductDate()=="" || pojo.getLabName() == "" || pojo.getName() == ""
+					|| pojo.getDepartment() == "" || pojo.getBatch() == ""){continue;}
+			System.out.println(pojo);
 
 			DepartmentExample example = new DepartmentExample();
 			DepartmentExample.Criteria criteria = example.createCriteria();
@@ -203,10 +204,15 @@ public class ExcelDataIOImpl implements ExcelDataIO {
 
 			PSchoolExample example1 = new PSchoolExample();
 			PSchoolExample.Criteria criteria1 = example1.createCriteria();
-			criteria1.andNameEqualTo(pojo.getSchoolArea())
+			criteria1.andNameEqualTo(pojo.getSchoolName())
 					.andDeletedEqualTo(0)
 					.andUniversityIdEqualTo(user.getUniversityId());
-			PSchool pSchool = pSchoolMapper.selectByExample(example1).get(0);
+			PSchool pSchool = null;
+			try {
+				pSchool = pSchoolMapper.selectByExample(example1).get(0);
+			}catch (Exception e){
+				throw new Exception("学校存在错误！");
+			}
 
 			PSchoolAreaExample example2 = new PSchoolAreaExample();
 			PSchoolAreaExample.Criteria criteria2 = example2.createCriteria();
@@ -214,23 +220,39 @@ public class ExcelDataIOImpl implements ExcelDataIO {
 					.andNameEqualTo(pojo.getSchoolArea())
 					.andSchoolIdEqualTo(pSchool.getId())
 					.andUniversityIdEqualTo(user.getUniversityId());
-			PSchoolArea pSchoolArea = pSchoolAreaMapper.selectByExample(example2).get(0);
+			PSchoolArea pSchoolArea = null;
+			try {
+				pSchoolArea = pSchoolAreaMapper.selectByExample(example2).get(0);
+			} catch (Exception e){
+				throw new Exception("第" + (i + 1) + "行的功能区错误或者不存在！");
+			}
 
-			PFieldExample example3 = new PFieldExample();
-			PFieldExample.Criteria criteria3 = example3.createCriteria();
-			criteria3.andAreaIdEqualTo(pSchoolArea.getId())
-					.andDeletedEqualTo(0)
-					.andUniversityIdEqualTo(user.getUniversityId());
-			PField pField = pFieldMapper.selectByExample(example3).get(0);
+//			PFieldExample example3 = new PFieldExample();
+//			PFieldExample.Criteria criteria3 = example3.createCriteria();
+//			criteria3.andAreaIdEqualTo(pSchoolArea.getId())
+//					.andNameEqualTo(pojo.ge)
+//					.andDeletedEqualTo(0)
+//					.andUniversityIdEqualTo(user.getUniversityId());
+//			PField pField = null;
+//			try {
+//				pField = pFieldMapper.selectByExample(example3).get(0);
+//			}catch (Exception e){
+//				throw new Exception("第" + (i + 1) + "行的地点存在错误！");
+//			}
 
 
 			LabExample example4 = new LabExample();
 			LabExample.Criteria criteria4 = example4.createCriteria();
 			criteria4.andUniversityIdEqualTo(user.getUniversityId())
 					.andDeletedEqualTo(false)
-					.andUniversityIdEqualTo(user.getUniversityId())
-					.andFieldIdEqualTo(pField.getId());
-			Lab lab = labMapper.selectByExample(example4).get(0);
+					.andDepartmentIdEqualTo(department.getId())
+					.andNameEqualTo(pojo.getLabName());
+			Lab lab = null;
+			try {
+				lab = labMapper.selectByExample(example4).get(0);
+			} catch (Exception e){
+				throw new Exception("第" + (i + 1) + "行的实验室错误或者不存在！");
+			}
 
 //			查找设备类别
 			Long categoryId = findCategoryId(pojo.getCategory());
@@ -270,6 +292,7 @@ public class ExcelDataIOImpl implements ExcelDataIO {
 
 			LabDevice labDevice = new LabDevice();
 			labDevice.setDeviceId(device.getId());
+			labDevice.setLabId(lab.getId());
 			labDevice.setDatetime(new Date());
 			labDevice.setUniversityId(user.getUniversityId());
 			labDevice.setByWho(user.getId());

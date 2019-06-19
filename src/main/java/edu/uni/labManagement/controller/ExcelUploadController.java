@@ -187,7 +187,7 @@ public class ExcelUploadController {
 	@ApiOperation(value = "设备模板生成")
 	@GetMapping("excel/device")
 	@ResponseBody
-	public void get3(HttpServletResponse response, Long labId, Long modelId, Long count) throws Exception{
+	public void get3(HttpServletResponse response, Long labId, Long modelId, Long count) throws Exception {
 		response.setContentType("application/octet-stream");
 		FileInputStream fis = null;
 		try {
